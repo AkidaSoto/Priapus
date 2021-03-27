@@ -175,14 +175,24 @@ setup.SoundPath = setup.Path + "sounds/";
 // Setting up a basic toggle control for the settings property 'mature'
 Setting.addToggle("mature", {
 	label : "Content for mature audiences?"
-}); // default value not defined, so false is used</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="783,44" size="100,100">[Introduce Backstory here]
+}); // default value not defined, so false is used</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="699,45" size="100,100">The Almighty God, Zeus, has been scorn by his creations, humans.
+After growing tired of waiting millenias for them to develop peace amongst themselves, he decided that he had enough.
 
+However, he would not stoop to their level by smiting them, drawing blood like they have.
+He is still the most gracious being above, so has devise a plan to get rid of humanity peacefully.
+As so, he has assigned you, a beginner god, an important role;
 
+@@.arousal;Reduce the population by turning all men homosexual.@@
+
+[Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;]
 
 Enter your name: &lt;&lt;textbox &#39;$name&#39; $name autofocus&gt;&gt; @@#error;@@
 
+The goal of the Introduction Sequence is introduce the premise, mission and gameplay. If you are experienced and would jump right to the sandbox mode, you won&#39;t lose out on any experience.
 
-&lt;&lt;link &#39;Continue to Intro&#39;&gt;&gt;
+Any texts in [] means that it&#39;s in development.
+
+&lt;&lt;link &#39;Introduction and Tutorial&#39;&gt;&gt;
     &lt;&lt;set $name to $name.trim()&gt;&gt;
     &lt;&lt;if not $name&gt;&gt;
         &lt;&lt;replace &#39;#error&#39;&gt;&gt;Names typically include letters!&lt;&lt;/replace&gt;&gt;
@@ -210,7 +220,7 @@ Exp: $skilltree.exp / 100
 Personal Arousal: $skilltree.arousal / 100
 
 &lt;&lt;if $skilltree.points &gt; 0&gt;&gt;
-You have @@#points;$skilltree.points@@ point(s) to use!
+You have @@#points;$skilltree.points@@ ability point(s) to use!
 &lt;&lt;/if&gt;&gt;
 
 
@@ -225,22 +235,91 @@ You have @@#points;$skilltree.points@@ point(s) to use!
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aural&quot;][&quot;level&quot;]&gt;&gt;
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;amounts&quot;][_strengthid]&gt;&gt;
 	Passive Sexual Aura (+ _strengthid)
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="117,515" size="100,100">&lt;&lt;link &#39;God Skills&#39;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="100,443" size="100,100">&lt;&lt;link &#39;God Abilities&#39;&gt;&gt;
         &lt;&lt;goto [[Skill Tree]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="957,48" size="100,100">[You get teleported down to earth]
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,44" size="100,100">You descend down from the heavens.
 
-[Apartment Complex exposition]
+Stand in front of you is your first assignment.
 
-&lt;&lt;link &#39;Go Inside&#39;&gt;&gt;
+&lt;&lt;cont append&gt;&gt;
+A mens-only luxury dormatory-styled apartment complex.
+[img[setup.ImagePath+&#39;Sets/lux_1.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+All tenents, men of all ages, lived in single rooms, maintained by a wonderful cleaning staff....
+[img[setup.ImagePath+&#39;Sets/lux_8.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+... and a great balcony view.
+[img[setup.ImagePath+&#39;Sets/lux_2.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+The amenties included a shared gym with available trainers...
+[img[setup.ImagePath+&#39;Sets/lux_7.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+.... and a pool open 24/7 for use.
+[img[setup.ImagePath+&#39;/Sets/lux_6.webp&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+Shared spaces includes Kitchen and dining area...
+[img[setup.ImagePath+&#39;Sets/lux_5.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+Bathroom and showers
+[img[setup.ImagePath+&#39;Sets/lux_3.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+....and a lounging common area!
+[img[setup.ImagePath+&#39;Sets/lux_4.jpg&#39;]]
+
+&lt;&lt;cont append&gt;&gt;
+Your report claims that this was the ideal start to your global mission. The men here had a curious exploratory nature, and were ripe for picking by a clever god.
+
+But first, you had to acquire a room.
+
+&lt;&lt;link &#39;Head Inside&#39;&gt;&gt;
         &lt;&lt;goto [[APT Intro]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
-</tw-passagedata><tw-passagedata pid="5" name="APT Intro" tags="" position="967,174" size="100,100">[You meet Landlord Marc]
 
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="APT Intro" tags="" position="979,44" size="100,100">You make your way through the automatic doors of the apartment.
+Sacnning the lobby to see various men making their way through life, most of them don&#39;t even notice you. 
+Before you could get fully distracted, your eye catches a door.
+
+&lt;&lt;cont append&gt;&gt;
+The plaque besides the door reads &quot;Management&quot;
+Perfect. You straighten back (as much as a homosexual god could, that is) and head inside.
+
+&lt;&lt;cont append&gt;&gt;
+&quot;Excuse me. How can I help you?&quot;
 [img[setup.ImagePath+&#39;Marc_01.png&#39;]]
+A burly older gentlemen behind a desk demands. Your cock pulses in your pants in anticipatation. 
 
-[He tells you that the last room just got rented out and the promised person is coming soon to sign the lease papers]
+You recover in time before it got awkward. &quot;Ah, yes.&quot; You clear your human throat. &quot;I&#39;ve come to inquire about an available room in this human establishment.&quot; Your first human words were to be desired, you reprimanded yourself.
 
-[Introduction to God Skills, Use your first skill that allows you raise arousal of men]
+&lt;&lt;cont append&gt;&gt;
+&quot;Well. First, people don&#39;t just barge into if they&#39;re looking to rent. There&#39;s an actual process for this.&quot; His eyebrows furrowed. 
+
+&quot;And secondly, the last room has just gotten leased out. Well, technically, the tenant is coming in today to sign it. Regardless, we&#39;re all out of rooms.&quot;
+
+&lt;&lt;cont append&gt;&gt;
+It was your turn to furrow your eyebrows. If you couldn&#39;t get a place here, it would jeopardize your mission!
+
+&quot;No. There&#39;s must be something that you can do?&quot; You push.
+
+However, you could see that his patience was running thin. He got up and put his hand on your shoulders.
+&quot;There&#39;s absolutely nothing. Now, you need to leave or else.&quot; But before he could push you out the door, you take drastic measures.
+
+&lt;&lt;cont append&gt;&gt;
+There may be nothing he can do, but that&#39;s not the same for you. It&#39;s time for your God Abilities to come into play.
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
 &lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
@@ -248,7 +327,7 @@ You have @@#points;$skilltree.points@@ point(s) to use!
 	&lt;&lt;set $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] --&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
- You need to use your available God Skill level up on Arousal to continue.
+ You will need to level up your &quot;Raise Arousal&quot; Ability to continue. Access the skill menu in the UI bar.
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 0&gt;&gt;
@@ -256,21 +335,31 @@ You have @@#points;$skilltree.points@@ point(s) to use!
 	Restart the Game!
 &lt;&lt;/if&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="6" name="FirstSex_01" tags="" position="971,322" size="100,100">[Landlord is flustered and stuttering as the God Skill is taking effect]
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
 
-[He is now eager for you to leave, most likely so he can have some alone time so he jack off.]
 
-[however you take the oppotunity when he puts his hand on you to push out to make a move]
+</tw-passagedata><tw-passagedata pid="6" name="FirstSex_01" tags="" position="975,199" size="100,100">You grab onto the hand on your shoulder and focus driving your energy into his body.
+
+His hold loosens and his eyes glazes out of focus for a moment.
+
+His posture slopes as his knees slightly give. He is now leaning some of his body weight on you for stability. A visible bulge grows at his crotch. 
+
+He catches your line of sight. &quot;You. You need to leave. Now.&quot; The octave in his voice drops a couple of octave, but it was wavering now. Clearly, he is now eager for you to leave, most likely so he can have some alone time to jack off.
+
+However, you still had his hand in your clasp, continuous pouring in erotic energy. You pull him in for a kiss, the best method of inject arousal.
 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_1.webp&#39;]]
 
-at first, he&#39;s shocked. He pushes you away. But then, something in his eyes changes.
+His eyes widen in shock and then when he realized what was happening he pushes you away. But then, something in his eyes changes. It grew hungry and he was now looking at you like his next meal.
 
+He pushes you again, but this time, more playfully as a smile forms on his face.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_2.webp&#39;]]
-
-He pushes again,  but this time, more playfully as a smile forms on his face.
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
@@ -281,8 +370,27 @@ He pushes again,  but this time, more playfully as a smile forms on his face.
  &lt;&lt;/cont&gt;&gt;
 
 
- &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Skill Tree" tags="" position="119,635" size="100,100">&lt;&lt;print Object.keys($skilltree.skills)&gt;&gt;
+ &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Skill Tree" tags="" position="119,635" size="100,100">&lt;&lt;message &#39;God Ability Help&#39;&gt;&gt;\
 
+This is where you can see all the abilities you currently have or can upgrade.
+
+Currently, the plan is to have two skill tree.
+One skill tree will be for actives that will have single-target touch skills that are set to a number of uses per day that will regenerate after resting (possibly some will regenerate through eating and showering.)
+
+   The other skill tree will be for passive area-of-effect skills that are always in effect and can target multiple men in the same room but at a lower strength. 
+
+The likelihood that a man will engage in sexual acts depends on two factors: their straightness and their arousal.
+
+Their straightness represents their innate sexual desire to fuck other men. The higher the value, the more unlikely they&#39;ll be convinced to fuck.
+
+But since men are animals, they&#39;ll fuck anything if they&#39;re horny enough. That is their other stat; Arousal. the higher this stat, the larger a debuff will be applied to their straightness. Use this to your advantage, but remember, once they ejaculate, their Arousal will reset to 0 and they may refuse to further continue with sexual acts!
+
+Luckily, each homosexual act will permanentlylower the man&#39;s straightness, so it will be a balancing act of raising their arousal to make them more gay acts but not too arousal that they cum before you can fuck &#39;em! 
+
+Each unique ejaculation event will award you with experience. With enough experience, you&#39;ll be awarded a level up which gives you a point to use to upgrade or buy abilities. A man with 0% will result in a special end event that will reward a lot of experience.
+
+Lastly, you have your own personal arousal. Some abilities will grow in strength the more aroused you are. Again, make sure you don&#39;t prematurely jizz before you&#39;re able to utilize those buffs!
+&lt;&lt;/message&gt;&gt;
 
 &lt;blockquote&gt;
 
@@ -325,120 +433,116 @@ He pushes again,  but this time, more playfully as a smile forms on his face.
 
 
 [[Return to scene|previous()]]
-</tw-passagedata><tw-passagedata pid="8" name="FirstSex_02" tags="" position="969,473" size="100,100">He pushes your head down, and you start to kneel.
+</tw-passagedata><tw-passagedata pid="8" name="FirstSex_02" tags="" position="969,337" size="100,100">He pushes your head down, and you take the cue to kneel.
 
-[You hungrily unzip his cock out and embraces his full hard-on into your mouth]
+You plant your face into groins and take in a deep breath. 
 
-
+You lustily unzip his pants. His large cock falls out and lands in front of your face.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_3.webp&#39;]]
-
-Your skill erases all concern in his eyes as he&#39;s readily succumbs to your efforts.
-
+Your godly oral skill erases all concern in his eyes as he readily succumbs to your efforts.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_3_5.webp&#39;]]
 
-after a few moments, you can feel cock throbbing in your throat. You are ready to recieve his cum when.....
+After a few moments, you feel his cock throbbing in your throat. You increase your speed, ready to receive his cum when...
+
+[[A knock comes from the office door|FirstSex_03]]
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-
-[[A knock comes from the office door|FirstSex_03]]
  &lt;&lt;/cont&gt;&gt;
- &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="969,623" size="100,100">&quot;One Moment!&quot; he yells out and tries to quickly zip his raging cock back into his pants.
+ &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="971,463" size="100,100">&quot;One Moment!&quot; he yells out and tries to quickly zip his raging hard cock back into his pants.
 
-&quot;You got to leave. Now.&quot; the roughness in his voice tells you he&#39;s not joking anymore.
+&quot;This is over. Now, go.&quot; the roughness in his voice tells you he&#39;s not joking anymore.
 
-However, you have another idea in mind. You just can&#39;t let this opportunity go....
+However, you plan to finish this your way.
 
 [[Get under the desk |FirstSex_04]]
-</tw-passagedata><tw-passagedata pid="10" name="FirstSex_04" tags="" position="973,773" size="100,100">&quot;What are you doing??&quot; 
+</tw-passagedata><tw-passagedata pid="10" name="FirstSex_04" tags="" position="973,599" size="100,100">He sees you crawl into under his desk. &quot;What are you doing!?&quot; 
 
-[Before you could reply the door swings open, and you see him straighten his posture at his desk]
+Before you could reply the door swings open, you could not see who came in, but that also meant they couldn&#39;t see you.
 
-[It is the tenant that&#39;s about to sign the lease to the last room]
+&quot;Hi, Marc. It&#39;s Louis, we talked on the phone today. I&#39;m coming into to sign the lease.&quot; Shit. It was the theft who stealing your room.
 
-You can&#39;t let this happen. You reach out towards his bulge.
+&quot;Right. Come have a seat.&quot; From your position, you see Marc, the man whose cock you became familiar with before his name, take his seat. His eyes quickly shoots down to you but he makes no other signs that you&#39;re hiding.
 
+&quot;It&#39;s nice of you to come into today.&quot;
+
+You can&#39;t let this signing go through! You reach out towards his bulge.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_4.webp&#39;]]
 
-[He is a bit spooked but you see that your rubbing has made is cock return to its large size]
+&quot;Ah!&quot; You spooked Marc with your touch but he quickly switches to a cough and smiles to Louis. His thighs tenses up though nervousness but his cock seems to grow through excitement.
 
-You unzipped his pants and the familiar taste of his cocks is back in your mouth.
-
+You quietly and slowly unzipp his pants and the familiar taste of his cocks is back in your mouth.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_5.webp&#39;]]
 
-[Are you okay, you seem a little distracted]
+&quot;Um, Marc? Was it actually a good time? You seem to be unwell.&quot; You smirk with your mouth full.
 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_6.webp&#39;]]
 
-[Y-Yes, I&#39;m actually a little down on the weather today.]
+&quot;Y-Yes, it&#39;s actually fine. I just didn&#39;t have much sleep last night. You know, managing this wonderful complex is tough work.&quot; He attempts to maintain a poker face but his voice wavers each time his cock hits the back of your throat.
 
-[With his cock in your mouth, throbbing for release, you give him a knowing glance.
-
-
-[He makes brief eye contact with you and then returns back to the tenant]
-
+You feel his balls start to swell. You force him to make eye-contact with you by gripping his penis a little to hard. He makes brief eye contact with you and you give him a knowingly look.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_7.webp&#39;]]
 
+&quot;Well, actually. There&#39;s something I need to tell you.&quot; His voices slows as most of his effort seems to be on not cumming. 
 
-[He apologizes that the room was recently inspected and it needs a renovation that could last a month of two and therefore he can&#39;t lease it out]]
+&quot;Yes?&quot;
 
-[The tenant is angry, yells and rushes off]
+&quot;We... uh ... recently inspected the room that you were about to lease and found that it was in need a renovation. Unfortunately, that could last a month of two and therefore we won&#39;t be able to lease it out to for the moment.]]
 
-[Luckily, the tenant has also slammed the door on the way out]
+&quot;What?! You told me this morning that it would be ready! Did you really make me come here to tell me that?&quot;
 
-@@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+&quot;Yes, it was quick inspection this morning. I&#39;m sorry.&quot; You commend the man&#39;s ability to lie and hold his cum back for this long.
+
+&quot;A complete waste of my time!&quot; You hear louis push his chair back followed by storming footstep and finally a door slam.
+
+At no point do you stop your blowjob. Marc returns his full attention to you. His face is scrunch in both sexual frustration and regular frustration.
 
 	[[finish him |FirstSex_05]]
-
+	@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
  &lt;&lt;/cont&gt;&gt;
   &lt;&lt;/cont&gt;&gt;
    &lt;&lt;/cont&gt;&gt;
     &lt;&lt;/cont&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="11" name="FirstSex_05" tags="" position="967,911" size="100,100">&quot;You fucking slut&quot; He says with an eager smile
+</tw-passagedata><tw-passagedata pid="11" name="FirstSex_05" tags="" position="973,740" size="100,100">&quot;You fucking slut.&quot; He enounces each word with a mix of disgust and devilishness.
 
-Is this what you want? He smacks his cock on your face.
+&quot;Is this what you want?&quot; He takes his cock back from you, smacks it across your face and starts stroking it.
 
-You nod your head with puppy eyes.
+You nod your head and give him your best slutty eyes.
 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;scene1_8.webp&#39;]]
-Before you catch his cum into your throat, he gives your first facial on earth.
 
-You feel the power grow inside you.
+His cum lands on your cheek, giving you your first facial on earth.
 
 @@.arousal; you gain 20 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 20&gt;&gt;
 
- &lt;&lt;link &#39;Clean Up.&#39;&gt;&gt;
- 		&lt;&lt;set $skilltree.xp to $skilltree.xp+5&gt;&gt;
-  		&lt;&lt;goto [[FirstSex_end]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="FirstSex_end" tags="" position="972,1068" size="100,100">[As you wipe off the cum from your face with your hand. You suck the cum off your fingers
-
+You wipe off his cum from your face with your hand and suck them off.
+You feel the power grow inside you.
+&lt;&lt;cont append&gt;&gt;
 @@.exp; you gain 25 exp@@
 &lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;
 
+Once the evidence of your act was gone, you got back up your feet. Marc ruffles through his desk and pulls out a key. He throws it your way.
 
-[he tosses a key your way.]
-
-[Room 69.]
-
-[You&#39;ll have to make a payment on the first of every week]
-
-[He&#39;ll stop by tomorrow morning to draw up an official lease :)]
+&quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $900 payment on the first or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
+You give a firm nod and before you actually get on his last nerve, you quickly make your way out of his office without looking back. You were sure though, that Marc&#39;s eyes were on the ass he was just talking about.
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="StoryInit" tags="" position="126,74" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
+ &lt;&lt;/link&gt;&gt;
+
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="StoryInit" tags="" position="126,74" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
 &lt;&lt;set $skilltree to {
 	points:1,
 	skills: [],
@@ -459,87 +563,86 @@ You feel the power grow inside you.
 	arousal:[0,0]
 }&gt;&gt;
 
-&lt;&lt;ignore &quot;link&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="PassageHeader" tags="" position="260.5,71" size="100,100"></tw-passagedata><tw-passagedata pid="15" name="Intro_1" tags="" position="1142,53" size="100,100">[picture of the inside of the apartment complex]
+&lt;&lt;ignore &quot;link&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="260.5,71" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="Intro_1" tags="" position="1142,52" size="100,100">Back outside the lobby, you see a man outside through the glassdoor passing around talking on a cellphone. He&#39;s visibly angry. Louis, your guess.
 
-[explain open kitchen, shared bathroom, gym space, lounging area]
+You smirk with pride and make your way towards the elevator. You pass the lounging area where a couple of loud men in their mid-twenties are playing pool. 
+One of the men looks up as you walk by.
 
-[a couple of gif of hot men hanging out in lounging area as you pass by]
-
-[One of the men notices you]
-
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;marc_00.webp&#39;]]
 
-The way he scans your body in clearly sexual.
-Being objectified turns you on.
+The way he scans your body in clearly sexual. Being objectified turns you on.
 
 You are reminded that all these men are part of your mission and you will fuck them all the future. You feel precum dripping from your hard-on your pants walking past these men.
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
 
+You need to find your room before you make an explosive scene.
+
  &lt;&lt;link &#39;Find your room&#39;&gt;&gt;
   		&lt;&lt;goto [[Room69_intro]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Room69_intro" tags="" position="1147,203" size="100,100">[Walking through the dorm, you finally arrived to your room]
+ &lt;&lt;/link&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Room69_intro" tags="" position="1147,202" size="100,100">You make the rest of the way to your apartment door without a scene.
+The key slides into knob smoothly, but it catches and refuses to turn.
 
-[your key slides into knob, but it catches and refuses to turn]
+You struggle for a moment to get it to turn, but instead the door slides open. It seems while you had the right key, the door&#39;s mechanism was busted and probably won&#39;t lock properly.]
 
-[As you struggle to get it to turn, the door slides open. 
-It seems to be the right key but the door&#39;s mechanism looks jammed and you don&#39;t it&#39;ll lock properly.]
+You make a mental note to mention this Marc but it&#39;s not urgent; you don&#39;t anything at all for the moment worth stealing.
 
-[You make a mental note to mention this to the landlord. But you aren&#39;t too concern, you don&#39;t anything at all for the moment to be worth stealing]
-
-[speaking of the landlord, your hard penis reminds you of the memory of sucking his cock just moments ago]
+Your thought of Marc brought your back to the memory of sucking his cock just moments ago.
 
 &lt;&lt;set $choice to 1&gt;&gt;
 &lt;&lt;link &quot;You&#39;re finally alone! Jerk off.&quot;&gt;&gt;
 &lt;&lt;goto [[JerkOff_01]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;&lt;link &quot;No time for jerking off. You need to find a job&quot;&gt;&gt;
+&lt;&lt;link &quot;No time for jerking off. You need to find a job.&quot;&gt;&gt;
 &lt;&lt;goto [[Settling_in]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="Ben_Intro" tags="" position="1348,58" size="100,100">A young man is standing at your door.
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1332,63" size="100,100">A young man is standing at your door.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_01.jpg&#39;]]
 
 He shyly waves at you from the door.
 
 &quot;Oh! I&#39;m so sorry. I didn&#39;t mean to open it, it&#39;s just slid open.&quot;
 
-You now reconsider telling the landlord about the door if it could continue bringing attractive men into your apartment.
+You now reconsider telling Marc about the jammed door if it could continue bringing attractive men into your apartment.
 
 &lt;&lt;switch $choice&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
-	[You walk up to him to introduce yourself]
+
+&lt;&lt;cont append&gt;&gt;
+	You walk up to him to introduce yourself. But standing closer than a stranger normally would. From this proximity, he had to strain his neck to look up at you. 
+	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
 	
-	He looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
+	He blushes and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
-	You walk up to Ben and extend you hand for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
+	His meek behavior is charming. You would love to destroy this twink.
 	
-	&quot;Likewise!&quot; His face is glowing with enthuasism as he shakes your hand.
+	You extend your hand. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
 	
-	&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off firs though. Unless you&#39;d want to join me?&quot; You give me a mischievous smirk and chuckle.
+	&quot;Likewise!&quot; His face glows with enthuasism as he shakes your hand.
 	
-	&quot;Oh!&quot; Your unexpected proposal surprises him
-	&quot;I-I.... uh, have to go.&quot; He rushes off, closing the door but before you notice a bulge in his pants grows.
+	&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off firs though. Unless you&#39;d want to join me?&quot; You say as you continue to shake his hand. You give him a mischievously raised eyebrow.
+	
+	&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He rushes off, closing the door behind but not before you notice a bulge in his pants grows.
 	
 	[[&quot;Head to the bathroom&quot;|Ben_IntroShower]]
-	
+	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;case 2&gt;&gt;
-	He is flustered and not sure how to respond after seeing your masturebate.
-	[You pretend that nothing was out of the ordinary as you quickly put  your clothes back on.]
-	My name is  $name . I just moved into the apartment today. 
+&lt;&lt;cont append&gt;&gt;
+	His face is flustered red and he seems unsure how to respond after seeing your masturbate.
+	You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
+	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
+		
+	He jerks his attention away from your hard-on that still clearly visible underneath the thin bedsheet and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
-	He looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
-	
-	You walk up to Ben and extend the hand that was just stroking your cock out for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
-	
-	Ben hesitates for a moment, and you can imagine the gears turning in his head.
-	
-	You continue to leave your hand out, maintaining eye contact and bright smile.
-	
+	You walk up to Ben and extend the same hand that was just stroking your cock. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
+	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
-	
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but before you notice a bulge in his pants grows.
+	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
 	
 	@@.arousal; you gain 5 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
@@ -550,24 +653,19 @@ You now reconsider telling the landlord about the door if it could continue brin
 	@@.arousal; Your Arousal is at 100, you have to cum!@@
 
 	[[&quot;Cum!&quot; |Ben_IntroCum]]
-	
+	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;case 3&gt;&gt;
-	He looks a deer frozen in headlights. He is completely captivated by your cock and cum. 
-	
-	My name is  $name . I just moved into the apartment today. 
-	[You pretend that nothing was out of the ordinary as you quickly put  your clothes back on.]
-	
+&lt;&lt;cont append&gt;&gt;
+	He looks like a deer frozen in headlights, completely captivated by your cock and cum. 
+	You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
+	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
+		
 	He breaks from his trance and quickly looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
-	You sloppily wipe your cum-stained hands onto the clean bed sheets , walk up to Ben and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
-	
-	Ben hesitates for a moment, and you can imagine the gears turning in his head.
-	
-	You continue to leave your hand out, maintaining eye contact and bright smile.
-	
+	You walk up to Ben, sloppily wipe your cum-stained hands onto the bedsheets/pants you were wearing and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
+	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out clearly with some cum still on it, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
-	
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but before you notice a bulge in his pants grows.
+	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
 	
 	@@.arousal; you gain 10 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;
@@ -576,23 +674,21 @@ You now reconsider telling the landlord about the door if it could continue brin
 	&lt;&lt;set $skilltree.exp to $skilltree.exp + 10&gt;&gt;
 	
 	You shower and clean up, uneventfully.
-	
-	
 	[[&quot;Let&#39;s head out&quot;|Apartment]]
-&lt;&lt;/switch&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="JerkOff_01" tags="" position="1127,501" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;
+	&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/switch&gt;&gt;
 
-[you excitedly hop on to your new bed, the clean sheets feel cool against your skin. You shed yourself of clothes]
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="JerkOff_01" tags="" position="1128,500" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;
 
+you excitedly hop on to your new bed, the clean sheets feel cool against your skin. You shed yourself of clothes
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;jerkoff_01.webp&#39;]]
 
-[You stroke yourself the way you love it, getting lost in the ectasy]
-
+You stroke yourself the way you love it, getting lost in the ectasy
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;jerkoff_02.webp&#39;]]
 
 From the back of your mind, you think notice a noise happening from the hall.
-
-@@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
 
 &lt;&lt;link &quot;It&#39;s a busy dorm, probably nothing. You&#39;re so close, finish.&quot;&gt;&gt;
 &lt;&lt;goto [[JerkOff_02]]&gt;&gt;
@@ -600,15 +696,20 @@ From the back of your mind, you think notice a noise happening from the hall.
 
 &lt;&lt;link &quot;Stop jerking, save your cum for your mission.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="JerkOff_02" tags="" position="1134,682" size="100,100">&lt;&lt;set $choice to 3&gt;&gt;
+&lt;&lt;/link&gt;&gt;
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
 
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="JerkOff_02" tags="" position="1134,682" size="100,100">&lt;&lt;set $choice to 3&gt;&gt;
 You continue on. Nothing can turn sop you now. You need release.
-
 Your grip loosens, and your slow your stroking, readying up.
 
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;jerkoff_03.webp&#39;]]
 
 @@.arousal; Your Arousal is at 100, you have to cum!@@
@@ -616,23 +717,29 @@ Your grip loosens, and your slow your stroking, readying up.
 
 The pressures builds up in your cock, until finally...
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;jerkoff_04.webp&#39;]]
 
-... you cum right onto your chest. 
+... you cum right onto your chest. Your body jerks with lightning from each shot.
 
-Your body jerks with lightning from each shot.
-
-[img[setup.ImagePath+&#39;jerkoff_04.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;jerkoff_05.webp&#39;]]
 
 you take sign of relief, letting the final wave of energy calm down.
 
-[img[setup.ImagePath+&#39;jerkoff_05.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;jerkoff_06.webp&#39;]]
 
-Before you could doze off with the drying cum on your chest, you notice a noise again. 
+But before you could doze off with the drying cum on your chest, you notice the noise again. 
 
 &lt;&lt;link &quot;You open your eyes to find a stranger at your door.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Settling_in" tags="" position="1143,362" size="100,100">You try to calm your horniness. It&#39;s a powerful weapon that should be saved for your mission.
+&lt;&lt;/link&gt;&gt;
+
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Settling_in" tags="" position="1143,362" size="100,100">You try to calm your horniness. It&#39;s a powerful weapon that should be saved for your mission, you remind yourself.
 
 You settle down on your bed, thinking about the next steps. 
 
@@ -644,39 +751,52 @@ Before you could continue your train of thought, a knocking comes at the door.
 
 &lt;&lt;link &quot;The door creaks open.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="PassageFooter" tags="" position="246.5,198" size="100,100"></tw-passagedata><tw-passagedata pid="22" name="Ben_IntroCum" tags="" position="1335,239" size="100,100">Getting caught jerking off by ben and then forcing him to shake your hand was too much.
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="PassageFooter" tags="" position="246.5,197" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="Ben_IntroCum" tags="" position="1324,354" size="100,100">Getting caught jerking off by ben and then forcing him to shake your hand was too much for you.
+You let the bedsheets drop from your waist and....
 
-you stripped down on the spot and....
 
-
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+ &#39;Ben_02.webp&#39;]]
+
+...release your sperm right onto the floor of your new apartment.
+Talk about housewarming!
 
 &lt;&lt;set $skilltree.arousal to 0&gt;&gt;
 
-release your sperm right onto the floor of your new apartment.
-Talk about housewarming!
-
 You shower and clean up, uneventfully.
 	
-	[[&quot;Let&#39;s head out&quot; |Apartment]]</tw-passagedata><tw-passagedata pid="23" name="Ben_IntroShower" tags="" position="1461,404" size="100,100">You make your way to the shared showers.
+	[[&quot;Let&#39;s head out&quot; |Apartment]]
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Ben_IntroShower" tags="" position="1325,205" size="100,100">You make your way to the shared showers.
 
-[image of dorm showers]
+To your delight, there a many meny in there, all of whom were comfortable being shirtless.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Ben_05.webp&#39;]]
 
-[you jerk off]
+You took it one step further though, going completely nude amongst the men. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Ben_06.webp&#39;]]
 
-
+Once you were alone in a stall and had the water running, you were no longer inhibited. You leaned back against the wall and stroke your penis blindly.
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_03.webp&#39;]]
 
-[you cum, moaning for all to hear around]
-
-
+You were not holding back any of your moans and let them out for anyone to hear. In only a few moments, you were ready to blow.
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_04.webp&#39;]]
 
-[As you get ready and start to out of the showers, you notice some familiar shoes and quiet jerking. He should have just joined you ff he was just going to follow you and jerk off alone in the stalls]
+You let out hard groan as your cum mixed with shower water
+&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
 
-Now, for your mission.
+You wash yourself up afterwards. As you back out from the shower rooms to change, you notice some familiar shoes under the bathroom stalls and the sounds of quiet jerking. You thought to yourself that Ben should have just joined you if he was just going to follow you and jerk off alone in the stalls.
+
+But you left him alone to his preferences. You changed and continued onto your mission.
 	
-	[[&quot;Let&#39;s head out&quot; |Apartment]]</tw-passagedata><tw-passagedata pid="24" name="Apartment" tags="" position="1544,98" size="100,100">End of Demo now
+	[[&quot;Let&#39;s head out&quot; |Apartment]]
+	
+	&lt;&lt;/cont&gt;&gt;
+	&lt;&lt;/cont&gt;&gt;
+	&lt;&lt;/cont&gt;&gt;
+	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Apartment" tags="" position="1539,55" size="100,100">End of Demo now
 
 testing code
 &lt;&lt;set _index to $npc.name.indexOf(&#39;Ben&#39;)&gt;&gt;
@@ -685,7 +805,22 @@ The person at this location is &lt;&lt;print $npc.name[_index]&gt;&gt;
 
 will raise lower his straightness now
 
-&lt;&lt;set $npc.straightness[_index] to $npc.straightness[_index-1]-.1&gt;&gt;</tw-passagedata></tw-storydata>
+&lt;&lt;set $npc.straightness[_index] to $npc.straightness[_index-1]-.1&gt;&gt;
+
+
+
+
+[[&quot;Room 69: Yours&quot;|Room_Player]]
+
+[[&quot;Common Room&quot;|Room_Common]]
+
+[[&quot;Kitchen&quot;|Room_Kitchen]]
+
+[[&quot;Bathroom&quot;|Room_Bathroom]]
+
+[[&quot;Gym&quot;|Room_Gym]]
+
+</tw-passagedata><tw-passagedata pid="24" name="Room_Common" tags="" position="1672,851" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="25" name="Room_Kitchen" tags="" position="1896,673" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="26" name="Room_Player" tags="" position="1960,303" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="27" name="Room_Bathroom" tags="" position="1978,466" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="28" name="Room_Gym" tags="" position="1954,72" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
