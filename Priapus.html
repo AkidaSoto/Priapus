@@ -105,12 +105,17 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 .exp {
   font-size: 1.2rem;
-  color: blue;
+  color: CornflowerBlue;
 }
 
 .level {
   font-size: 1.2rem;
-  color: green;
+  color: #00CED1;
+}
+
+.obj {
+  font-size: 1.2rem;
+  color: #008080;
 }
 
 img {
@@ -246,11 +251,11 @@ You have @@#points;$skilltree.points@@ ability point(s) to use!
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aural&quot;][&quot;level&quot;]&gt;&gt;
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;amounts&quot;][_strengthid]&gt;&gt;
 	Passive Sexual Aura (+ _strengthid)
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="100,442" size="100,100">&lt;&lt;link &#39;God Abilities&#39;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="103,442" size="100,100">&lt;&lt;link &#39;God Abilities&#39;&gt;&gt;
         &lt;&lt;goto [[Skill Tree]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;&lt;link &#39;Character &amp; Objectives&#39;&gt;&gt;
+&lt;&lt;link &#39;Characters&#39;&gt;&gt;
         &lt;&lt;goto [[Characters]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,44" size="100,100">You descend down from the heavens.
 
@@ -305,7 +310,7 @@ But first, you had to acquire a room.
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="979,44" size="100,100">You make your way through the automatic doors of the apartment.
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="980,44" size="100,100">You make your way through the automatic doors of the apartment.
 Scanning the lobby to see various men making their way through life, most of them don&#39;t even notice you. 
 Before you could get fully distracted, your eye catches a door.
 
@@ -317,9 +322,6 @@ Perfect. You straighten back (as much as a homosexual god could, that is) and he
 &quot;Excuse me. How can I help you?&quot;
 [img[setup.ImagePath+&#39;Marc_01.png&#39;]]
 A burly older gentlemen behind a desk demands. Your cock pulses in your pants in anticipatation. 
-
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 
 You recover in time before it got awkward. &quot;Ah, yes.&quot; You clear your human throat. &quot;I&#39;ve come to inquire about an available room in this human establishment.&quot; Your first human words were to be desired, you reprimanded yourself.
 
@@ -480,11 +482,15 @@ However, you plan to finish this your way.
 
 Before you could reply the door swings open, you could not see who came in, but that also meant they couldn&#39;t see you.
 
-&quot;Hi, Marc. It&#39;s Louis, we talked on the phone today. I&#39;m coming into to sign the lease.&quot; Shit. It was the theft who stealing your room.
+The stranger speaks, &quot;Hi, Marc. It&#39;s Louis, we talked on the phone today. I&#39;m coming into to sign the lease.&quot; Shit. It was the theft who stealing your room.
 
 &quot;Right. Come have a seat.&quot; From your position, you see Marc, the man whose cock you became familiar with before his name, take his seat. His eyes quickly shoots down to you but he makes no other signs that you&#39;re hiding.
 
-&quot;It&#39;s nice of you to come into today.&quot;
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; you&#39;ve met Marc. You can now find him under &quot;Character&quot;@@
+
+&quot;It&#39;s nice of you to come into today.&quot; He continues.
 
 You can&#39;t let this signing go through! You reach out towards his bulge.
 &lt;&lt;cont append&gt;&gt;
@@ -557,6 +563,7 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
+@@.obj; New Obj: Meet with Marc in the morning to sign the lease@@
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
@@ -637,9 +644,6 @@ Your thought of Marc brought your back to the memory of sucking his cock just mo
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_01.jpg&#39;]]
 
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
-
 He shyly waves at you from the door.
 
 &quot;Oh! I&#39;m so sorry. I didn&#39;t mean to open it, it&#39;s just slid open.&quot;
@@ -655,6 +659,10 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	
 	He blushes and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
+	
 	His meek behavior is charming. You would love to destroy this twink.
 	
 	You extend your hand. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
@@ -665,6 +673,10 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	
 	&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He rushes off, closing the door behind but not before you notice a bulge in his pants grows.
 	
+	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
+
 	[[&quot;Head to the bathroom&quot;|Ben_IntroShower]]
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;case 2&gt;&gt;
@@ -675,11 +687,19 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 		
 	He jerks his attention away from your hard-on that still clearly visible underneath the thin bedsheet and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
+	
 	You walk up to Ben and extend the same hand that was just stroking your cock. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
 	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
 	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
 	
+	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
+
 	@@.arousal; you gain 5 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
 	
@@ -698,11 +718,19 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 		
 	He breaks from his trance and quickly looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
+	
 	You walk up to Ben, sloppily wipe your cum-stained hands onto the bedsheets/pants you were wearing and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
 	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out clearly with some cum still on it, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
 	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
 	
+	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
+
 	@@.arousal; you gain 10 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;
 	
@@ -714,8 +742,6 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
 
 &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="JerkOff_01" tags="" position="1128,500" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;
 
