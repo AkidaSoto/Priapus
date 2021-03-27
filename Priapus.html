@@ -208,6 +208,11 @@ Any texts in [] means that it&#39;s in development.
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+		&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
+		
+		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
+		
 		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
 		&lt;&lt;set $skilltree.exp to 25&gt;&gt;
@@ -548,6 +553,9 @@ Once the evidence of your act was gone, you got back up your feet. Marc ruffles 
 &quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $900 payment on the first or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
 You give a firm nod and before you actually get on his last nerve, you quickly make your way out of his office without looking back. You were sure though, that Marc&#39;s eyes were on the ass he was just talking about.
 
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
+
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
  &lt;&lt;/link&gt;&gt;
@@ -572,8 +580,11 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;],
 	straightness:[.7,.3,.9],
 	arousal:[0,0,.5],
-	met:[false,false,false]
+	met:[false,false,false],
+	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;]
 }&gt;&gt;
+
+&lt;&lt;set  $bulletin to false&gt;&gt;
 
 &lt;&lt;set $debuff to .5&gt;&gt;
 
@@ -619,7 +630,7 @@ Your thought of Marc brought your back to the memory of sucking his cock just mo
 
 &lt;&lt;link &quot;No time for jerking off. You need to find a job.&quot;&gt;&gt;
 &lt;&lt;goto [[Settling_in]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1332,63" size="100,100">A young man is standing at your door.
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1331,61" size="100,100">A young man is standing at your door.
 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_01.jpg&#39;]]
@@ -700,6 +711,9 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	[[&quot;Let&#39;s head out&quot;|Apartment]]
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
+
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
 
 &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="JerkOff_01" tags="" position="1128,500" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;
 
@@ -819,7 +833,7 @@ But you left him alone to his preferences. You changed and continued onto your m
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
-	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Apartment" tags="" position="1539,55" size="100,100">End of Demo now
+	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Apartment" tags="" position="1539,54" size="100,100">End of Demo now
 
 
 testing code
@@ -859,23 +873,54 @@ will raise lower his straightness now
 
 
 There&#39;s a bulletin board of notices and local events.
-	[[&quot;Check the bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="25" name="Room_Kitchen" tags="" position="1738,379" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="26" name="Room_Player" tags="" position="1738,172" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="27" name="Room_Bathroom" tags="" position="1738,274" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="28" name="Room_Gym" tags="" position="1737,66" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Tucker_Intro" tags="" position="1904,493" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Bulletin" tags="" position="1742,612" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Characters" tags="" position="213,586" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+	[[&quot;Check the bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="25" name="Room_Kitchen" tags="" position="1738,379" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="26" name="Room_Player" tags="" position="1738,172" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="27" name="Room_Bathroom" tags="" position="1738,274" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="28" name="Room_Gym" tags="" position="1737,66" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Tucker_Intro" tags="" position="1904,494" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+
+The man seems to be focused on making a shot, leaning onto the table. His juicy ass is propped up very nicely for you to see.
+
+&quot;Hey.&quot; You say as you approach him. He shifts his neck to look your way and makes a shot at the same time.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker_01.jpg&#39;]]
+
+&quot;Hey.&quot; The balls falls into its pocket and he gives you an endearing smile. &quot;You new?&quot;
+
+&lt;&lt;/cont&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="30" name="Bulletin" tags="" position="1742,612" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Characters" tags="" position="213,586" size="100,100">[This is a place for you]
+
+&lt;&lt;if $bulletin == false&gt;&gt;
+	You need to look for a job!	
+	Try checking out the bulletin in the common area
+&lt;&lt;/if&gt;&gt;
+
+
+
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
 	[You met Marc]
 	[Pic of Marc, Description, number of Encounters]
+	$npc[&quot;notice&quot;][_tindex]
+&lt;&lt;else&gt;&gt;
+	You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
 	[You met Ben]
 	[Pic of Ben, Description, number of Encounters]
+	$npc[&quot;notice&quot;][_tindex]
+&lt;&lt;else&gt;&gt;
+	You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
 	[You met Tucker]
 	[Pic of Tucker, Description, number of Encounters]
+	
+	$npc[&quot;notice&quot;][_tindex]
+&lt;&lt;else&gt;&gt;
+	You can meet this person in the lounging area.
 &lt;&lt;/if&gt;&gt;
 
 
