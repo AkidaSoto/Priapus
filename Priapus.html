@@ -565,6 +565,8 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
 @@.obj; New Obj: Meet with Marc in the morning to sign the lease@@
 
+@@.obj; New Obj: Get a job to pay for rent!@@
+
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
  &lt;&lt;/link&gt;&gt;
@@ -914,40 +916,45 @@ The man seems to be focused on making a shot, leaning onto the table. His juicy 
 
 &lt;&lt;/cont&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="30" name="Bulletin" tags="" position="1742,612" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Characters" tags="" position="213,586" size="100,100">[This is a place for you]
+</tw-passagedata><tw-passagedata pid="30" name="Bulletin" tags="" position="1742,612" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Characters" tags="" position="221,584" size="100,100">[This is a place for you]
 
 &lt;&lt;if $bulletin == false&gt;&gt;
+	&lt;span class=&quot;obj&quot;&gt;
 	You need to look for a job!	
 	Try checking out the bulletin in the common area
+	&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
 
 
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[You met Marc]
-	[Pic of Marc, Description, number of Encounters]
-	$npc[&quot;notice&quot;][_tindex]
+	@@.obj; &quot;Marc&quot;@@
+	[img[setup.ImagePath+&#39;Marc_pic.jpg&#39;]]
+	The manager of the apartment complex. Older gentlemen with strong attitude and a stronger cock.
+	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
 	You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[You met Ben]
-	[Pic of Ben, Description, number of Encounters]
-	$npc[&quot;notice&quot;][_tindex]
+	@@.obj; &quot;Ben&quot;@@
+	[img[setup.ImagePath+&#39;Ben_pic.jpg&#39;]]
+	Your shy twink neighbor. Clearly wants his hole destroyed.
+	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
 &lt;&lt;else&gt;&gt;
 	You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[You met Tucker]
-	[Pic of Tucker, Description, number of Encounters]
-	
-	$npc[&quot;notice&quot;][_tindex]
+	@@.obj; &quot;Tucker&quot;@@
+	[img[setup.ImagePath+&#39;Tucker_pic.jpg&#39;]]
+	Easy-going fella you met in lounge. Enjoys pool and rubbing his bulge against your thigh as he teaches you how to play.
+	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex]&lt;/span&gt;
 &lt;&lt;else&gt;&gt;
+	@@.obj; &quot;Tucker&quot;@@
 	You can meet this person in the lounging area.
 &lt;&lt;/if&gt;&gt;
 
