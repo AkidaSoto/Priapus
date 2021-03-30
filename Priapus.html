@@ -103,12 +103,17 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   color: pink;
 }
 
-.exp {
+.neg {
   font-size: 1.2rem;
-  color: CornflowerBlue;
+  color: red;
 }
 
-.level {
+.exp {
+  font-size: 1.2rem;
+  color: #F0E68C;
+}
+
+.notif {
   font-size: 1.2rem;
   color: #00CED1;
 }
@@ -118,10 +123,18 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   color: #008080;
 }
 
-img {
-  height: 400px; /*this makes sure to maintain the aspect ratio*/
-  width: auto; /*set the width or max-width*/
-    
+.passage img {
+    display: block;
+    width: auto;
+    height:  400px;
+    margin: 0 auto;
+}
+
+.passage webp { 
+  	display: block;
+    width: auto;
+    height:  400px;
+    margin: 0 auto;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where the HTML file is
 	// located if you want to run this from inside Twine.
@@ -139,10 +152,138 @@ setup.SoundPath = setup.Path + "sounds/";
 // end dialog-api-macro-set.min.js
 
 
-// continue.min.js, for SugarCube 2, by Chapel
-// v1.0.1, 2021-02-25, 2fa0d5a6692222b9a5db3088b4746f12d21cf0b0
-;!function(){"use strict";var n=["a",":button",'*[role="button"]',".continue-macro-ignore","#ui-bar","#ui-dialog"],t=0;function o(){$(document).on("click.continue-macro keyup.continue-macro",n.join(", "),(function(n){n.stopPropagation()}))}function e(){if(State.length>0)return!1;var t=[].slice.call(arguments).flatten();return n=n.concat(t),!0}function c(n,o){var e=function(){var n="."+Date.now().toString(36)+"-"+t;return t++,n}();if(o&&"function"==typeof o){var c="click.continue-macro"+e;n&&(c=c+" keyup.continue-macro"+e),$(document).one(c,(function(){o.call(),$(document).off(e)}))}}prehistory["%%continue-expiration"]=function(){t=0},$(document).one(":passagerender",(function(){o()})),Macro.add("ignore",{handler:function(){if(!e(this.args))return this.error("the <<ignore>> macro should only be run from StoryInit or equivalent.")}}),Macro.add("cont",{tags:null,handler:function(){var n,t=this.args.includes("append"),o=this.args.includesAny("key","keypress","press","button"),e=this.payload[0].contents;t&&(n=$(document.createElement("span")).addClass("macro-"+this.name).appendTo(this.output)),c(o,this.createShadowWrapper((function(){t&&n&&n instanceof $?n.wiki(e):$.wiki(e)})))}}),setup.cont=c,setup.cont.ignore=e,setup.cont.reset=function(){var t=[].slice.call(arguments).flatten();n=n.concat(t),$(document).off(".continue-macro"),o()},window.cont=window.cont||setup.cont}();
-// end continue.min.js
+(function () {
+    // v1.0.1
+    'use strict';
+
+    // selectors to ignore
+    var ignored = ['a', ':button', '*[role="button"]', '.continue-macro-ignore', '#ui-bar', '#ui-dialog'];
+
+    var _i = 0;
+
+    prehistory['%%continue-expiration'] = function () {
+        _i = 0;
+    };
+
+    function ns () {
+        // create unique namespace
+        var namespace = '.' + Date.now().toString(36) + '-' + _i;
+        _i++;
+        return namespace;
+    }
+
+    function ignoreMe () {
+        $(document).on('click.continue-macro keyup.continue-macro', ignored.join(', '), function (ev) { 
+            ev.stopPropagation(); 
+        });
+    }
+
+    function addIgnore () {
+        if (State.length > 0) {
+            return false;
+        }
+        var args = [].slice.call(arguments).flatten();
+        ignored = ignored.concat(args);
+        return true;
+    }
+
+    $(document).one(':passagerender', function () {
+        // on first render, set up the ignore list
+        ignoreMe();
+    });
+
+    // continue functions
+    function cont (press, cb) {
+        var namespace = ns();
+        if (!cb || typeof cb !== 'function') {
+            return;
+        }
+        var events = 'click.continue-macro' + namespace;
+        if (press) {
+            events = events + ' keyup.continue-macro' + namespace;
+        }
+// +++++++++++++++++++++++++++++++++++++++++++++++++++
+			if (state.active.variables.autoClick){
+						cb.call();
+				  	$(document).off(namespace);
+				}
+				else{		
+        $(document).one(events, function () {
+            cb.call();
+            // expire all namespaced events
+            $(document).off(namespace);
+					
+        }
+				);}
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    }
+    function reset () {
+        var args = [].slice.call(arguments).flatten();
+        ignored = ignored.concat(args);
+        $(document).off('.continue-macro');
+        ignoreMe();
+    }
+
+    // macros
+    // <<ignore selectors...>>
+    Macro.add('ignore', {
+        handler : function () {
+            var check = addIgnore(this.args);
+            if (!check) {
+                return this.error('the <<ignore>> macro should only be run from StoryInit or equivalent.');
+            }
+        }
+    });
+	
+    // <<cont [append] [press]>>Code<</cont>>
+    Macro.add('cont', {
+        tags : null,
+        handler : function () {
+					
+					$(document.createElement("span")).addClass("macro-"+this.name).append("<p align='center' id='continuedots'>...</p>").appendTo(this.output)
+					
+            var append = this.args.includes('append'), // append keyword
+                press = this.args.includesAny('key', 'keypress', 'press', 'button'), // keypress keyword
+                wiki = this.payload[0].contents, // content to wikify
+                $output; // output element (if needed)
+            if (append) {
+                // create output element, but only if needed (e.g. if appending content)
+                $output = $(document.createElement('span'))
+                    .addClass('macro-' + this.name)
+                    .appendTo(this.output);
+	
+            }
+            cont(press, this.createShadowWrapper( function () {
+                // wikify 
+							
+							
+
+							//$('#connectdots').remove();
+							
+                if (append && $output && $output instanceof $) {
+									
+		var element =  document.getElementById('continuedots');
+if (typeof(element) != 'undefined' && element != null)
+{
+  document.getElementById("continuedots").outerHTML = ""; // Exists.
+}
+
+                    $output.wiki(wiki);
+                } else {
+                    $.wiki(wiki);
+                }
+
+            }));
+        }
+    });
+    // APIs
+    setup.cont = cont;
+    setup.cont.ignore = addIgnore;
+    setup.cont.reset = reset;
+
+    window.cont = window.cont || setup.cont;
+}());
+
 
 // ui-macro.min.js, for SugarCube 2, by Chapel
 // v1.0.0, 2021-02-25, 2fa0d5a6692222b9a5db3088b4746f12d21cf0b0
@@ -179,11 +320,36 @@ setup.SoundPath = setup.Path + "sounds/";
 ;!function(){"use strict";function t(t){if(t.length%2!=0)return"Style rules should be a list of key/value pairs; you've passed an odd number.";var r={};return t.forEach((function(e,n){n%2==0&&(r[e]=t[n+1])})),r}function r(t,r){try{return"string"==typeof r?r:(t instanceof jQuery||(t=$(t)),t.css(r))}catch(t){return t.message}}Macro.add("css",{handler:function(){var e=function(){try{var e,n=[].slice.call(arguments).flatten(),s=n.shift();return"string"==typeof n[0]?e=t(n):"object"==typeof n[0]&&(e=clone(n[0])),r(s,e)}catch(t){return t.message}}(this.args);if("string"==typeof e)return this.error(e)}})}();
 // end css-macro.min.js
 
-// Setting up a basic toggle control for the settings property 'mature'
-Setting.addToggle("mature", {
-	label : "Content for mature audiences?"
-}); // default value not defined, so false is used</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,45" size="100,100">The Almighty God, Zeus, has been scorn by his creations, humans.
-After growing tired of waiting millenias for them to develop peace amongst themselves, he decided that he had enough.
+// cycles.min.js, for SugarCube 2, by Chapel
+// v2.1.1, 2021-02-25, 2fa0d5a6692222b9a5db3088b4746f12d21cf0b0
+;!function(){"use strict";var e="%%cycles",t=!0,r="cycles.pause",i="cycles.pause.menu",s="cycles.postdisplay";function n(){return State.variables[e]}function a(e,t){if(!(this instanceof a))return new a(e,t);if(!e||"object"!=typeof e)throw new Error("Cycle() -> invalid definition object");if(!e.name||"string"!=typeof e.name||!e.name.trim())throw new Error("Cycle() -> invalid name");if(this.name=e.name,!e.phases||!Array.isArray(e.phases)||e.phases.length<2)throw new Error("Cycle() -> phases should be an array of at least two strings");if(!e.phases.every((function(e){return e&&"string"==typeof e&&e.trim()})))throw new Error("Cycle() -> each phase should be a valid, non-empty string");this.phases=clone(e.phases),e.period=Number(e.period),(Number.isNaN(e.period)||e.period<1)&&(e.period=1),Number.isInteger(e.period)||(e.period=Math.trunc(e.period)),this.period=e.period,e.increment=Number(e.increment),(Number.isNaN(e.increment)||e.increment<1)&&(e.increment=1),Number.isInteger(e.increment)||(e.increment=Math.trunc(e.increment)),this.increment=e.increment,this.active=void 0===e.active||!!e.active,t=Number(t),(Number.isNaN(t)||t<0)&&(t=0),Number.isInteger(t)||(t=Math.trunc(t)),this.stack=t}State.variables[e]={},Object.assign(a,{is:function(e){return e instanceof a},add:function(e,t){if(!t||"object"!=typeof t)throw new Error("Cycle.add() -> invalid definition object");if(e&&"string"==typeof e&&e.trim())t.name=e;else if(!t.name||"string"!=typeof t.name||!t.name.trim())throw new Error("Cycle.add() -> invalid name");var r=new a(t,0);return n()[t.name]=r,r},has:function(e){var t=n();return t.hasOwnProperty(e)&&a.is(t[e])},get:function(e){return a.has(e)?n()[e]:null},del:function(e){return!!a.has(e)&&(delete n()[e],!0)},check:function(e){if(a.has(e)){var t=[].slice.call(arguments).flatten().slice(1);return a.get(e).check(t)}},clear:function(e){n()},_emit:function(e,t){$(document).trigger({type:":cycle-"+t,cycle:e})},_retrieveCycles:n}),Object.assign(a.prototype,{constructor:a,revive:function(){var e={};return Object.keys(this).forEach((function(t){e[t]=clone(this[t])}),this),e},clone:function(){return new a(this.revive(),this.stack)},toJSON:function(){return JSON.reviveWrapper("new setup.Cycle("+JSON.stringify(this.revive())+", "+this.stack+")")},current:function(){return this.phases[Math.trunc(this.stack/this.period)%this.phases.length]},length:function(){return this.period*this.phases.length},turns:function(){return this.period/this.increment},turnsTotal:function(){return this.length()/this.increment},update:function(e){e=Number(e),Number.isNaN(e)&&(e=this.increment);var t=this.current();return this.stack+=e,this.stack<0&&(this.stack=0),Number.isInteger(this.stack)||(this.stack=Math.trunc(this.stack)),t!==this.current()&&a._emit(this,"change"),this},reset:function(){return this.stack=0,a._emit(this,"reset"),this.update(0)},suspend:function(){var e=this.active;return this.active=!1,e!==this.active&&a._emit(this,"suspend"),this},resume:function(){var e=this.active;return this.active=!0,e!==this.active&&a._emit(this,"resume"),this},toggle:function(){return this.active?this.suspend():this.resume(),this},isSuspended:function(){return!this.active},editIncrement:function(e){return e=Number(e),(!Number.isNaN(e)||e>0)&&(Number.isInteger(e)||(e=Math.trunc(e)),this.increment=e),this.increment},check:function(){var e=[].slice.call(arguments).flatten();return e.includes(this.current())}}),postdisplay[s]=function(){var e;tags().includes(r)||e?e=!1:tags().includes(i)?e=!0:Object.keys(n()).forEach((function(e){var t=a.get(e);t.active&&t.update()}))},setup.Cycle=a,t&&(window.Cycle=window.Cycle||a),Macro.add("newcycle",{tags:["phase"],handler:function(){if(this.args.length<1)return this.error("A cycle must at least be given a name.");if(this.payload.length<2)return this.error("A cycle must be given at least two phases.");var e=this.payload.slice(1).map((function(e){return function(e){if(e.args.length<1)return null;var t=e.args.flatten();return t.every((function(e){return"string"==typeof e}))?t:null}(e)})).flatten();if(e.includes(null))return this.error("Each `<<phase>>` tag must be given a valid name.");try{a.add(this.args[0],{phases:e,period:this.args[1],increment:this.args[2],active:this.args[3]&&"string"==typeof this.args[3]&&"suspend"!==this.args[3].trim()})}catch(e){var t=e.message&&e.message.split("->")[1];return t=!!t&&t.trim(),this.error(t||e.message)}}}),Macro.add("editcycle",{handler:function(){if(this.args.length<1||"string"!=typeof this.args[0]||!this.args[0].trim())return this.error("You must name the cycle you wish to act on.");if(this.args.length<2)return this.error("You must provide an action to perform.");var e=a.get(this.args[0]);if(null===e)return this.error('Cannot find a cycle named "'+this.args[0]+'".');if(this.args.includes("suspend")?e.suspend():this.args.includes("toggle")?e.toggle():this.args.includes("resume")&&e.resume(),this.args.includes("increment")){var t=this.args[this.args.indexOf("increment")+1];"number"==typeof t&&e.editIncrement(t)}if(this.args.includesAny("reset","clear")&&e.reset(),this.args.includes("change")){var r=this.args[this.args.indexOf("change")+1];r=Number(r),!Number.isNaN(r)&&Number.isInteger(r)&&e.update(r)}}}),Macro.add("showcycle",{handler:function(){if(this.args.length<1||"string"!=typeof this.args[0]||!this.args[0].trim())return this.error("You must name the cycle you wish to act on.");var e=a.get(this.args[0]);if(null===e)return this.error('Cannot find a cycle named "'+this.args[0]+'".');var t=e.current();this.args.includes("uppercase")?t=t.toUpperCase():this.args.includes("lowercase")?t=t.toLowerCase():this.args.includes("upperfirst")&&(t=t.toUpperFirst()),$(document.createElement("span")).addClass("macro-"+this.name).append(t).appendTo(this.output)}})}();
+// end cycles.min.js
+
+
+// Setting up a basic toggle control for the settings property 
+
+// Setting up a toggle control for the settings property 'widescreen' w/ callbacks
+setup.autoClickHandler = function () {
+	if (state.active.variables.autoClick) { // is true
+		state.active.variables.autoClick = false;
+	}
+	else { // is false
+		state.active.variables.autoClick = true;
+	}
+	state.active.variables.defaultAC = state.active.variables.autoClick
+};
+
+Setting.addToggle("autoClick", {
+	label : "Disable Click-to-read?",
+	default: false,
+	onInit   : [],
+	onChange : setup.autoClickHandler
+}); // default value not defined, so false is used</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,43" size="100,100">[Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;]
+
+[img[setup.ImagePath+&#39;GameStart.jpg&#39;]]
+
+The Almighty God, Zeus, has been scorn by his creations, humans.
+After growing tired of waiting millenias for them to develop peace amongst themselves, he decided that he had enough. 
 
 However, he would not stoop to their level by smiting them, drawing blood like they have.
 He is still the most gracious being above, so has devise a plan to get rid of humanity peacefully.
@@ -191,7 +357,8 @@ As so, he has assigned you, a beginner god, an important role;
 
 @@.arousal;Reduce the population by turning all men homosexual.@@
 
-[Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;]
+@@.notif;When you see these dots, click anywhere to continue@@
+&lt;&lt;cont append&gt;&gt;
 
 Enter your name: &lt;&lt;textbox &#39;$name&#39; $name autofocus&gt;&gt; @@#error;@@
 
@@ -219,14 +386,20 @@ Any texts in [] means that it&#39;s in development.
 		
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-		
+		&lt;&lt;set $skilltree.skill.Arousal.level to 1&gt;&gt;
+		&lt;&lt;set $skilltree.skill.Arousal.availableUses to 0&gt;&gt;
+		&lt;&lt;set $rp to 1&gt;&gt;
 		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
 		&lt;&lt;set $skilltree.exp to 25&gt;&gt;
         &lt;&lt;goto [[Apartment]]&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/link&gt;&gt;
-</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="123,268" size="100,100">&lt;&lt;if $skilltree[&quot;xp&quot;] &gt; 100&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+
+&lt;&lt;editcycle &#39;time&#39; suspend&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="125,268" size="100,100">&lt;&lt;showcycle &#39;time&#39; upperfirst&gt;&gt;
+
+&lt;&lt;if $skilltree[&quot;xp&quot;] &gt; 100&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;exp&quot;] to 0&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;
@@ -252,12 +425,14 @@ You have @@#points;$skilltree.points@@ ability point(s) to use!
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;amounts&quot;][_strengthid]&gt;&gt;
 	Passive Sexual Aura (+ _strengthid)
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="103,442" size="100,100">&lt;&lt;link &#39;God Abilities&#39;&gt;&gt;
-        &lt;&lt;goto [[Skill Tree]]&gt;&gt;
+	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;
+    &lt;&lt;goto [[Skill Tree]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &#39;Characters&#39;&gt;&gt;
-        &lt;&lt;goto [[Characters]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,44" size="100,100">You descend down from the heavens.
+	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;
+    &lt;&lt;goto [[Characters]]&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,42" size="100,100">You descend down from the heavens.
 
 Stand in front of you is your first assignment.
 
@@ -301,6 +476,7 @@ But first, you had to acquire a room.
 &lt;&lt;link &#39;Head Inside&#39;&gt;&gt;
         &lt;&lt;goto [[Marc_Intro]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
+&lt;&lt;print &quot;-----------------&quot;&gt;&gt;
 
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
@@ -310,7 +486,9 @@ But first, you had to acquire a room.
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="980,44" size="100,100">You make your way through the automatic doors of the apartment.
+&lt;&lt;/cont&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="980,48" size="100,100">You make your way through the automatic doors of the apartment.
 Scanning the lobby to see various men making their way through life, most of them don&#39;t even notice you. 
 Before you could get fully distracted, your eye catches a door.
 
@@ -342,12 +520,14 @@ However, you could see that his patience was running thin. He got up and put his
 There may be nothing he can do, but that&#39;s not the same for you. It&#39;s time for your God Abilities to come into play.
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
+&lt;&lt;set $mainobj to &quot;&quot;&gt;&gt;
 &lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
     &lt;&lt;goto [[FirstSex_01]]&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] --&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
- You will need to level up your &quot;Raise Arousal&quot; Ability to continue. Access the skill menu in the UI bar.
+&lt;&lt;set $mainobj to &quot;You will need to level up your &#39;Raise Arousal&#39; Ability to continue. Access the skill menu in the UI bar.&quot;&gt;&gt;
+@@.obj; New Obj: You will need to level up your &quot;Raise Arousal&quot; Ability to continue. Access the skill menu in the UI bar.@@
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 0&gt;&gt;
@@ -412,6 +592,9 @@ Each unique ejaculation event will award you with experience. With enough experi
 Lastly, you have your own personal arousal. Some abilities will grow in strength the more aroused you are. Again, make sure you don&#39;t prematurely jizz before you&#39;re able to utilize those buffs!
 &lt;&lt;/message&gt;&gt;
 
+Refreshment Points: @@#refresh;$rp@@
+
+
 &lt;blockquote&gt;
 
 &lt;&lt;set _skill to &quot;Arousal&quot;&gt;&gt;
@@ -426,6 +609,15 @@ Lastly, you have your own personal arousal. Some abilities will grow in strength
 	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;] ++&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &quot;replenish&quot;&gt;&gt;
+&lt;&lt;if $rp &gt; 0&gt;&gt;
+&lt;&lt;if $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] &lt; $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;]&gt;&gt;
+&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;
+&lt;&lt;set $rp --&gt;&gt;
+&lt;&lt;replace #refresh&gt;&gt; &lt;&lt;print $rp&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 &lt;&lt;/capture&gt;&gt;
 &lt;blockquote&gt; \
@@ -451,8 +643,7 @@ Lastly, you have your own personal arousal. Some abilities will grow in strength
 	
 &lt;/blockquote&gt;
 
-
-[[Return to scene|previous()]]
+[[Return to scene|$previous_passage]]
 </tw-passagedata><tw-passagedata pid="8" name="FirstSex_02" tags="" position="969,337" size="100,100">He pushes your head down, and you take the cue to kneel.
 
 You plant your face into groins and take in a deep breath. 
@@ -567,14 +758,15 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
 @@.obj; New Obj: Meet with Marc in the morning to sign the lease@@
 
-@@.obj; New Obj: Get a job to pay for rent!@@
+&lt;&lt;set $mainobj to &quot;Get a job to pay for rent!&quot;&gt;&gt;
+@@.obj; New Main Obj: Get a job to pay for rent!@@
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
  &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="StoryInit" tags="" position="126,74" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="StoryInit" tags="" position="127,71" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
 &lt;&lt;set $skilltree to {
 	points:1,
 	skills: [],
@@ -582,32 +774,54 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 	level:1,
 	arousal:50
 }&gt;&gt;
-
 &lt;&lt;set $skilltree[&quot;skills&quot;] to {
 	&quot;Arousal&quot;:{name:&quot;Arousal&quot;,level:0,useType:1,definition: &quot;Target&#39;s arousal is raised&quot;,maxUses: 0, availableUses:0,amounts:[0,10, 15 ,20]},
 	&quot;Aura&quot;:{name:&quot;Sexual Aura&quot;,level:0,useType:0, definition: &quot;Passively raise the arousal of anyone in the vicinity&quot;, maxUses: 0, availableUses:0,amounts:[0,1, 5, 10]}
 }&gt;&gt;
-
-
-&lt;&lt;set $npc to {
-	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;],
-	straightness:[.7,.3,.9],
-	arousal:[0,0,.5],
-	met:[false,false,false],
-	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;]
-}&gt;&gt;
-
-&lt;&lt;set  $bulletin to false&gt;&gt;
-
 &lt;&lt;set $debuff to .5&gt;&gt;
-
 &lt;&lt;set $arousalgain to {
 	thoughts: 5,
 	blowjob: 10,
 	cum:25,
 	anal:25}&gt;&gt;
 
-&lt;&lt;ignore &quot;link&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="260.5,71" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="Intro_1" tags="" position="1142,52" size="100,100">Back outside the lobby, you see a man outside through the glassdoor passing around talking on a cellphone. He&#39;s visibly angry. Louis, your guess.
+&lt;&lt;set $rp to 0&gt;&gt;
+&lt;&lt;set $mainobj to &#39;&#39;&gt;&gt;
+&lt;&lt;set $bulletin to false&gt;&gt;
+&lt;&lt;set $showered to false&gt;&gt;
+&lt;&lt;set $eaten to false&gt;&gt;
+
+&lt;&lt;set $showerscore to 0&gt;&gt;
+
+&lt;&lt;set $npc to {
+	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;,&quot;Trojan&quot;],
+	straightness:[.7,.5,.2,.9],
+	arousal:[0,0,.5,.5],
+	met:[false,false,false,false],
+	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;],
+	event: [false,false,false.false],
+	progress:[1,1,0,0]
+}&gt;&gt;
+
+&lt;&lt;newcycle &quot;time&quot; 6&gt;&gt;
+    &lt;&lt;phase &#39;morning&#39; &#39;mid-morning&#39; &#39;afternoon&#39; &#39;evening&#39; &#39;night&#39; &#39;midnight&#39;&gt;&gt;
+&lt;&lt;/newcycle&gt;&gt;
+
+&lt;&lt;ignore &quot;link&quot;&gt;&gt;
+&lt;&lt;set $current_passage to &quot;Start Your Story&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="265.5,60" size="100,100">&lt;&lt;if ![&quot;Characters&quot;,&quot;Skill Tree&quot;].includes($current_passage) &gt;&gt;\
+	&lt;&lt;set $previous_passage to $current_passage&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;set $previous_passage2 to $current_passage&gt;&gt;\
+&lt;&lt;set $current_passage to passage()&gt;&gt;\
+&lt;&lt;if [&quot;Characters&quot;,&quot;Skill Tree&quot;].includes($previous_passage2)&gt;&gt;\
+	&lt;&lt;set  $autoClick =  true&gt;&gt;\
+	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;
+&lt;&lt;else&gt;&gt;\
+	&lt;&lt;set $autoClick to $defaultAC&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;if [&quot;Sleep&quot;].includes($previous_passage) &gt;&gt;\
+	&lt;&lt;editcycle &#39;time&#39; reset&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="14" name="Intro_1" tags="" position="1142,52" size="100,100">Back outside the lobby, you see a man outside through the glassdoor passing around talking on a cellphone. He&#39;s visibly angry. Louis, your guess.
 
 You smirk with pride and make your way towards the elevator. You pass the lounging area where a couple of loud men in their mid-twenties are playing pool. 
 One of the men looks up as you walk by.
@@ -643,7 +857,7 @@ Your thought of Marc brought your back to the memory of sucking his cock just mo
 
 &lt;&lt;link &quot;No time for jerking off. You need to find a job.&quot;&gt;&gt;
 &lt;&lt;goto [[Settling_in]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1331,61" size="100,100">A young man is standing at your door.
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1331,60" size="100,100">A young man is standing at your door.
 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben_01.jpg&#39;]]
@@ -673,11 +887,11 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	
 	&quot;Likewise!&quot; His face glows with enthuasism as he shakes your hand.
 	
-	&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off firs though. Unless you&#39;d want to join me?&quot; You say as you continue to shake his hand. You give him a mischievously raised eyebrow.
+	&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off first though. Unless you&#39;d want to join me?&quot; You say as you continue to shake his hand. You give him a mischievously raised eyebrow.
 	
-	&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He rushes off, closing the door behind but not before you notice a bulge in his pants grows.
+	&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He rushes off, closing the door behind but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
 	
-	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
 
@@ -698,9 +912,9 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	You walk up to Ben and extend the same hand that was just stroking your cock. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
 	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
+	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
 	
-	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
 
@@ -729,20 +943,23 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	You walk up to Ben, sloppily wipe your cum-stained hands onto the bedsheets/pants you were wearing and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
 	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out clearly with some cum still on it, maintaining eye contact and a brighter smile.
 	The awkwardness breaks him and he quickly shakes your hand.
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows.
+	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
 	
-	@@.obj; &quot;New Obj: Stop by Room 70 to hi to your twink neighbor&quot;@@
+	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-
 	@@.arousal; you gain 10 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;
-	
 	@@.exp; you gain 10 exp@@
 	&lt;&lt;set $skilltree.exp to $skilltree.exp + 10&gt;&gt;
 	
 	You shower and clean up, uneventfully.
+	
+	@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
+	&lt;&lt;set $rp to 1&gt;&gt;
+	
 	[[&quot;Let&#39;s head out&quot;|Apartment]]
+	
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 
@@ -820,7 +1037,7 @@ Before you could continue your train of thought, a knocking comes at the door.
 
 &lt;&lt;link &quot;The door creaks open.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="PassageFooter" tags="" position="246.5,197" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="Ben_IntroCum" tags="" position="1324,354" size="100,100">Getting caught jerking off by ben and then forcing him to shake your hand was too much for you.
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Ben_IntroCum" tags="" position="1311,293" size="100,100">Getting caught jerking off by ben and then forcing him to shake your hand was too much for you.
 You let the bedsheets drop from your waist and....
 
 
@@ -831,11 +1048,13 @@ You let the bedsheets drop from your waist and....
 Talk about housewarming!
 
 &lt;&lt;set $skilltree.arousal to 0&gt;&gt;
+&lt;&lt;set $rp to 1&gt;&gt;
 
 You shower and clean up, uneventfully.
-	
+@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
+
 	[[&quot;Let&#39;s head out&quot; |Apartment]]
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Ben_IntroShower" tags="" position="1325,205" size="100,100">You make your way to the shared showers.
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="Ben_IntroShower" tags="" position="1321,180" size="100,100">You make your way to the shared showers.
 
 To your delight, there a many meny in there, all of whom were comfortable being shirtless.
 &lt;&lt;cont append&gt;&gt;
@@ -859,75 +1078,238 @@ You let out hard groan as your cum mixed with shower water
 You wash yourself up afterwards. As you back out from the shower rooms to change, you notice some familiar shoes under the bathroom stalls and the sounds of quiet jerking. You thought to yourself that Ben should have just joined you if he was just going to follow you and jerk off alone in the stalls.
 
 But you left him alone to his preferences. You changed and continued onto your mission.
+
+@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
+&lt;&lt;set $rp to 1&gt;&gt;
+[[&quot;Let&#39;s head out&quot; |Apartment]]
 	
-	[[&quot;Let&#39;s head out&quot; |Apartment]]
-	
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
-	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Apartment" tags="" position="1539,54" size="100,100">End of Demo now
-
-
-testing code
-&lt;&lt;set _index to $npc.name.indexOf(&#39;Ben&#39;)&gt;&gt;
-
-The person at this location is &lt;&lt;print $npc.name[_index]&gt;&gt;
-
-will raise lower his straightness now
+	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Apartment" tags="" position="1538,54" size="100,100">&lt;&lt;editcycle &#39;time&#39; resume&gt;&gt;
 
 &lt;&lt;set $npc.straightness[_index] to $npc.straightness[_index-1]-.1&gt;&gt;
 
-
-
-
 [[&quot;Room 69: Yours&quot;|Room_Player]]
+&lt;&lt;if Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
+[[&quot;Room 70: Ben&#39;s&quot;|Room_Ben]]
+&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Room 70: Ben&#39;s&quot;&gt;&gt;&amp;emsp;You knock and get no response.&lt;&lt;/message&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[&quot;Management&quot;|Room_Management]]
 
 [[&quot;Common Room&quot;|Room_Common]]
-
 [[&quot;Kitchen&quot;|Room_Kitchen]]
-
-[[&quot;Bathroom&quot;|Room_Bathroom]]
-
+&lt;&lt;If $showered is true&gt;&gt;[[&quot;Take a Shower&quot;|Room_Bathroom]]&lt;&lt;else&gt;&gt;&lt;message &quot;Take a Shower&quot;&gt;&amp;emsp;You&#39;ve already showered today.&lt;&lt;/message&gt;&gt;
+[[&quot;Outside Pool&quot;|Room_Pool]]
 [[&quot;Gym&quot;|Room_Gym]]
 
-</tw-passagedata><tw-passagedata pid="24" name="Room_Common" tags="" position="1741,484" size="100,100">[Lounging Area Summary]
+[[&quot;Staff Office&quot;|Room_Staff]]
+[[&quot;Parking&quot;|Room_Parking]]
+
+[[&quot;Outside&quot;|Outside]]</tw-passagedata><tw-passagedata pid="23" name="Room_Common" tags="" position="1716,390" size="100,100">[Lounging Area Summary]
 
 
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == false&gt;&gt;
-	You see someone playing pool. It&#39;s the same man that was checking you out before when you were passing by. He seems to be alone this time.
-	
+	You see someone playing in the Billiards room. It&#39;s the same man that was checking you out before when you were passing by. He seems to be alone this time.
+	[img[setup.ImagePath+&#39;Tucker_00.jpg&#39;]]
 	[[&quot;Introduce yourself&quot;|Tucker_Intro]]
+&lt;&lt;else&gt;&gt;
+	[[&quot;Check out the Billiards room&quot;|Room_Billiards]]
+&lt;&lt;/if&gt;&gt;
 
+&lt;&lt;if lastVisited(&quot;Sleeping_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;afternoon&#39;)&gt;&gt;
+You see a man fast asleep on one of the couch.
+img[setup.ImagePath+&#39;\misc\sleep\Sleep_01.webp&#39;]]
+
+&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
+&lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
+	&lt;&lt;goto [[Sleeping_01]]&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+There&#39;s a bulletin board of notices and local events.
+	[[&quot;Check the bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="24" name="Room_Kitchen" tags="" position="2538,45" size="100,100">
+&lt;&lt;if lastVisited(&quot;Sleeping_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;mid-morning&#39;)&gt;&gt;
+Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about since guests are allowed. You see a man having brunch with someone who looks like his girlfriend or wife
+&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 2&gt;&gt;
+	&lt;&lt;goto [[&quot;Grab his attention&quot;|Kitchen_01]]&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;message &quot;Grab his attention&quot;&gt;&gt;&amp;emsp;You might be able to grab his attention if you had a higher sexual aura.&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+[[&quot;Order Pizza&quot;|Pizza]]</tw-passagedata><tw-passagedata pid="25" name="Room_Player" tags="" position="1908,87" size="100,100">[This is your room.]
+
+[you can jerk off]
+[you can sleep]
+
+[[&quot;Sleep&quot;|Sleep]]
+
+[If your raise Arousal is level 2 here, you get a unique scene]
+
+
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+&lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1 and Cycle.check(&#39;time&#39;, &#39;morning&#39;)&gt;&gt;
+	[[&quot;There&#39;s a knock at the door&quot;||Marc_Lease]]
 &lt;&lt;/if&gt;&gt;
 
 
-There&#39;s a bulletin board of notices and local events.
-	[[&quot;Check the bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="25" name="Room_Kitchen" tags="" position="1738,379" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="26" name="Room_Player" tags="" position="1738,172" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="27" name="Room_Bathroom" tags="" position="1738,274" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="28" name="Room_Gym" tags="" position="1737,66" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Tucker_Intro" tags="" position="1904,494" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+[[&quot;Head out&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="26" name="Room_Bathroom" tags="" position="2357,512" size="100,100">&lt;&lt;set $showered to true&gt;&gt;
+&lt;&lt;set $showerscore +=$skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;]&gt;&gt;
+
+&lt;&lt;if $showerscore &lt;4 and $showerscore&gt;1 &gt;&gt;
+The men&#39;s exposure to your sexual aura has cause them to be more confident in their nudity. One man, when he sees you, takes off his trousers and gives you a nod.
+
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_02.webp&#39;]][img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_03.webp&#39;]]
+
+&lt;&lt;elseif $showerscore &lt;7&gt;&gt;
+The men&#39;s exposure to your sexual aura has cause them to be more confident in their nudity.
+
+Some men are getting more handys with each other
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_04.webp&#39;]]
+
+And most of them don&#39;t even think twice about showing off their assets.
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_01.webp&#39;]]
+
+
+&lt;&lt;elseif $showerscore &lt;10&gt;&gt;
+	It is now an unspoken role that anyone can jerk off in the showers if they wanted to.
+
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_05.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_06.webp&#39;]]
+
+
+&lt;&lt;elseif $showerscore &lt;13&gt;&gt;
+	The men have decided that helping each other in the showers is a great way to reach the hard spots.
+
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_07.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_08.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_09.webp&#39;]]
+
+&lt;&lt;elseif $showerscore &lt;16&gt;&gt;
+	The lockers and shower area has grown to become a cruising spot for sexual release.
+
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_10.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_11.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_12.webp&#39;]]
+
+
+&lt;&lt;elseif $showerscore &lt;19&gt;&gt;
+
+&lt;&lt;/if&gt;&gt;
+
+[All Bathroom scenes will be based on sexual aura stats]
+[The more often you shower, the more your aura effects them you will seen them gradually becoming more sexual]
+[You will get exp for other men playing with each other or cumming]
+
+[If you Sexual Aura is at level 1, you can handjob]
+
+
+</tw-passagedata><tw-passagedata pid="27" name="Room_Gym" tags="" position="1743,47" size="100,100">[You can only meet this Asian Buff guy name Rico if you go to the gym at Midnight. He&#39;s a total meathead that you can manipulate into having sex as part of a workout.]
+
+
+&lt;&lt;if lastVisited(&quot;GymTrainer_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
+
+You visit the gym late in the middle of the night. It is mostly empty.
+The trainer at the front offers you help since he has nothing else to do.
+
+
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_01.webp&#39;]]
+	
+	[[&quot;Sure, have him teach you&quot;|GymTrainer_01]]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Tucker_Intro" tags="" position="1863,645" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] ++&gt;&gt;
+&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
 
 The man seems to be focused on making a shot, leaning onto the table. His juicy ass is propped up very nicely for you to see.
 
 &quot;Hey.&quot; You say as you approach him. He shifts his neck to look your way and makes a shot at the same time.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_01.jpg&#39;]]
+[img[setup.ImagePath+&#39;Tucker_01.webp&#39;]]
 
 &quot;Hey.&quot; The balls falls into its pocket and he gives you an endearing smile. &quot;You new?&quot;
 
+&quot;Yeah, Just settled in this afternoon. I&#39;m &lt;&lt;print $name&gt;&gt;.&quot;
+
+He toss you a stick. &quot;Tucker. You play?&quot; 
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; You&#39;ve met Tucker. You can now see him under &quot;Character&quot;@@
+
+You&#39;re unfamiliar with all of the human games they&#39;ve created but billiards is one that you&#39;ve seen before. &quot;Never played before.&quot; You lie, a plan already formulating in your mind.
+
+&quot;But you just hit it like this, yea?&quot; You lean over and attempt the worst posture you could imagine and attempt a shot missing.
+[img[setup.ImagePath+&#39;Tucker_01_2.webp&#39;]]
+
+&quot;No, not at all.&quot; He chuckles and shakes his head. You give him an innocent shrug and lip pout. He sighs dramatically and says, &quot;Okay, Okay. More like this,&quot; he leans over you.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker_02.jpg&#39;]]
+
+He then puts his left hand on yours and directing it towards the center of the white ball. He lays his rught hand on your back, pushing it down to the right position, arching your back. His crotch now lies nicely on your thigh. Then, He leans further onto your body, his face now right next your ears. &quot;More like this.&quot; he whispers, you feel his breath pass through your ear.
+
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+
+You make the shot, being a pro this time, easily not distracted by a bulge pressing against you. It lands perfectly and two balls are pocketed. &quot;Wow, it worked.&quot; You turn to Tucker.
+
+Your face are inches from each other and so you move in to kiss. There&#39;s no resistance, he moves his lips to meet yours. You taste the musk of tobacco.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker_03.webp&#39;]]
+
+Before you could take it to the next level, the door opens and a crew of frat boys walks in, clearly drunk and rowdy.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker_04.webp&#39;]]
+Tucker straightens up and jumps away from you with a terrified look. 
+
+&quot;Ey, Tucks! Didn&#39;t see you there! You shoulda came with us to Emilys. She had a buncha her slutty sisters over. We&#39;re heading back tonight.&quot; 
+
+&quot;Oh. Sweet! Fuck yea.&quot; He attempts enthusiasm but his voice cracked at the end with panick. They were obviously too drunk to notice. He quickly looks between you and the frat boys, sweat forming on his forehead. You realized his look; Shame. Your face drops. Your penis shrinks. Your butthole puckered up. 
+
+Normally, you&#39;d be excited to party with a bunch of straight drunk frat boys and take advantage of them but Tucker&#39;s change in attitude left a sour taste that overwritten the sweet tobacco you had moments ago. You start walking away without making a scene when the main frat boy asks. &quot;Ey, Tucks. Who&#39;s this fella?&quot;
+
+Tucker&#39;s face pales. He hesitates, and you can see him wondering if he had plausable deniability. You jump in before he can answer. &quot;Oh, I&#39;m &lt;&lt;print $name&gt;&gt;. Just moved in today. Was just checking out the pool room. I don&#39;t know anyone.&quot; You emphasize the any without making it too obvious for anyone besides tucker.
+
+You straighted up and toss your pool stick.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker_05.webp&#39;]]
+
+&quot;Gotta go though.&quot; You do a half wave and head out without looking back. The last thing that hear was &quot;What&#39;s with that fella, huh? Stick up his ass or sumn?&quot;
+
+Hah. if only.
+
+@@.obj; &quot;New Obj: You want to avoid him. You have actual straight men to convert.&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;New Obj: You want to avoid him. You have actual straight men to convert.&quot;&gt;&gt;
+
+@@.neg; You lost all arousal@@
+&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
+
+[[&quot;Back to the lobby area&quot;|Room_Common]]
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="30" name="Bulletin" tags="" position="1742,612" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Characters" tags="" position="221,584" size="100,100">[This is a place for you]
-
+</tw-passagedata><tw-passagedata pid="29" name="Bulletin" tags="" position="1602,553" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Characters" tags="" position="222,583" size="100,100">
+&lt;span class=&quot;obj&quot;&gt;&lt;&lt;print $mainobj&gt;&gt;&lt;/span&gt;
 &lt;&lt;if $bulletin == false&gt;&gt;
 	&lt;span class=&quot;obj&quot;&gt;
 	You need to look for a job!	
 	Try checking out the bulletin in the common area
 	&lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
-
-
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
@@ -953,33 +1335,175 @@ The man seems to be focused on making a shot, leaning onto the table. His juicy 
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
 	@@.obj; &quot;Tucker&quot;@@
 	[img[setup.ImagePath+&#39;Tucker_pic.jpg&#39;]]
-	Easy-going fella you met in lounge. Enjoys pool and rubbing his bulge against your thigh as he teaches you how to play.
+	Easy-going fella you met in lounge. Enjoys pool and rubbing his bulge against your thigh as he teaches you how to play. If only he wasn&#39;t so stuck in the closet.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex]&lt;/span&gt;
 &lt;&lt;else&gt;&gt;
 	@@.obj; &quot;Tucker&quot;@@
 	You can meet this person in the lounging area.
 &lt;&lt;/if&gt;&gt;
 
+[[Return to scene|$previous_passage]]</tw-passagedata><tw-passagedata pid="31" name="Sleep" tags="" position="2156,50" size="100,100">&lt;&lt;set $showered to false&gt;&gt;\
+You sleep like a baby!
+
+[[&quot;Wake Up&quot;|Room_Player]]
 
 
+&lt;&lt;for _i=0; $i&lt;$npc.event; $i++&gt;&gt;\
+	&lt;&lt;set $npc.event[_i] to false&gt;&gt;
+&lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Room_Ben" tags="" position="1923,219" size="100,100">You arrive at Ben&#39;s door and knock on it.
+
+[First encounter, just requires a raised arousal. you get to fuck him]
+
+[[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="33" name="Room_Pool" tags="" position="1956,424" size="100,100">[Come here at night for sex]</tw-passagedata><tw-passagedata pid="34" name="Room_Management" tags="" position="1497,392" size="100,100">[Requires a level 5 ability here?]</tw-passagedata><tw-passagedata pid="35" name="Room_Billiards" tags="" position="1730,557" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+
+&lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1&gt;&gt;
+You found yourself wandering into the pool room.
+
+An arm comes from behinds you holds you against a wall. It was Tucker. He looked like a sad puppy.
+
+[Here would be a skill check. Probably like Raise Arousal level 3?]
 
 
+&lt;&lt;if Cycle.check(&#39;time&#39;, &#39;afternoon&#39;)&gt;&gt;
+    There&#39;s someone sleeping on the couch.
+	
+	
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Outside" tags="" position="1417,817" size="100,100">[You are not familiar with the area yet, so you can&#39;t go too far.]
+
+&lt;&lt;set _findex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;if lastVisited(&quot;Frat_Intro&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;afternoon&#39;) and $npc[&quot;event&quot;][_findex] == 0 and $npc[&quot;met&quot;][_tindex] == 1&gt;&gt;
+	A couple of frat boys are out in the yard doing some kind of cook-out/car-wash event.
+	&quot;Ey! It&#39;s you duuuuude!&quot; One of the men calls out to you. You recognize him from the time you were interrupted in the pool with Tucker. He seems as drunk as before.
+	&quot;Come party, bro!&quot;
+	
+[img[setup.ImagePath+&#39;Trojan/Trojan_01.webp&#39;]]
+	
+	[[&quot;Show them how greeks really party.&quot;|Frat_Intro]]
 
 
+&lt;&lt;/if&gt;&gt;
+
+[[&quot;Park&quot;|Park]]</tw-passagedata><tw-passagedata pid="37" name="Park" tags="" position="1417,967" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="38" name="Sleeping_01" tags="" position="2078,563" size="100,100">In the middle of the afternoon on a work day, the lounge was basically empty. You could see how someone could easily fall asleep here. 
+
+But, you thought, it&#39;s not good to sleep in the open. You should wake him up so he can go back to his room. Wake him up your way, you thought.
+
+You start massaging his crotch. It easily started to grow; he must be having a nice dream.
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_02.webp&#39;]]
+
+You practically didn&#39;t powers to get him semi-hard. But wouldn&#39;t satisfy you. You needed direct skin contact for your arousal power to work. So you reached into his pants slowly.
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_03.webp&#39;]]
+
+You lift his cock from his jeans. The penis was seemingly more awake and aware than it&#39;s owner. You concentrated some of your power into your saliva and let it drip on his cock and then began your blowjob.
+
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_04.webp&#39;]]
+
+You head weaved up and down on his cock and yet he made no sign of waking up.
+
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_06.webp&#39;]]
+
+You stopped being as quiet anymore. Pushing his cock deeper and letting lose sloppy gags. After a few moments, you felt his cock stiffen. You move to suck on his balls in anticipatation. He only lasted a few seconds later until you were able to squeeze his jizz into your mouth.
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_07.webp&#39;]]
+
+@@.arousal; you gain 25 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;
+
+@@.exp; you gain 25 exp@@
+&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;
+
+You squeeze his cock dry.
+&lt;&lt;if $skilltree.arousal &gt; 100&gt;&gt;
+	@@.arousal; Your Arousal is at 100, you have to cum!@@
+You hadn&#39;t expected to get so turned-on by a partner who did no work but you were at your limit. you brought your cock to his sleeping face and let loose string of cum.
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_07_3.webp&#39;]]
+&lt;&lt;/if&gt;&gt;
+
+he was still knocked-out on the couch. So, you just left his pants down and began to walk away.  When he wakes up , that should teach him a lesson about sleeping in public.
+
+Only after a couple of steps, you heard a quiet groggy voice. &quot;Wait.&quot;
+You turn around and see two legs raised up high and a pair of buttcheeks.
+The man was fingering himself. He looked like he was still half-asleep and half in ectasy.
+
+[img[setup.ImagePath+&#39;misc/sleep/Sleep_08.webp&#39;]]
+
+&quot;Come back.&quot; he moaned, &quot;I want more.&quot;
+
+[[&quot;Give him more.&quot;|Sleeping_02]]
+</tw-passagedata><tw-passagedata pid="39" name="Marc_Lease" tags="" position="2218,269" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="Sleeping_02" tags="" position="2071,716" size="100,100">
+
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_09.webp&#39;]]
+
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_09_2.webp&#39;]]
+
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_10.webp&#39;]]
+
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_11.webp&#39;]]\
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_12.webp&#39;]]\
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_13.webp&#39;]]\
+[img[setup.ImagePath+&#39;/misc/sleep/Sleep_14.webp&#39;]]\</tw-passagedata><tw-passagedata pid="41" name="Room_Staff" tags="" position="1463,205" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="Room_Parking" tags="" position="1613,205" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="Pizza" tags="" position="2722,45" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="Frat_Intro" tags="" position="1603,815" size="100,100">You jump into that party, always enjoying the energy wild drunk men brought to any occasion. However bad they were at washing cars, they were still able to rack in customers.
+
+[img[setup.ImagePath+&#39;Trojan/Trojan_02.webp&#39;]]
+
+The guy who invited you over throws an arm around your shoulder, as if you were buddies for a long time. You can tell that he&#39;s the alpha leader of the group.
+&quot;Bro, look.&quot; He slurs, &quot;Whatever happened the other day. It&#39;s good, bro. It&#39;s alllllll goooooooood.&quot; He waves his tong a little too drunkingly close to your face.
+&quot;No problem, &quot; you added after a moment &quot;bro.&quot; 
+&quot;They call me Trojan.&quot; and then he screams it out again, &quot;TROJAN MAGNUM!&quot;
+The whole crowd follows his cue and screams along, &quot;TROJAN MAGNUM!&quot;
+
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+@@.obj; You&#39;ve met Trojan. You can now see him under &quot;Character&quot;@@
+
+You wonder if the name lived up to it&#39;s namesake.
+
+&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
+
+&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;availableUses&quot;] &gt; 2&gt;&gt;
+&lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
+	&lt;&lt;goto [[Frat_Blowjob]]&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;&lt;/else&gt;&gt;
+&lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;You need a higher Sexual Aura to convince everyone around it&#39;s acceptable&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;else&gt;&gt;
+&lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+[[&quot;Have a drink and then head out&quot;|Outside]]</tw-passagedata><tw-passagedata pid="45" name="Frat_Blowjob" tags="" position="1603,965" size="100,100">[img[setup.ImagePath+&#39;Trojan/Trojan_02.webp&#39;]]
+</tw-passagedata><tw-passagedata pid="46" name="Kitchen_01" tags="" position="2539,195" size="100,100">[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_01.webp&#39;]]
+
+[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_02.webp&#39;]]
 
 
+[The following requires a high Raise Arousal in order to get him to want to be fucked.]
+[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_03.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_04.webp&#39;]]</tw-passagedata><tw-passagedata pid="47" name="GymTrainer_01" tags="" position="1757,177" size="100,100">
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_02.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_03.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_04.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_06.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_05.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_07.webp&#39;]]
 
-
-
-
-
-
-[[Return to scene|previous()]]</tw-passagedata></tw-storydata>
+</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
