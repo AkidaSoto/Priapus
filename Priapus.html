@@ -101,26 +101,36 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	<tw-storydata name="Priapus" startnode="1" creator="Twine" creator-version="2.3.13" ifid="C2CC7A9E-FEA6-4B65-97F1-D9A7120DBA6C" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.arousal {
   font-size: 1.2rem;
   color: pink;
+  text-align:center;
+  display:block
 }
 
 .neg {
   font-size: 1.2rem;
   color: red;
+  text-align:center;
+  display:block
 }
 
 .exp {
   font-size: 1.2rem;
   color: #F0E68C;
+  text-align:center;
+  display:block
 }
 
 .notif {
   font-size: 1.2rem;
   color: #00CED1;
+  text-align:center;
+  display:block
 }
 
 .obj {
   font-size: 1.2rem;
   color: #008080;
+  text-align:center;
+  display:block
 }
 
 .passage img {
@@ -135,6 +145,11 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     width: auto;
     height:  400px;
     margin: 0 auto;
+}
+
+.passage p {
+	text-align: center;
+ 	margin: 0;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where the HTML file is
 	// located if you want to run this from inside Twine.
@@ -344,27 +359,41 @@ Setting.addToggle("autoClick", {
 	default: false,
 	onInit   : [],
 	onChange : setup.autoClickHandler
-}); // default value not defined, so false is used</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,43" size="100,100">[Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;]
+}); // default value not defined, so false is used
 
+
+/*
+	Debug Settings.
+*/
+(function () {
+	Setting.addHeader("Debug Settings");
+
+	function initSettingDebug() {
+		Config.debug = settings.debug;
+	}
+	Setting.addToggle("debug", {
+		label    : "Enable test/debug mode?",
+		default  : false,
+		onInit   : initSettingDebug,
+		onChange : function () {
+			initSettingDebug();
+			window.location.reload();
+		}
+	});
+})();</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,43" size="100,100">
+\&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;Priapus&lt;/p&gt;&lt;p style=&quot;font-family: Garamond, serif; font-size: 16px&quot;&gt;Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;&lt;/p&gt;\
 [img[setup.ImagePath+&#39;GameStart.jpg&#39;]]
 
-The Almighty God, Zeus, has been scorn by his creations, humans.
-After growing tired of waiting millenias for them to develop peace amongst themselves, he decided that he had enough. 
-
-However, he would not stoop to their level by smiting them, drawing blood like they have.
-He is still the most gracious being above, so has devise a plan to get rid of humanity peacefully.
-As so, he has assigned you, a beginner god, an important role;
-
+\&lt;p&gt;The Almighty God, Zeus, has been scorn by his creations, humans. After growing tired of waiting millenias for them to develop peace amongst themselves, he decided that he had enough.&lt;/p&gt;
+&lt;p&gt;However, he would not stoop to their level by smiting them, drawing blood like they have as he is still the most gracious being above. He devised a plan to get rid of humanity peacefully.
+As so, he has assigned you, a beginner god, an important role&lt;/p&gt;
 @@.arousal;Reduce the population by turning all men homosexual.@@
 
-@@.notif;When you see these dots, click anywhere to continue@@
+@@.notif;When you see these dots, click anywhere to continue@@\
 &lt;&lt;cont append&gt;&gt;
-
 Enter your name: &lt;&lt;textbox &#39;$name&#39; $name autofocus&gt;&gt; @@#error;@@
 
-The goal of the Introduction Sequence is introduce the premise, mission and gameplay. If you are experienced and would jump right to the sandbox mode, you won&#39;t lose out on any experience.
-
-Any texts in [] means that it&#39;s in development.
+The goal of the Introduction Sequence is to introduce the premise, mission and gameplay. If you are experienced and would like jump right to sandbox mode, you won&#39;t lose out on any experience points.
 
 &lt;&lt;link &#39;Introduction and Tutorial&#39;&gt;&gt;
     &lt;&lt;set $name to $name.trim()&gt;&gt;
@@ -383,13 +412,12 @@ Any texts in [] means that it&#39;s in development.
 		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 		&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
-		
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-		&lt;&lt;set $skilltree.skill.Arousal.level to 1&gt;&gt;
-		&lt;&lt;set $skilltree.skill.Arousal.availableUses to 0&gt;&gt;
-		&lt;&lt;set $rp to 1&gt;&gt;
-		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+		&lt;&lt;set $skilltree.skills.Arousal.level to 1&gt;&gt;
+		&lt;&lt;set $skilltree.skills.Arousal.availableUses to 0&gt;&gt;
+		&lt;&lt;set $rp to 1&gt;&gt;		
 		&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
 		&lt;&lt;set $skilltree.exp to 25&gt;&gt;
         &lt;&lt;goto [[Apartment]]&gt;&gt;
@@ -432,92 +460,69 @@ You have @@#points;$skilltree.points@@ ability point(s) to use!
 &lt;&lt;link &#39;Characters&#39;&gt;&gt;
 	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;
     &lt;&lt;goto [[Characters]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,42" size="100,100">You descend down from the heavens.
-
-Stand in front of you is your first assignment.
-
+&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Introduction" tags="" position="847,42" size="100,100">You descend down from the heavens, having devoted you life to the holy mission. Standing in front of you is your first assignment;
+An all-male luxury dormatory-styled apartment complex.
 &lt;&lt;cont append&gt;&gt;
-A mens-only luxury dormatory-styled apartment complex.
 [img[setup.ImagePath+&#39;Sets/lux_1.jpg&#39;]]
+&lt;p style=&quot;font-family: Garamond, serif; font-size: 18px&quot;&gt; Welcome to HomoAndros; We&#39;re all men here. &lt;/p&gt;
+This place, the HomoAndros, created as an alternative to the city&#39;s expensive housing was home to over 100 tenants, men of all ages and point in life, each living in staff-maintained single rooms. 
 
 &lt;&lt;cont append&gt;&gt;
-All tenents, men of all ages, lived in single rooms, maintained by a wonderful cleaning staff....
 [img[setup.ImagePath+&#39;Sets/lux_8.jpg&#39;]]
 
-&lt;&lt;cont append&gt;&gt;
-... and a great balcony view.
-[img[setup.ImagePath+&#39;Sets/lux_2.jpg&#39;]]
-
-&lt;&lt;cont append&gt;&gt;
 The amenties included a shared gym with available trainers...
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Sets/lux_7.jpg&#39;]]
 
+and a pool open 24/7 for use.
 &lt;&lt;cont append&gt;&gt;
-.... and a pool open 24/7 for use.
 [img[setup.ImagePath+&#39;/Sets/lux_6.webp&#39;]]
 
-&lt;&lt;cont append&gt;&gt;
 Shared spaces includes Kitchen and dining area...
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Sets/lux_5.jpg&#39;]]
 
+Bathroom and showers,
 &lt;&lt;cont append&gt;&gt;
-Bathroom and showers
 [img[setup.ImagePath+&#39;Sets/lux_3.jpg&#39;]]
 
 &lt;&lt;cont append&gt;&gt;
-....and a lounging common area!
+and a friendly common area!
 [img[setup.ImagePath+&#39;Sets/lux_4.jpg&#39;]]
 
 &lt;&lt;cont append&gt;&gt;
-Your report claims that this was the ideal start to your global mission. The men here had a curious exploratory nature, and were ripe for picking by a clever god.
+&amp;emsp;As a sex god, your power grows from the semen of human men, however you were an inexperience one, and have not yet gain the full power of a real God. Your report claims that this was the ideal start to your global mission. The men here had a curious exploratory nature, and were ripe for picking by a clever god. You&#39;ll be able to kill two birds with one stone; turning the men gay here and developing your powers.
 
-But first, you had to acquire a room.
+&amp;emsp;But first, you had to acquire a room.
 
 &lt;&lt;link &#39;Head Inside&#39;&gt;&gt;
         &lt;&lt;goto [[Marc_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;&lt;print &quot;-----------------&quot;&gt;&gt;
+&lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="980,47" size="100,100">[img[setup.ImagePath+&#39;Sets/Lobby.jpg&#39;]]
+&amp;emsp;You make your way through the automatic doors of the apartment. Scanning the lobby to see various men making their way through life, most of them don&#39;t even notice you. Before you could get fully distracted, your eye catches a plaque.
 
-</tw-passagedata><tw-passagedata pid="5" name="Marc_Intro" tags="" position="980,48" size="100,100">You make your way through the automatic doors of the apartment.
-Scanning the lobby to see various men making their way through life, most of them don&#39;t even notice you. 
-Before you could get fully distracted, your eye catches a door.
+\&lt;&lt;cont append&gt;&gt;
+&lt;p style=&quot;font-family: Garamond, serif; font-size: 18px&quot;&gt; Management&lt;/p&gt;
+&amp;emsp;Perfect. You straighten back (as much as a homosexual sex god could, that is) and walk inside.
 
-&lt;&lt;cont append&gt;&gt;
-The plaque besides the door reads &quot;Management&quot;
-Perfect. You straighten back (as much as a homosexual god could, that is) and head inside.
+&amp;emsp;&quot;Excuse me. How can I help you?&quot;, A burly older gentlemen sitting in the office, looks up from his laptop and demands. 
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/Marc_01.png&#39;]]
+&amp;emsp;His voice is rough, almost like predator&#39;s growl. Your cock pulses in your pants in anticipatation of the kind of aggression he could inflict on you.
+&amp;emsp;You realize you stood there fantasizing for a bit too long and recover in time before it got too awkward. &quot;Ah, yes.&quot; You clear your throat, &quot;I&#39;ve come to inquire about an available room in this human establishment.&quot; Your first human words could have been much better.
 
-&lt;&lt;cont append&gt;&gt;
-&quot;Excuse me. How can I help you?&quot;
-[img[setup.ImagePath+&#39;Marc_01.png&#39;]]
-A burly older gentlemen behind a desk demands. Your cock pulses in your pants in anticipatation. 
+\&lt;&lt;cont append&gt;&gt;
+&amp;emsp;His eyebrows furrowed. &quot;Well. First, people don&#39;t just barge into if they&#39;re looking to rent a place like this. There&#39;s an actual process for this.&quot; 
+&amp;emsp;&quot;And second, the last room has just gotten leased out. Well, technically, the tenant is coming in today to sign it. Regardless, we&#39;re all out of rooms.&quot;
 
-You recover in time before it got awkward. &quot;Ah, yes.&quot; You clear your human throat. &quot;I&#39;ve come to inquire about an available room in this human establishment.&quot; Your first human words were to be desired, you reprimanded yourself.
+\&lt;&lt;cont append&gt;&gt;
+&amp;emsp;It was your turn to furrow your eyebrows. If you couldn&#39;t get a place here to live, it would jeopardize your mission!
+&amp;emsp;&quot;No. There&#39;s must be something that you can do?&quot; You push. However, you could see that his patience was running thin. He got up and put his hand on your shoulders.
+&amp;emsp;&quot;There&#39;s absolutely nothing. Now, you need to leave or else.&quot; But before he could push you out the door, you decide take drastic measures.
 
-&lt;&lt;cont append&gt;&gt;
-&quot;Well. First, people don&#39;t just barge into if they&#39;re looking to rent. There&#39;s an actual process for this.&quot; His eyebrows furrowed. 
-
-&quot;And secondly, the last room has just gotten leased out. Well, technically, the tenant is coming in today to sign it. Regardless, we&#39;re all out of rooms.&quot;
-
-&lt;&lt;cont append&gt;&gt;
-It was your turn to furrow your eyebrows. If you couldn&#39;t get a place here, it would jeopardize your mission!
-
-&quot;No. There&#39;s must be something that you can do?&quot; You push.
-
-However, you could see that his patience was running thin. He got up and put his hand on your shoulders.
-&quot;There&#39;s absolutely nothing. Now, you need to leave or else.&quot; But before he could push you out the door, you take drastic measures.
-
-&lt;&lt;cont append&gt;&gt;
-There may be nothing he can do, but that&#39;s not the same for you. It&#39;s time for your God Abilities to come into play.
+\&lt;&lt;cont append&gt;&gt;
+&amp;emsp;There may be nothing he could do, but that did not apply for a sex god like you. It&#39;s time for your God Abilities to come into play.
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
 &lt;&lt;set $mainobj to &quot;&quot;&gt;&gt;
@@ -526,51 +531,55 @@ There may be nothing he can do, but that&#39;s not the same for you. It&#39;s ti
 	&lt;&lt;set $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] --&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
-&lt;&lt;set $mainobj to &quot;You will need to level up your &#39;Raise Arousal&#39; Ability to continue. Access the skill menu in the UI bar.&quot;&gt;&gt;
+&lt;&lt;set $mainobj to &quot;You will need to level up your &#39;Raise Arousal&#39; Ability to convince the landlord and continue!&quot;&gt;&gt;
 @@.obj; New Obj: You will need to level up your &quot;Raise Arousal&quot; Ability to continue. Access the skill menu in the UI bar.@@
-&lt;&lt;/if&gt;&gt;
-
+&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 0&gt;&gt;
 	You upgrade the wrong skill
 	Restart the Game!
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="6" name="FirstSex_01" tags="" position="975,199" size="100,100">You grab onto the hand on your shoulder and focus driving your energy into his body.
+</tw-passagedata><tw-passagedata pid="6" name="FirstSex_01" tags="" position="974,199" size="100,100">&amp;emsp;You grab onto his hand on your shoulder and focus driving your energy into his body. His hold loosens and his eyes glazes out of focus for a moment. His posture slopes as his knees slightly give. He is now leaning some of his body weight on you for stability. A visible bulge grows at his crotch. 
 
-His hold loosens and his eyes glazes out of focus for a moment.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/Marc_02.jpg&#39;]]
+&amp;emsp;He catches your line of sight. &quot;You. You need to leave. Now.&quot; The octave in his voice drops a couple of octave, but it was wavering now. Clearly, he is now eager for you to leave, most likely so he can have some alone time to jack off.
+&amp;emsp;However, you still had his hand in your clasp, continuous pouring in erotic energy. You pull him in for a kiss, the best method of inject arousal.
 
-His posture slopes as his knees slightly give. He is now leaning some of his body weight on you for stability. A visible bulge grows at his crotch. 
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_1.webp&#39;]]
+&amp;emsp;His eyes widen in shock and then when he realized what was happening he pushes you away. But then, something in his eyes changes. It grew hungry and he was now looking at you like his next meal.
+&amp;emsp;He pushes you again, but this time, more playfully as a smile forms on his face.
 
-He catches your line of sight. &quot;You. You need to leave. Now.&quot; The octave in his voice drops a couple of octave, but it was wavering now. Clearly, he is now eager for you to leave, most likely so he can have some alone time to jack off.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_2.webp&#39;]]
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
+&amp;emsp;He pushes your head down, and you take the cue to kneel. You get onto your knees and plant your face into groins and take in a deep breath. He unzips his pants and a large cock falls out and lands in front of your face.
 
-However, you still had his hand in your clasp, continuous pouring in erotic energy. You pull him in for a kiss, the best method of inject arousal.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_2_2.webp&#39;]]
+&amp;emsp;You start off slow, licking and sucking the precum from the tip. His cock shivers in pleasure.
 
+&amp;emsp;&quot;Take it all, boy.&quot; He demands.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_1.webp&#39;]]
-
-His eyes widen in shock and then when he realized what was happening he pushes you away. But then, something in his eyes changes. It grew hungry and he was now looking at you like his next meal.
-
-He pushes you again, but this time, more playfully as a smile forms on his face.
+[img[setup.ImagePath+&#39;Marc/scene1_3.webp&#39;]]
+You go deeper, taking his monster down your throat. Your godly oral skills drives him crazy as he his hips starts to follow your movements.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Marc/scene1_3_5.webp&#39;]]
+
+After a few moments, you feel his cock begin throbbing in your throat. You increase your speed, ready to receive his cum when...
+
+[[A knock comes from the office door|FirstSex_02]]
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-
-&lt;&lt;link &#39;Get on your knees.&#39;&gt;&gt;
-  &lt;&lt;goto [[FirstSex_02]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+ &lt;&lt;/cont&gt;&gt;
  &lt;&lt;/cont&gt;&gt;
 
-
- &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Skill Tree" tags="" position="105,727" size="100,100">&lt;&lt;message &#39;God Ability Help&#39;&gt;&gt;\
+ &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt; &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Skill Tree" tags="" position="105,727" size="100,100">&lt;&lt;message &#39;God Ability Help&#39;&gt;&gt;\
 
 This is where you can see all the abilities you currently have or can upgrade.
 
@@ -592,24 +601,21 @@ Each unique ejaculation event will award you with experience. With enough experi
 Lastly, you have your own personal arousal. Some abilities will grow in strength the more aroused you are. Again, make sure you don&#39;t prematurely jizz before you&#39;re able to utilize those buffs!
 &lt;&lt;/message&gt;&gt;
 
-Refreshment Points: @@#refresh;$rp@@
-
-
-&lt;blockquote&gt;
+Replenishment Points: @@#refresh;$rp@@
 
 &lt;&lt;set _skill to &quot;Arousal&quot;&gt;&gt;
 &quot;God Skill 01: Raise Arousal&quot; is at level @@#arousal_level;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]@@\
 &lt;&lt;capture _skill&gt;&gt;\
-&lt;&lt;button &quot;+&quot;&gt;&gt;
+&amp;emsp;&lt;&lt;button &quot;+&quot;&gt;&gt;
 	&lt;&lt;if $skilltree.points &gt; 0&gt;&gt;
-	&lt;&lt;set $skilltree.points --&gt;&gt;	
-	&lt;&lt;replace #points&gt;&gt;&lt;&lt;print $skilltree.points&gt;&gt;&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;level&quot;] ++&gt;&gt;
-	&lt;&lt;replace #arousal_level&gt;&gt;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;] ++&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;
+	&lt;&lt;set $skilltree.points --&gt;&gt;\	
+	&lt;&lt;replace #points&gt;&gt;&lt;&lt;print $skilltree.points&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;level&quot;] ++&gt;&gt;\
+	&lt;&lt;replace #arousal_level&gt;&gt;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;] ++&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;\
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/button&gt;&gt;
+&lt;&lt;/button&gt;&gt;&amp;emsp;\
 &lt;&lt;button &quot;replenish&quot;&gt;&gt;
 &lt;&lt;if $rp &gt; 0&gt;&gt;
 &lt;&lt;if $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] &lt; $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;]&gt;&gt;
@@ -618,141 +624,114 @@ Refreshment Points: @@#refresh;$rp@@
 &lt;&lt;replace #refresh&gt;&gt; &lt;&lt;print $rp&gt;&gt; &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/button&gt;&gt;
+&lt;&lt;/button&gt;&gt;\
 &lt;&lt;/capture&gt;&gt;
-&lt;blockquote&gt; \
-	&lt;&lt;print $skilltree[&quot;skills&quot;][_skill][&quot;definition&quot;]&gt;&gt;
-&lt;/blockquote&gt;\
-
+&amp;emsp;&lt;&lt;print $skilltree[&quot;skills&quot;][_skill][&quot;definition&quot;]&gt;&gt;
 
 &lt;&lt;set _skill to &quot;Aura&quot;&gt;&gt;
 &quot;God Skill 02: Sexual Aura&quot; is at level @@#aura_level;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]@@\
 &lt;&lt;capture _skill&gt;&gt;\
-&lt;&lt;button &quot;+&quot;&gt;&gt;
-	&lt;&lt;if ;$skilltree.points &gt; 0&gt;&gt;
-	&lt;&lt;set $skilltree.points --&gt;&gt;	
-	&lt;&lt;replace #points&gt;&gt;&lt;&lt;print $skilltree.points&gt;&gt;&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill].level ++&gt;&gt;
-	&lt;&lt;replace #aura_level&gt;&gt;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
+&amp;emsp;&lt;&lt;button &quot;+&quot;&gt;&gt;
+	&lt;&lt;if ;$skilltree.points &gt; 0&gt;&gt;\
+	&lt;&lt;set $skilltree.points --&gt;&gt;	\
+	&lt;&lt;replace #points&gt;&gt;&lt;&lt;print $skilltree.points&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill].level ++&gt;&gt;\
+	&lt;&lt;replace #aura_level&gt;&gt;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;/if&gt;&gt;\
 &lt;&lt;/button&gt;&gt;
+&lt;&lt;/capture&gt;&gt;\
+&amp;emsp;&lt;&lt;print $skilltree[&quot;skills&quot;][_skill][&quot;definition&quot;]&gt;&gt;
+
+&lt;&lt;set _skill to &quot;ManFinder&quot;&gt;&gt;
+&quot;God Skill 03: Man Finder&quot; is at level @@#arousal_level;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]@@\
+&lt;&lt;capture _skill&gt;&gt;\
+&amp;emsp;&lt;&lt;button &quot;+&quot;&gt;&gt;
+	&lt;&lt;if $skilltree.points &gt; 0&gt;&gt;
+	&lt;&lt;set $skilltree.points --&gt;&gt;\	
+	&lt;&lt;replace #points&gt;&gt;&lt;&lt;print $skilltree.points&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;level&quot;] ++&gt;&gt;\
+	&lt;&lt;replace #arousal_level&gt;&gt;$skilltree[&quot;skills&quot;][_skill][&quot;level&quot;]&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;] ++&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;\
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;&amp;emsp;\
+&lt;&lt;button &quot;replenish&quot;&gt;&gt;
+&lt;&lt;if $rp &gt; 0&gt;&gt;
+&lt;&lt;if $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] &lt; $skilltree[&quot;skills&quot;][_skill][&quot;maxUses&quot;]&gt;&gt;
+&lt;&lt;set $skilltree[&quot;skills&quot;][_skill][&quot;availableUses&quot;] ++&gt;&gt;
+&lt;&lt;set $rp --&gt;&gt;
+&lt;&lt;replace #refresh&gt;&gt; &lt;&lt;print $rp&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;\
 &lt;&lt;/capture&gt;&gt;
-&lt;blockquote&gt; \
-	&lt;&lt;print $skilltree[&quot;skills&quot;][_skill][&quot;definition&quot;]&gt;&gt;
-&lt;/blockquote&gt;\
-	
-&lt;/blockquote&gt;
+&amp;emsp;&lt;&lt;print $skilltree[&quot;skills&quot;][_skill][&quot;definition&quot;]&gt;&gt;
 
 [[Return to scene|$previous_passage]]
-</tw-passagedata><tw-passagedata pid="8" name="FirstSex_02" tags="" position="969,337" size="100,100">He pushes your head down, and you take the cue to kneel.
-
-You plant your face into groins and take in a deep breath. 
-
-You lustily unzip his pants. His large cock falls out and lands in front of your face.
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_3.webp&#39;]]
-Your godly oral skill erases all concern in his eyes as he readily succumbs to your efforts.
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_3_5.webp&#39;]]
-
-After a few moments, you feel his cock throbbing in your throat. You increase your speed, ready to receive his cum when...
-
-[[A knock comes from the office door|FirstSex_03]]
-
-@@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
- &lt;&lt;/cont&gt;&gt;
- &lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="971,463" size="100,100">&quot;One Moment!&quot; he yells out and tries to quickly zip his raging hard cock back into his pants.
-
-&quot;This is over. Now, go.&quot; the roughness in his voice tells you he&#39;s not joking anymore.
-
-However, you plan to finish this your way.
-
-[[Get under the desk |FirstSex_04]]
-</tw-passagedata><tw-passagedata pid="10" name="FirstSex_04" tags="" position="973,599" size="100,100">He sees you crawl into under his desk. &quot;What are you doing!?&quot; 
-
-Before you could reply the door swings open, you could not see who came in, but that also meant they couldn&#39;t see you.
-
-The stranger speaks, &quot;Hi, Marc. It&#39;s Louis, we talked on the phone today. I&#39;m coming into to sign the lease.&quot; Shit. It was the theft who stealing your room.
-
-&quot;Right. Come have a seat.&quot; From your position, you see Marc, the man whose cock you became familiar with before his name, take his seat. His eyes quickly shoots down to you but he makes no other signs that you&#39;re hiding.
-
+</tw-passagedata><tw-passagedata pid="8" name="FirstSex_02" tags="" position="975,327" size="100,100">&amp;emsp;&quot;One Moment!&quot; he yells out and struggles to quickly zip his raging hard cock back into his pants.
+&amp;emsp;&quot;This is over. Now, go.&quot; the roughness in his voice tells you he&#39;s not joking anymore. However, you plan to finish this your way and crawl under the desk.
+&amp;emsp; &quot;What are you doing!?&quot; Before you could reply the door swings open. You could not see who came in, but that also meant they couldn&#39;t see you.
+&amp;emsp;The stranger speaks, &quot;Hi, Marc. It&#39;s Louis, we talked on the phone today. I&#39;m coming into to sign the lease.&quot; Shit. It was the theft who stealing your room.
+&amp;emsp;&quot;Right. It&#39;s nice of you to come into today. Come have a seat.&quot; From your position, you see Marc take his seat, the man whose cock you became familiar with before his name. His eyes quickly shoots down to you but he makes no other signs that you&#39;re here.
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 @@.obj; you&#39;ve met Marc. You can now find him under &quot;Character&quot;@@
 
-&quot;It&#39;s nice of you to come into today.&quot; He continues.
+&amp;emsp;You can&#39;t let this signing go through! You reach out towards his bulge.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_4.webp&#39;]]
+&amp;emsp;&quot;Ah!&quot; You spooked Marc with your touch but he quickly switches to a cough and smiles to Louis. His thighs tenses up though nervousness but his cock grows in excitement.
+&amp;emsp;You quietly and slowly unzipp his pants and the familiar taste of his cocks is back in your mouth.
 
-You can&#39;t let this signing go through! You reach out towards his bulge.
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_4.webp&#39;]]
-
-&quot;Ah!&quot; You spooked Marc with your touch but he quickly switches to a cough and smiles to Louis. His thighs tenses up though nervousness but his cock seems to grow through excitement.
-
-You quietly and slowly unzipp his pants and the familiar taste of his cocks is back in your mouth.
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_5.webp&#39;]]
-
-&quot;Um, Marc? Was it actually a good time? You seem to be unwell.&quot; You smirk with your mouth full.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_5.webp&#39;]]
+&amp;emsp;&quot;Um, Marc? Was it actually a good time? You seem to be unwell.&quot; You smirk with your mouth full. With what little room you had, you take his cock faster.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_6.webp&#39;]]
-
-&quot;Y-Yes, it&#39;s actually fine. I just didn&#39;t have much sleep last night. You know, managing this wonderful complex is tough work.&quot; He attempts to maintain a poker face but his voice wavers each time his cock hits the back of your throat.
-
-You feel his balls start to swell. You force him to make eye-contact with you by gripping his penis a little to hard. He makes brief eye contact with you and you give him a knowingly look.
+[img[setup.ImagePath+&#39;Marc/scene1_6.webp&#39;]]
+&amp;emsp;&quot;Y-Yes, it&#39;s actually fine. I just didn&#39;t have much sleep last night. You know, managing this wonderful complex is tough work.&quot; He attempts to maintain a poker face but his voice wavers each time his cock hits the back of your throat.
+&amp;emsp;You feel his cock start to swell. You force him to make eye-contact with you by gripping his penis a little to hard. He makes brief eye contact with you and you give him a knowing look.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_7.webp&#39;]]
+[img[setup.ImagePath+&#39;Marc/scene1_7.webp&#39;]]
 
-&quot;Well, actually. There&#39;s something I need to tell you.&quot; His voices slows as most of his effort seems to be on not cumming. 
-
-&quot;Yes?&quot;
-
-&quot;We... uh ... recently inspected the room that you were about to lease and found that it was in need a renovation. Unfortunately, that could last a month of two and therefore we won&#39;t be able to lease it out to for the moment.]]
-
-&quot;What?! You told me this morning that it would be ready! Did you really make me come here to tell me that?&quot;
-
-&quot;Yes, it was quick inspection this morning. I&#39;m sorry.&quot; You commend the man&#39;s ability to lie and hold his cum back for this long.
-
-&quot;A complete waste of my time!&quot; You hear louis push his chair back followed by storming footstep and finally a door slam.
-
-At no point do you stop your blowjob. Marc returns his full attention to you. His face is scrunch in both sexual frustration and regular frustration.
-
-	[[finish him |FirstSex_05]]
-	@@.arousal; you gain 5 arousal@@
+&amp;emsp;&quot;Well, actually. There&#39;s something I need to tell you.&quot; His voices slows as most of his effort becomes focused on not cumming.
+&amp;emsp;&quot;We... uh ... recently inspected the room that you were about to lease and found that it was in need of a renovation. Unfortunately, that could last a month of two and therefore we won&#39;t be able to lease it out to for the moment.]]
+&amp;emsp;&quot;What?! You told me this morning that it would be ready! Did you really make me come here to tell me that?&quot;
+&amp;emsp;&quot;Yes, it was quick inspection this morning. I&#39;m very sorry.&quot; You commend the man&#39;s ability to lie and hold his cum back for this long.
+&amp;emsp;&quot;A complete waste of my time!&quot; You hear Louis push his chair back followed by storming footstep and finally a door slam.
+&amp;emsp;At no point do you stop your blowjob. Marc returns his full attention to you. His face is scrunched in both sexual frustration and regular frustration.
+@@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+
+	[[Finish him |FirstSex_03]]
  &lt;&lt;/cont&gt;&gt;
   &lt;&lt;/cont&gt;&gt;
    &lt;&lt;/cont&gt;&gt;
     &lt;&lt;/cont&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="11" name="FirstSex_05" tags="" position="973,740" size="100,100">&quot;You fucking slut.&quot; He enounces each word with a mix of disgust and devilishness.
+</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="983,473" size="100,100">&amp;emsp;&quot;You fucking slut.&quot; He enounces each word with a mix of disgust and devilishness. &quot;Is this what you want?&quot; He takes his cock back from you, smacks it across your face and starts stroking it.
+&amp;emsp;You nod your head and give him your best slutty eyes.
 
-&quot;Is this what you want?&quot; He takes his cock back from you, smacks it across your face and starts stroking it.
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_7_2.webp&#39;]]
+&amp;emsp;His cum lands on your cheek, giving you your first facial on earth.
 
-You nod your head and give him your best slutty eyes.
-
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_8.webp&#39;]]
-
-His cum lands on your cheek, giving you your first facial on earth.
-
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_8.webp&#39;]]
 @@.arousal; you gain 20 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 20&gt;&gt;
-
-You wipe off his cum from your face with your hand and suck them off.
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 20&gt;&gt;\
+&amp;emsp;You wipe off his cum from your face with your hand and suck them off.
 You feel the power grow inside you.
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;scene1_9.webp&#39;]]
 
+\&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene1_9.webp&#39;]]
 @@.exp; you gain 25 exp@@
-&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;
+&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
+&amp;emsp;Once you absorbed all your could, you got back up your feet. Marc ruffles through his desk and pulls out a key. He throws it your way.
 
-Once the evidence of your act was gone, you got back up your feet. Marc ruffles through his desk and pulls out a key. He throws it your way.
-
-&quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $900 payment on the first or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
-You give a firm nod and before you actually get on his last nerve, you quickly make your way out of his office without looking back. You were sure though, that Marc&#39;s eyes were on the ass he was just talking about.
+&amp;emsp;&quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $900 payment on the first or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
+&amp;emsp;You give a firm nod and before you actually get on his last nerve, you quickly make your way out of his office without looking back. You were sure though, that Marc&#39;s eyes were on the ass he was just talking about.
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
@@ -763,36 +742,31 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;
-
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="StoryInit" tags="" position="127,71" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
+ &lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="127,71" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
 &lt;&lt;set $skilltree to {
 	points:1,
 	skills: [],
 	exp:0,
 	level:1,
 	arousal:50
-}&gt;&gt;
+}&gt;&gt;\
 &lt;&lt;set $skilltree[&quot;skills&quot;] to {
-	&quot;Arousal&quot;:{name:&quot;Arousal&quot;,level:0,useType:1,definition: &quot;Target&#39;s arousal is raised&quot;,maxUses: 0, availableUses:0,amounts:[0,10, 15 ,20]},
-	&quot;Aura&quot;:{name:&quot;Sexual Aura&quot;,level:0,useType:0, definition: &quot;Passively raise the arousal of anyone in the vicinity&quot;, maxUses: 0, availableUses:0,amounts:[0,1, 5, 10]}
-}&gt;&gt;
-&lt;&lt;set $debuff to .5&gt;&gt;
+	&quot;Arousal&quot;:{name:&quot;Arousal&quot;,level:0,useType:1,definition: &quot;Target&#39;s arousal is raised. Requires touch.&quot;,maxUses: 0, availableUses:0,amounts:[0,10, 15 ,20]},
+	&quot;Aura&quot;:{name:&quot;Sexual Aura&quot;,level:0,useType:0, definition: &quot;Passively raise the arousal of men in the general vicinity&quot;, maxUses: 0, availableUses:0,amounts:[0,1, 5, 10]},
+	&quot;ManFinder&quot;:{name:&quot;Man Finder&quot;,level:0,useType:1,definition: &quot;Identify exactly what skill and level will be needed to convert a man. Can unlock new targets&quot;,maxUses: 0, availableUses:0}
+}&gt;&gt;\
+&lt;&lt;set $debuff to .5&gt;&gt;\
 &lt;&lt;set $arousalgain to {
 	thoughts: 5,
 	blowjob: 10,
 	cum:25,
-	anal:25}&gt;&gt;
-
-&lt;&lt;set $rp to 0&gt;&gt;
-&lt;&lt;set $mainobj to &#39;&#39;&gt;&gt;
-&lt;&lt;set $bulletin to false&gt;&gt;
-&lt;&lt;set $showered to false&gt;&gt;
-&lt;&lt;set $eaten to false&gt;&gt;
-
-&lt;&lt;set $showerscore to 0&gt;&gt;
-
+	anal:25}&gt;&gt;\
+&lt;&lt;set $rp to 0&gt;&gt;\
+&lt;&lt;set $mainobj to &#39;&#39;&gt;&gt;\
+&lt;&lt;set $bulletin to false&gt;&gt;\
+&lt;&lt;set $showered to false&gt;&gt;\
+&lt;&lt;set $eaten to false&gt;&gt;\
+&lt;&lt;set $showerscore to 0&gt;&gt;\
 &lt;&lt;set $npc to {
 	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;,&quot;Trojan&quot;],
 	straightness:[.7,.5,.2,.9],
@@ -801,150 +775,117 @@ You give a firm nod and before you actually get on his last nerve, you quickly m
 	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;],
 	event: [false,false,false.false],
 	progress:[1,1,0,0]
-}&gt;&gt;
-
+}&gt;&gt;\
 &lt;&lt;newcycle &quot;time&quot; 6&gt;&gt;
-    &lt;&lt;phase &#39;morning&#39; &#39;mid-morning&#39; &#39;afternoon&#39; &#39;evening&#39; &#39;night&#39; &#39;midnight&#39;&gt;&gt;
-&lt;&lt;/newcycle&gt;&gt;
-
-&lt;&lt;ignore &quot;link&quot;&gt;&gt;
-&lt;&lt;set $current_passage to &quot;Start Your Story&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="265.5,60" size="100,100">&lt;&lt;if ![&quot;Characters&quot;,&quot;Skill Tree&quot;].includes($current_passage) &gt;&gt;\
+    &lt;&lt;phase &#39;morning&#39; &#39;mid-morning&#39; &#39;afternoon&#39; &#39;evening&#39; &#39;night&#39; &#39;midnight&#39;&gt;&gt;\
+&lt;&lt;/newcycle&gt;&gt;\
+&lt;&lt;ignore &quot;link&quot;&gt;&gt;\
+&lt;&lt;set $current_passage to &quot;Start Your Story&quot;&gt;&gt;\</tw-passagedata><tw-passagedata pid="11" name="PassageHeader" tags="" position="265,59" size="100,100">&lt;&lt;if ![&quot;Characters&quot;,&quot;Skill Tree&quot;].includes($current_passage) &gt;&gt;\
 	&lt;&lt;set $previous_passage to $current_passage&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;set $previous_passage2 to $current_passage&gt;&gt;\
 &lt;&lt;set $current_passage to passage()&gt;&gt;\
 &lt;&lt;if [&quot;Characters&quot;,&quot;Skill Tree&quot;].includes($previous_passage2)&gt;&gt;\
 	&lt;&lt;set  $autoClick =  true&gt;&gt;\
-	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;
+	&lt;&lt;editcycle &quot;time&quot;  change -1&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 	&lt;&lt;set $autoClick to $defaultAC&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if [&quot;Sleep&quot;].includes($previous_passage) &gt;&gt;\
 	&lt;&lt;editcycle &#39;time&#39; reset&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="14" name="Intro_1" tags="" position="1142,52" size="100,100">Back outside the lobby, you see a man outside through the glassdoor passing around talking on a cellphone. He&#39;s visibly angry. Louis, your guess.
-
-You smirk with pride and make your way towards the elevator. You pass the lounging area where a couple of loud men in their mid-twenties are playing pool. 
+&lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="12" name="Intro_1" tags="" position="1142,53" size="100,100">&amp;emsp;Back outside the lobby, you see a man outside through the glassdoor pacing around talking on a cellphone. He&#39;s visibly angry. Louis, your guess.
+&amp;emsp;You smirk with pride and make your way towards the elevator. You pass the lounging area where a couple of loud men in their mid-twenties are playing pool. 
 One of the men looks up as you walk by.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;marc_00.webp&#39;]]
-
-The way he scans your body in clearly sexual. Being objectified turns you on.
-
-You are reminded that all these men are part of your mission and you will fuck them all the future. You feel precum dripping from your hard-on your pants walking past these men.
+[img[setup.ImagePath+&#39;Tucker/Tucker_00.webp&#39;]]
+&amp;emsp;The way he scans your body in clearly sexual. Being objectified turns you on.
+&amp;emsp;You are reminded that all these men are part of your mission and you will fuck them all the future. You feel precum dripping from your hard-on your pants walking past these men.
 
 @@.arousal; you gain 5 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
 
 You need to find your room before you make an explosive scene.
-
  &lt;&lt;link &#39;Find your room&#39;&gt;&gt;
   		&lt;&lt;goto [[Room69_intro]]&gt;&gt;
  &lt;&lt;/link&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Room69_intro" tags="" position="1147,202" size="100,100">You make the rest of the way to your apartment door without a scene.
-The key slides into knob smoothly, but it catches and refuses to turn.
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Room69_intro" tags="" position="1148,202" size="100,100">&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;Room 69&lt;/p&gt;
 
-You struggle for a moment to get it to turn, but instead the door slides open. It seems while you had the right key, the door&#39;s mechanism was busted and probably won&#39;t lock properly.]
+&amp;emsp;The key slides into the knob smoothly, but it catches and refuses to turn. You struggle for a moment to get it to turn, but instead the door slides open. It seems that while you had the right key, the door&#39;s mechanism was busted and probably won&#39;t lock properly.]
+&amp;emsp;You make a mental note to mention this to Marc but it&#39;s not urgent; you don&#39;t anything worth stealing at the moment.
 
-You make a mental note to mention this Marc but it&#39;s not urgent; you don&#39;t anything at all for the moment worth stealing.
-
-Your thought of Marc brought your back to the memory of sucking his cock just moments ago.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Sets/Room69.jpg&#39;]]
+&amp;emsp;Your room is spacious and has lot of light. You laid on the bed and took a moment&#39;s break. Your thoughts of Marc brought your back to the memory of sucking his cock just minutes ago.
 
 &lt;&lt;set $choice to 1&gt;&gt;
 &lt;&lt;link &quot;You&#39;re finally alone! Jerk off.&quot;&gt;&gt;
 &lt;&lt;goto [[JerkOff_01]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
-
 &lt;&lt;link &quot;No time for jerking off. You need to find a job.&quot;&gt;&gt;
 &lt;&lt;goto [[Settling_in]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Ben_Intro" tags="" position="1331,60" size="100,100">A young man is standing at your door.
+&lt;&lt;/link&gt;&gt;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Ben_Intro" tags="" position="1331,59" size="100,100">A nervous twink is standing at your door.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Ben_01.jpg&#39;]]
-
-He shyly waves at you from the door.
-
-&quot;Oh! I&#39;m so sorry. I didn&#39;t mean to open it, it&#39;s just slid open.&quot;
-
-You now reconsider telling Marc about the jammed door if it could continue bringing attractive men into your apartment.
+[img[setup.ImagePath+&#39;Ben/Ben_01.jpg&#39;]]
+&amp;emsp;He shyly waves at you from the door. &quot;Oh! I&#39;m so sorry. I didn&#39;t mean to open it, it&#39;s just slid open.&quot;
+&amp;emsp;You reconsider telling Marc about the jammed door if it could continue bringing attractive men into your apartment.
 
 &lt;&lt;switch $choice&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
-
 &lt;&lt;cont append&gt;&gt;
-	You walk up to him to introduce yourself. But standing closer than a stranger normally would. From this proximity, he had to strain his neck to look up at you. 
-	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
-	
-	He blushes and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
-	
+&amp;emsp;You walk up to him to introduce yourself. But standing closer than a stranger normally would. From this proximity, he had to strain his neck to look up at you. He blushes and looks away onto the ground, trying not to stare at your shirtless body.
+&amp;emsp;&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
+&amp;emsp;&quot;Oh, nice. My name is B-Ben.&quot; he stutters from nervousness, struggling to look at you in your eyes, &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 @@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
-	
-	His meek behavior is charming. You would love to destroy this twink.
-	
-	You extend your hand. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
-	
-	&quot;Likewise!&quot; His face glows with enthuasism as he shakes your hand.
-	
-	&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off first though. Unless you&#39;d want to join me?&quot; You say as you continue to shake his hand. You give him a mischievously raised eyebrow.
-	
-	&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He rushes off, closing the door behind but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
-	
+&amp;emsp;His meek behavior is charming. You would love to destroy this twink. You extend your hand. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot;
+&amp;emsp;&quot;Likewise!&quot; His face glows with enthuasism as he shakes your hand.
+&amp;emsp;&quot;Well, Ben. Would love to chat but I&#39;m looking to head out soon. Gonna hop in the shower and jerk one off first though. Unless,&quot; You grip his hand harder, &quot;you&#39;d want to join me?&quot; You say as you continue to hold his hand. You give him a mischievously raised eyebrow.
+&amp;emsp;&quot;Oh!&quot; Your unexpected proposal surprises him. &quot;I-I.... uh, have to go, actually.&quot; He manages to slip his hand from your grip and rushes off, closing the door behind but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him.
 	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-
 	[[&quot;Head to the bathroom&quot;|Ben_IntroShower]]
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;case 2&gt;&gt;
 &lt;&lt;cont append&gt;&gt;
-	His face is flustered red and he seems unsure how to respond after seeing your masturbate.
-	You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
-	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
-		
-	He jerks his attention away from your hard-on that still clearly visible underneath the thin bedsheet and looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
-	
+&amp;emsp;His face is flustered red and he seems unsure how to respond after seeing your masturbate.
+&amp;emsp;You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
+&amp;emsp;&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
+&amp;emsp;He jerks his attention away from your hard-on that still clearly visible underneath the thin bedsheet and looks away onto the ground. &amp;emsp;&quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 @@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
-	
-	You walk up to Ben and extend the same hand that was just stroking your cock. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
-	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out, maintaining eye contact and a brighter smile.
-	The awkwardness breaks him and he quickly shakes your hand.
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
-	
+&amp;emsp;You walk up to Ben and extend the same hand that was just stroking your cock. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
+&amp;emsp;Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out, maintaining eye contact and a brighter smile.
+&amp;emsp;The awkwardness breaks him and he quickly shakes your hand.
+&amp;emsp;&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
 	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-
 	@@.arousal; you gain 5 arousal@@
-	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-	
+	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
 	@@.exp; you gain 5 exp@@
-	&lt;&lt;set $skilltree.exp to $skilltree.exp + 5&gt;&gt;
-	
-	@@.arousal; Your Arousal is at 100, you have to cum!@@
-
+	&lt;&lt;set $skilltree.exp to $skilltree.exp + 5&gt;&gt;\
+	@@.arousal; Your Arousal is at 100, you have to cum!@
 	[[&quot;Cum!&quot; |Ben_IntroCum]]
 	&lt;&lt;/cont&gt;&gt;
 &lt;&lt;case 3&gt;&gt;
 &lt;&lt;cont append&gt;&gt;
-	He looks like a deer frozen in headlights, completely captivated by your cock and cum. 
-	You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
-	&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
-		
-	He breaks from his trance and quickly looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
-	
+&amp;emsp;He looks like a deer frozen in headlights, completely captivated by your cock and cum. 
+&amp;emsp;You pretend that absolutely nothing was out of the ordinary and wrap the bedsheet around your waste as makeshift towel. You stand up and walk his way.
+&amp;emsp;&quot;My name is  &lt;&lt;print $name&gt;&gt; . I just moved into the apartment today.&quot;
+&amp;emsp;He breaks from his trance and quickly looks away onto the ground. &quot;Oh, nice. My name is B-Ben&quot; he stutters from nervousness. &quot;I live right next door, and I saw you coming in so I thought I&#39;d say hi.&quot;
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 @@.obj; You&#39;ve met Ben. You can now see him under &quot;Character&quot;@@
-	
-	You walk up to Ben, sloppily wipe your cum-stained hands onto the bedsheets/pants you were wearing and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
-	Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out clearly with some cum still on it, maintaining eye contact and a brighter smile.
-	The awkwardness breaks him and he quickly shakes your hand.
-	&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
-	
+&amp;emsp;You walk up to Ben, sloppily wipe your cum-stained hands onto the bedsheets/pants you were wearing and extend it for a shake. &quot;It&#39;s a pleasure to meet you, Ben. Let&#39;s get to know each other more.&quot; You smile.
+&amp;emsp;Ben hesitates for a moment, and you can imagine the gears turning in his head. You continue to leave your hand out clearly with some cum still on it, maintaining eye contact and a brighter smile.
+&amp;emsp;The awkwardness breaks him and he quickly shakes your hand.
+&amp;emsp;&quot;Likewise... uh.. I have to go.&quot; He rushes off, closing the door but not before you notice a bulge in his pants grows. If you had any god powers left in you, you would have easily taken the opportunity to pull him into your room and devour him here.
 	@@.obj; New Obj: Stop by Room 70 to hi to your twink neighbor@@
 	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
@@ -952,28 +893,23 @@ You now reconsider telling Marc about the jammed door if it could continue bring
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;
 	@@.exp; you gain 10 exp@@
 	&lt;&lt;set $skilltree.exp to $skilltree.exp + 10&gt;&gt;
-	
 	You shower and clean up, uneventfully.
-	
-	@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
+@@.notif; You feel refreshed. Awarded 1 Replenishment point that returns a use of an ability.@@
 	&lt;&lt;set $rp to 1&gt;&gt;
-	
 	[[&quot;Let&#39;s head out&quot;|Apartment]]
-	
 	&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/switch&gt;&gt;
+&lt;&lt;/switch&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="JerkOff_01" tags="" position="1128,500" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;\
+&amp;emsp;you excitedly hop onto your new bed, the clean sheets feel cool against your skin. You shed yourself of clothes
 
-
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="JerkOff_01" tags="" position="1128,500" size="100,100">&lt;&lt;set $choice to 2&gt;&gt;
-
-you excitedly hop on to your new bed, the clean sheets feel cool against your skin. You shed yourself of clothes
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_01.webp&#39;]]
+[img[setup.ImagePath+&#39;Ben/jerkoff_01.webp&#39;]]
+&amp;emsp;You stroke yourself the way you love it, getting lost in the ectasy
 
-You stroke yourself the way you love it, getting lost in the ectasy
+@@.arousal; you gain 5 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_02.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Ben/jerkoff_02.webp&#39;]]
 From the back of your mind, you think notice a noise happening from the hall.
 
 &lt;&lt;link &quot;It&#39;s a busy dorm, probably nothing. You&#39;re so close, finish.&quot;&gt;&gt;
@@ -982,41 +918,28 @@ From the back of your mind, you think notice a noise happening from the hall.
 
 &lt;&lt;link &quot;Stop jerking, save your cum for your mission.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-
-@@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="JerkOff_02" tags="" position="1134,682" size="100,100">&lt;&lt;set $choice to 3&gt;&gt;
-You continue on. Nothing can turn sop you now. You need release.
+&lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="JerkOff_02" tags="" position="1138,631" size="100,100">&lt;&lt;set $choice to 3&gt;&gt;\
+&amp;emsp;You continue on. Nothing can turn sop you now. You need release.
 Your grip loosens, and your slow your stroking, readying up.
 
 @@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_03.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Ben/jerkoff_03.webp&#39;]]
 @@.arousal; Your Arousal is at 100, you have to cum!@@
-&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
-
-The pressures builds up in your cock, until finally...
+&lt;&lt;set $skilltree.arousal to 0&gt;&gt;\
+&amp;emsp;The pressures builds up in your cock, until finally...
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Ben/jerkoff_04.webp&#39;]]
+&amp;emsp;You cum right onto your chest. Your body jerks with lightning from each shot.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_04.webp&#39;]]
-
-... you cum right onto your chest. Your body jerks with lightning from each shot.
-
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_05.webp&#39;]]
-
-you take sign of relief, letting the final wave of energy calm down.
+[img[setup.ImagePath+&#39;Ben/jerkoff_05.webp&#39;]]
+&amp;emsp;You take sign of relief, letting the final wave of energy calm down.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;jerkoff_06.webp&#39;]]
-
-But before you could doze off with the drying cum on your chest, you notice the noise again. 
+[img[setup.ImagePath+&#39;Ben/jerkoff_06.webp&#39;]]
+&amp;emsp;But before you could doze off with the drying cum on your chest, you notice the noise again. 
 
 &lt;&lt;link &quot;You open your eyes to find a stranger at your door.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
@@ -1025,115 +948,98 @@ But before you could doze off with the drying cum on your chest, you notice the 
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Settling_in" tags="" position="1143,362" size="100,100">You try to calm your horniness. It&#39;s a powerful weapon that should be saved for your mission, you remind yourself.
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="Settling_in" tags="" position="1143,361" size="100,100">&amp;emsp;You try to calm your horniness. Feeling hot, You settle down on your bed, throwing off your top.
 
-You settle down on your bed, thinking about the next steps. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Ben/Jerk_01_1.jpg&#39;]]
 
-While you could spend all your time on your mission, you are now living in human society and will need to behave like one.
-That means finding a reliable source of income to pay for rent to keep living at the dorm. Furthermore, money is always useful. 
-Money can give you access to more men.
-
-Before you could continue your train of thought, a knocking comes at the door.
+&amp;emsp;You start to thinking about the next steps. While you could spend all your time on your mission, you are now living in human society and will need to behave like one.
+&amp;emsp;That means finding a reliable source of income to pay for rent to keep living at the dorm. Furthermore, money is always useful. Money can give you access to more men. Before you could continue your train of thought, a knocking comes at the door.
 
 &lt;&lt;link &quot;The door creaks open.&quot;&gt;&gt;
 &lt;&lt;goto [[Ben_Intro]]&gt;&gt;
-&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Ben_IntroCum" tags="" position="1311,293" size="100,100">Getting caught jerking off by ben and then forcing him to shake your hand was too much for you.
-You let the bedsheets drop from your waist and....
-
-
+&lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="Ben_IntroCum" tags="" position="1313,336" size="100,100">&amp;emsp;Getting caught jerking off by ben and then forcing him to shake your hand was too much for you. You let the bedsheets drop from your waist and....
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+ &#39;Ben_02.webp&#39;]]
-
+[img[setup.ImagePath+ &#39;Ben/Ben_02.webp&#39;]]
 ...release your sperm right onto the floor of your new apartment.
 Talk about housewarming!
-
-&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
-&lt;&lt;set $rp to 1&gt;&gt;
-
+&lt;&lt;set $skilltree.arousal to 0&gt;&gt;\
+&lt;&lt;set $rp to 1&gt;&gt;\
 You shower and clean up, uneventfully.
-@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
-
+@@.notif; You feel refreshed. Awarded 1 Replenishment point that returns a use of an ability.@@
 	[[&quot;Let&#39;s head out&quot; |Apartment]]
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="Ben_IntroShower" tags="" position="1321,180" size="100,100">You make your way to the shared showers.
-
-To your delight, there a many meny in there, all of whom were comfortable being shirtless.
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Ben_IntroShower" tags="" position="1321,188" size="100,100">&amp;emsp;You make your way to the shared showers. To your delight, there a many meny in there, all of whom were comfortable being shirtless.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Ben_05.webp&#39;]]
-
-You took it one step further though, going completely nude amongst the men. 
+[img[setup.ImagePath+&#39;Ben/Ben_05.webp&#39;]]
+&amp;emsp;However, You took it one step further though, going completely nude amongst the men. 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Ben_06.webp&#39;]]
-
-Once you were alone in a stall and had the water running, you were no longer inhibited. You leaned back against the wall and stroke your penis blindly.
+[img[setup.ImagePath+&#39;Ben/Ben_06.webp&#39;]]
+&amp;emsp;All the men noticed, but some quickly looked away while some eyes lingered. Your cock was now semi-hard and swinging between your legs as you walked to the shower stalls. 
+&amp;emsp;Once you were alone in a stall and had the water running, you were no longer inhibited. You leaned back against the wall and stroke your penis blindly.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Ben_03.webp&#39;]]
-
-You were not holding back any of your moans and let them out for anyone to hear. In only a few moments, you were ready to blow.
+[img[setup.ImagePath+&#39;Ben/Ben_03.webp&#39;]]
+&amp;emsp;You were not holding back any of your moans and let them out for anyone to hear. In only a few moments, you were ready to blow.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Ben_04.webp&#39;]]
-
-You let out hard groan as your cum mixed with shower water
-&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
-
-You wash yourself up afterwards. As you back out from the shower rooms to change, you notice some familiar shoes under the bathroom stalls and the sounds of quiet jerking. You thought to yourself that Ben should have just joined you if he was just going to follow you and jerk off alone in the stalls.
-
-But you left him alone to his preferences. You changed and continued onto your mission.
-
-@@.notif; you feel refreshed. Awarded 1 refreshment point the replenish an ability with 1 use.@@
+[img[setup.ImagePath+&#39;Ben/Ben_04.webp&#39;]]
+&amp;emsp;You let out hard groan as your cum mixed with shower water
+&lt;&lt;set $skilltree.arousal to 0&gt;&gt;\
+&amp;emsp;You wash yourself up afterwards. As you back out from the shower rooms to change, you notice some familiar shoes under the bathroom stalls and the sounds of quiet jerking. You thought to yourself that Ben should have just joined you if he was just going to follow you and jerk off alone in the stalls. But you left him alone to his preferences. 
+&amp;emsp;You changed and continued onto your mission.
+@@.notif; You feel refreshed. Awarded 1 Replenishment point that returns a use of an ability.@@
 &lt;&lt;set $rp to 1&gt;&gt;
 [[&quot;Let&#39;s head out&quot; |Apartment]]
 	
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
-	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Apartment" tags="" position="1538,54" size="100,100">&lt;&lt;editcycle &#39;time&#39; resume&gt;&gt;
-
-&lt;&lt;set $npc.straightness[_index] to $npc.straightness[_index-1]-.1&gt;&gt;
+	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Apartment" tags="" position="1543,55" size="100,100">&lt;&lt;editcycle &#39;time&#39; resume&gt;&gt;\
+[img[setup.ImagePath+&#39;Sets/lobby_2.webp&#39;]]
+&amp;emsp;You are standing in the HomoAndros lobby. Where do you want to head to?
 
 [[&quot;Room 69: Yours&quot;|Room_Player]]
 &lt;&lt;if Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
 [[&quot;Room 70: Ben&#39;s&quot;|Room_Ben]]
-&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Room 70: Ben&#39;s&quot;&gt;&gt;&amp;emsp;You knock and get no response.&lt;&lt;/message&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Room 70: Ben&#39;s&quot;&gt;&gt;&amp;emsp;You knock and get no response. He might be out until later&lt;&lt;/message&gt;&gt;&lt;&lt;/if&gt;&gt;
 [[&quot;Management&quot;|Room_Management]]
 
-[[&quot;Common Room&quot;|Room_Common]]
+[[&quot;Common Area&quot;|Room_Common]]
 [[&quot;Kitchen&quot;|Room_Kitchen]]
-&lt;&lt;If $showered is true&gt;&gt;[[&quot;Take a Shower&quot;|Room_Bathroom]]&lt;&lt;else&gt;&gt;&lt;message &quot;Take a Shower&quot;&gt;&amp;emsp;You&#39;ve already showered today.&lt;&lt;/message&gt;&gt;
+&lt;&lt;if $showered is true&gt;&gt;[[&quot;Take a Shower&quot;|Room_Bathroom]]&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Take a Shower&quot;&gt;&gt;&amp;emsp;You&#39;ve already showered today.&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 [[&quot;Outside Pool&quot;|Room_Pool]]
 [[&quot;Gym&quot;|Room_Gym]]
 
 [[&quot;Staff Office&quot;|Room_Staff]]
 [[&quot;Parking&quot;|Room_Parking]]
 
-[[&quot;Outside&quot;|Outside]]</tw-passagedata><tw-passagedata pid="23" name="Room_Common" tags="" position="1716,390" size="100,100">[Lounging Area Summary]
+[[&quot;Outside&quot;|Outside]]</tw-passagedata><tw-passagedata pid="21" name="Room_Common" tags="" position="1742,561" size="100,100">[img[setup.ImagePath+&#39;Sets/Lounge.png&#39;]]
+You&#39;re standing the common area. This is a place for the men to relax and hang out. There&#39;s couches and games to play as well as the large billiards room.
 
-
-
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
-
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == false&gt;&gt;
 	You see someone playing in the Billiards room. It&#39;s the same man that was checking you out before when you were passing by. He seems to be alone this time.
-	[img[setup.ImagePath+&#39;Tucker_00.jpg&#39;]]
+	[img[setup.ImagePath+&#39;Tucker/Tucker_00.jpg&#39;]]
 	[[&quot;Introduce yourself&quot;|Tucker_Intro]]
 &lt;&lt;else&gt;&gt;
 	[[&quot;Check out the Billiards room&quot;|Room_Billiards]]
 &lt;&lt;/if&gt;&gt;
-
 &lt;&lt;if lastVisited(&quot;Sleeping_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;afternoon&#39;)&gt;&gt;
 You see a man fast asleep on one of the couch.
-img[setup.ImagePath+&#39;\misc\sleep\Sleep_01.webp&#39;]]
+img[setup.ImagePath+&#39;Rooms/Common/Sleep_01.webp&#39;]]
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
 &lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
 	&lt;&lt;goto [[Sleeping_01]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
-&lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
 
 There&#39;s a bulletin board of notices and local events.
-	[[&quot;Check the bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="24" name="Room_Kitchen" tags="" position="2538,45" size="100,100">
+	[[&quot;Check the bulletin&quot;|Bulletin]]
+	
+[[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="22" name="Room_Kitchen" tags="" position="2174,35" size="100,100">
 &lt;&lt;if lastVisited(&quot;Sleeping_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;mid-morning&#39;)&gt;&gt;
 Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about since guests are allowed. You see a man having brunch with someone who looks like his girlfriend or wife
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 2&gt;&gt;
@@ -1143,23 +1049,21 @@ Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about 
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[&quot;Order Pizza&quot;|Pizza]]</tw-passagedata><tw-passagedata pid="25" name="Room_Player" tags="" position="1908,87" size="100,100">[This is your room.]
+[[&quot;Order Pizza&quot;|Pizza]]
 
-[you can jerk off]
-[you can sleep]
+[[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="23" name="Room_Player" tags="" position="2918,334" size="100,100">[img[setup.ImagePath+&#39;Sets/Room69.jpg&#39;]]
+&amp;emsp;You are in your room. What do you want to do?
 
 [[&quot;Sleep&quot;|Sleep]]
 
-[If your raise Arousal is level 2 here, you get a unique scene]
-
-
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1 and Cycle.check(&#39;time&#39;, &#39;morning&#39;)&gt;&gt;
-	[[&quot;There&#39;s a knock at the door&quot;||Marc_Lease]]
+	There&#39;s a knock at the door.
+	[[&quot;Answer it naked.&quot;|Marc_Lease1]]
+	[[&quot;Answer it clothed.&quot;|Marc_Lease2]]
 &lt;&lt;/if&gt;&gt;
 
-
-[[&quot;Head out&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="26" name="Room_Bathroom" tags="" position="2357,512" size="100,100">&lt;&lt;set $showered to true&gt;&gt;
+[[&quot;Head out&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="24" name="Room_Bathroom" tags="" position="2339,578" size="100,100">&lt;&lt;set $showered to true&gt;&gt;
 &lt;&lt;set $showerscore +=$skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;]&gt;&gt;
 
 &lt;&lt;if $showerscore &lt;4 and $showerscore&gt;1 &gt;&gt;
@@ -1210,7 +1114,7 @@ And most of them don&#39;t even think twice about showing off their assets.
 [If you Sexual Aura is at level 1, you can handjob]
 
 
-</tw-passagedata><tw-passagedata pid="27" name="Room_Gym" tags="" position="1743,47" size="100,100">[You can only meet this Asian Buff guy name Rico if you go to the gym at Midnight. He&#39;s a total meathead that you can manipulate into having sex as part of a workout.]
+</tw-passagedata><tw-passagedata pid="25" name="Room_Gym" tags="" position="2845,887" size="100,100">[You can only meet this Asian Buff guy name Rico if you go to the gym at Midnight. He&#39;s a total meathead that you can manipulate into having sex as part of a workout.]
 
 
 &lt;&lt;if lastVisited(&quot;GymTrainer_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
@@ -1222,127 +1126,77 @@ The trainer at the front offers you help since he has nothing else to do.
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_01.webp&#39;]]
 	
 	[[&quot;Sure, have him teach you&quot;|GymTrainer_01]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Tucker_Intro" tags="" position="1863,645" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
-&lt;&lt;set $npc[&quot;progress&quot;][_tindex] ++&gt;&gt;
-&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
-
-The man seems to be focused on making a shot, leaning onto the table. His juicy ass is propped up very nicely for you to see.
-
-&quot;Hey.&quot; You say as you approach him. He shifts his neck to look your way and makes a shot at the same time.
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Tucker_Intro" tags="" position="1535,1021" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] ++&gt;&gt;\
+&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;\
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;\
+&amp;emsp;The man seems to be focused on making a shot, leaning onto the table. His juicy ass is propped up very nicely for you to see.
+&amp;emsp;&quot;Hey.&quot; You say as you approach him. He shifts his neck to look your way and makes a shot at the same time.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_01.webp&#39;]]
-
-&quot;Hey.&quot; The balls falls into its pocket and he gives you an endearing smile. &quot;You new?&quot;
-
-&quot;Yeah, Just settled in this afternoon. I&#39;m &lt;&lt;print $name&gt;&gt;.&quot;
-
-He toss you a stick. &quot;Tucker. You play?&quot; 
+[img[setup.ImagePath+&#39;Tucker/Tucker_01.webp&#39;]]
+&amp;emsp;&quot;Hey.&quot; The balls falls into its pocket and he gives you an endearing smile. &quot;You new?&quot;
+&amp;emsp;&quot;Yeah, Just settled in this afternoon. I&#39;m &lt;&lt;print $name&gt;&gt;.&quot;
+&amp;emsp;He toss you a stick. &quot;Tucker. You play?&quot; 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
 @@.obj; You&#39;ve met Tucker. You can now see him under &quot;Character&quot;@@
-
-You&#39;re unfamiliar with all of the human games they&#39;ve created but billiards is one that you&#39;ve seen before. &quot;Never played before.&quot; You lie, a plan already formulating in your mind.
-
-&quot;But you just hit it like this, yea?&quot; You lean over and attempt the worst posture you could imagine and attempt a shot missing.
-[img[setup.ImagePath+&#39;Tucker_01_2.webp&#39;]]
-
-&quot;No, not at all.&quot; He chuckles and shakes his head. You give him an innocent shrug and lip pout. He sighs dramatically and says, &quot;Okay, Okay. More like this,&quot; he leans over you.
+&amp;emsp;You&#39;re unfamiliar with all of the human games they&#39;ve created but billiards is one that you&#39;ve seen before. &quot;Never played before.&quot; You lie, a plan already formulating in your mind.
+&amp;emsp;&quot;But you just hit it like this, yea?&quot; You lean over and attempt the worst posture you could imagine and attempt a shot missing.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_02.jpg&#39;]]
-
-He then puts his left hand on yours and directing it towards the center of the white ball. He lays his rught hand on your back, pushing it down to the right position, arching your back. His crotch now lies nicely on your thigh. Then, He leans further onto your body, his face now right next your ears. &quot;More like this.&quot; he whispers, you feel his breath pass through your ear.
-
+[img[setup.ImagePath+&#39;Tucker/Tucker_01_2.webp&#39;]]
+&amp;emsp;&quot;No, not at all.&quot; He chuckles and shakes his head. You give him an innocent shrug and lip pout. He sighs dramatically and says, &quot;Okay, Okay. More like this,&quot; he leans over you. He then puts his left hand on yours and directing it towards the center of the white ball. He lays his rught hand on your back, pushing it down to the right position, arching your back. His crotch now lies nicely on your thigh. Then, He leans further onto your body, his face now right next your ears. &quot;More like this.&quot; he whispers, you feel his breath pass through your ear.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_02.webp&#39;]]
 @@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
+&amp;emsp;You make the shot, being a pro this time, easily not distracted by a bulge pressing against you. It lands perfectly and two balls are pocketed. &quot;Wow, it worked.&quot; You turn to Tucker.
 
-You make the shot, being a pro this time, easily not distracted by a bulge pressing against you. It lands perfectly and two balls are pocketed. &quot;Wow, it worked.&quot; You turn to Tucker.
-
-Your face are inches from each other and so you move in to kiss. There&#39;s no resistance, he moves his lips to meet yours. You taste the musk of tobacco.
-
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_03.webp&#39;]]
-
-Before you could take it to the next level, the door opens and a crew of frat boys walks in, clearly drunk and rowdy.
-
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_04.webp&#39;]]
-Tucker straightens up and jumps away from you with a terrified look. 
-
-&quot;Ey, Tucks! Didn&#39;t see you there! You shoulda came with us to Emilys. She had a buncha her slutty sisters over. We&#39;re heading back tonight.&quot; 
-
-&quot;Oh. Sweet! Fuck yea.&quot; He attempts enthusiasm but his voice cracked at the end with panick. They were obviously too drunk to notice. He quickly looks between you and the frat boys, sweat forming on his forehead. You realized his look; Shame. Your face drops. Your penis shrinks. Your butthole puckered up. 
-
-Normally, you&#39;d be excited to party with a bunch of straight drunk frat boys and take advantage of them but Tucker&#39;s change in attitude left a sour taste that overwritten the sweet tobacco you had moments ago. You start walking away without making a scene when the main frat boy asks. &quot;Ey, Tucks. Who&#39;s this fella?&quot;
-
-Tucker&#39;s face pales. He hesitates, and you can see him wondering if he had plausable deniability. You jump in before he can answer. &quot;Oh, I&#39;m &lt;&lt;print $name&gt;&gt;. Just moved in today. Was just checking out the pool room. I don&#39;t know anyone.&quot; You emphasize the any without making it too obvious for anyone besides tucker.
-
-You straighted up and toss your pool stick.
-
-&lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker_05.webp&#39;]]
-
-&quot;Gotta go though.&quot; You do a half wave and head out without looking back. The last thing that hear was &quot;What&#39;s with that fella, huh? Stick up his ass or sumn?&quot;
-
-Hah. if only.
-
-@@.obj; &quot;New Obj: You want to avoid him. You have actual straight men to convert.&quot;@@
-	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;New Obj: You want to avoid him. You have actual straight men to convert.&quot;&gt;&gt;
-
-@@.neg; You lost all arousal@@
-&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
-
-[[&quot;Back to the lobby area&quot;|Room_Common]]
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;
-
-</tw-passagedata><tw-passagedata pid="29" name="Bulletin" tags="" position="1602,553" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Characters" tags="" position="222,583" size="100,100">
-&lt;span class=&quot;obj&quot;&gt;&lt;&lt;print $mainobj&gt;&gt;&lt;/span&gt;
-&lt;&lt;if $bulletin == false&gt;&gt;
-	&lt;span class=&quot;obj&quot;&gt;
-	You need to look for a job!	
-	Try checking out the bulletin in the common area
-	&lt;/span&gt;
+&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
+&lt;&lt;link &#39;Use Raise Arousal: Grind against him&#39;&gt;&gt;
+	&lt;&lt;goto [[Tucker_Grind]]&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;message &#39;Use Raise Arousal: Grind against him&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+[[&quot;Kiss Him&quot;|Tucker_Kiss]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="27" name="Bulletin" tags="" position="1143,893" size="100,100">[[&quot;Stop looking at Bulletin&quot;|Room_Common]]</tw-passagedata><tw-passagedata pid="28" name="Characters" tags="" position="222,583" size="100,100">@@.obj; Main Objectives@@
+&lt;&lt;print $mainobj&gt;&gt;\
+&lt;&lt;if $bulletin == false and lastVisited(&#39;Apartment&#39;) != -1&gt;&gt;\
+	You need to look for a job!	Try checking out the bulletin in the common area.
+&lt;&lt;/if&gt;&gt;\
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+@@.obj; Marc@@
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	@@.obj; &quot;Marc&quot;@@
 	[img[setup.ImagePath+&#39;Marc_pic.jpg&#39;]]
 	The manager of the apartment complex. Older gentlemen with a strong attitude and a stronger cock.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
-&lt;&lt;else&gt;&gt;
-	You will meet this person once you finish the introduction.	
+&lt;&lt;else&gt;&gt;You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
+@@.obj; Ben@@
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	@@.obj; &quot;Ben&quot;@@
 	[img[setup.ImagePath+&#39;Ben_pic.jpg&#39;]]
 	Your shy twink neighbor. Clearly wants his hole destroyed.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
-&lt;&lt;else&gt;&gt;
-	You will meet this person once you finish the introduction.	
+&lt;&lt;else&gt;&gt;You will meet this person once you finish the introduction.	
 &lt;&lt;/if&gt;&gt;
 
+@@.obj; Tucker@@
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	@@.obj; &quot;Tucker&quot;@@
 	[img[setup.ImagePath+&#39;Tucker_pic.jpg&#39;]]
 	Easy-going fella you met in lounge. Enjoys pool and rubbing his bulge against your thigh as he teaches you how to play. If only he wasn&#39;t so stuck in the closet.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex]&lt;/span&gt;
-&lt;&lt;else&gt;&gt;
-	@@.obj; &quot;Tucker&quot;@@
-	You can meet this person in the lounging area.
+&lt;&lt;else&gt;&gt;You can meet this person in the lounging area.
 &lt;&lt;/if&gt;&gt;
 
-[[Return to scene|$previous_passage]]</tw-passagedata><tw-passagedata pid="31" name="Sleep" tags="" position="2156,50" size="100,100">&lt;&lt;set $showered to false&gt;&gt;\
+[[Return to scene|$previous_passage]]</tw-passagedata><tw-passagedata pid="29" name="Sleep" tags="" position="3179,207" size="100,100">&lt;&lt;set $showered to false&gt;&gt;\
 You sleep like a baby!
 
 [[&quot;Wake Up&quot;|Room_Player]]
@@ -1350,11 +1204,11 @@ You sleep like a baby!
 
 &lt;&lt;for _i=0; $i&lt;$npc.event; $i++&gt;&gt;\
 	&lt;&lt;set $npc.event[_i] to false&gt;&gt;
-&lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Room_Ben" tags="" position="1923,219" size="100,100">You arrive at Ben&#39;s door and knock on it.
+&lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Room_Ben" tags="" position="2839,597" size="100,100">You arrive at Ben&#39;s door and knock on it.
 
 [First encounter, just requires a raised arousal. you get to fuck him]
 
-[[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="33" name="Room_Pool" tags="" position="1956,424" size="100,100">[Come here at night for sex]</tw-passagedata><tw-passagedata pid="34" name="Room_Management" tags="" position="1497,392" size="100,100">[Requires a level 5 ability here?]</tw-passagedata><tw-passagedata pid="35" name="Room_Billiards" tags="" position="1730,557" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+[[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="31" name="Room_Pool" tags="" position="2098,629" size="100,100">[Come here at night for sex]</tw-passagedata><tw-passagedata pid="32" name="Room_Management" tags="" position="1497,392" size="100,100">[Requires a level 5 ability here?]</tw-passagedata><tw-passagedata pid="33" name="Room_Billiards" tags="" position="1288,1063" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 
 &lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1&gt;&gt;
 You found yourself wandering into the pool room.
@@ -1370,7 +1224,7 @@ An arm comes from behinds you holds you against a wall. It was Tucker. He looked
 	
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Outside" tags="" position="1417,817" size="100,100">[You are not familiar with the area yet, so you can&#39;t go too far.]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Outside" tags="" position="605,913" size="100,100">[You are not familiar with the area yet, so you can&#39;t go too far.]
 
 &lt;&lt;set _findex to $npc[&quot;name&quot;].indexOf(&#39;Trojan&#39;)&gt;&gt;
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
@@ -1386,72 +1240,118 @@ An arm comes from behinds you holds you against a wall. It was Tucker. He looked
 
 &lt;&lt;/if&gt;&gt;
 
-[[&quot;Park&quot;|Park]]</tw-passagedata><tw-passagedata pid="37" name="Park" tags="" position="1417,967" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="38" name="Sleeping_01" tags="" position="2078,563" size="100,100">In the middle of the afternoon on a work day, the lounge was basically empty. You could see how someone could easily fall asleep here. 
+[[&quot;Park&quot;|Park]]</tw-passagedata><tw-passagedata pid="35" name="Park" tags="" position="567,1061" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="36" name="Sleeping_01" tags="" position="1898,722" size="100,100">&amp;emsp;In the middle of the afternoon on a work day, the lounge was basically empty. You could see how someone could easily fall asleep here. But it&#39;s not safe to sleep in the open like this. Someone could do something perverted to him. You should wake him up so he can go back to his room. It&#39;s your civic duty, you thought. However, you&#39;ll wake him up your way.
 
-But, you thought, it&#39;s not good to sleep in the open. You should wake him up so he can go back to his room. Wake him up your way, you thought.
+&amp;emsp;You start massaging his crotch. A bulge starts for form quickly; he must be having a nice dream.
 
-You start massaging his crotch. It easily started to grow; he must be having a nice dream.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_02.webp&#39;]]
 
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_02.webp&#39;]]
+&amp;emsp;You grow more ambitious when he continues to show no sign of waking up. You needed direct skin contact for your arousal power to work so you reached into his pants slowly.
 
-You practically didn&#39;t powers to get him semi-hard. But wouldn&#39;t satisfy you. You needed direct skin contact for your arousal power to work. So you reached into his pants slowly.
-
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_03.webp&#39;]]
-
-You lift his cock from his jeans. The penis was seemingly more awake and aware than it&#39;s owner. You concentrated some of your power into your saliva and let it drip on his cock and then began your blowjob.
-
-@@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_04.webp&#39;]]
-
-You head weaved up and down on his cock and yet he made no sign of waking up.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_03.webp&#39;]]
+&amp;emsp;You lift his cock from his jeans. His penis was more awake and lively than he was. You concentrated some of your power into your saliva and let it drip on his cock and then began your work.
 
 @@.arousal; you gain 5 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_04.webp&#39;]]
+&amp;emsp;Your head weaved up and down on his cock and yet he made no sign of waking up.
 
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_06.webp&#39;]]
+@@.arousal; you gain 5 arousal@@
+&amp;emsp;&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 5&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_06.webp&#39;]]
+&amp;emsp;You stopped holding back, letting your blowjob be wet and loud. Pushing his cock deeper and letting lose sloppy gags. After a few moments, you felt his cock stiffen. You move to suck on his balls in anticipatation. He only lasted a few seconds later until you were able to squeeze his jizz into your mouth.
 
-You stopped being as quiet anymore. Pushing his cock deeper and letting lose sloppy gags. After a few moments, you felt his cock stiffen. You move to suck on his balls in anticipatation. He only lasted a few seconds later until you were able to squeeze his jizz into your mouth.
-
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_07.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07.webp&#39;]]
 @@.arousal; you gain 25 arousal@@
-&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;
-
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
 @@.exp; you gain 25 exp@@
-&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;
+&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
 
 You squeeze his cock dry.
 &lt;&lt;if $skilltree.arousal &gt; 100&gt;&gt;
 	@@.arousal; Your Arousal is at 100, you have to cum!@@
-You hadn&#39;t expected to get so turned-on by a partner who did no work but you were at your limit. you brought your cock to his sleeping face and let loose string of cum.
-
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_07_3.webp&#39;]]
-&lt;&lt;/if&gt;&gt;
-
-he was still knocked-out on the couch. So, you just left his pants down and began to walk away.  When he wakes up , that should teach him a lesson about sleeping in public.
-
-Only after a couple of steps, you heard a quiet groggy voice. &quot;Wait.&quot;
+&lt;&lt;cont append&gt;&gt;
+&amp;emsp;You hadn&#39;t expected to get so turned-on by a partner who did no work but you were at your limit. you brought your cock to his sleeping face and let loose string of cum.
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07_3.webp&#39;]]
+&lt;&lt;set $skilltree.arousal -= 100&gt;&gt;\
+&amp;emsp;You drained his balls of his cum yet he was still knocked-out on the couch so, you just left his pants down. That should teach him a lesson about sleeping in public.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07_2.webp&#39;]]
+&amp;emsp;You began to walk away when only after a couple of steps, you heard a quiet groggy voice. &quot;Wait.&quot;
 You turn around and see two legs raised up high and a pair of buttcheeks.
 The man was fingering himself. He looked like he was still half-asleep and half in ectasy.
-
-[img[setup.ImagePath+&#39;misc/sleep/Sleep_08.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_08.webp&#39;]]
 &quot;Come back.&quot; he moaned, &quot;I want more.&quot;
+[[&quot;Give him more.&quot;|Sleeping_02]]&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;\
+&lt;&lt;else&gt;&gt;
+&amp;emsp;You drained his balls of his cum yet he was still knocked-out on the couch so, you just left his pants down. That should teach him a lesson about sleeping in public.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07_2.jpg&#39;]]
+&amp;emsp;You began to walk away when only after a couple of steps, you heard a quiet groggy voice. &quot;Wait.&quot;
+&lt;&lt;cont append&gt;&gt;
+You turn around and see two legs raised up high and a pair of buttcheeks.
+The man was fingering himself. He looked like he was still half-asleep and half in ectasy.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_08.webp&#39;]]
+&quot;Come back.&quot; he moaned, &quot;I want more.&quot;
+[[&quot;Give him more.&quot;|Sleeping_02]]&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Sleeping_02" tags="" position="1923,953" size="100,100">&amp;emsp;You walk back to the sofa and get on your knees again. You move his finger away from his asshole and replace them with yours. Your index finger slides in and out of his tight hole, Once  your found his g-spot, his cock turned hard again. 
 
-[[&quot;Give him more.&quot;|Sleeping_02]]
-</tw-passagedata><tw-passagedata pid="39" name="Marc_Lease" tags="" position="2218,269" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="Sleeping_02" tags="" position="2071,716" size="100,100">
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_09_2.webp&#39;]]
+&amp;emsp; The man was moaning uncontrollably as you played with his g-spot. You start to milk his cock, making him go crazier.
 
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_09.webp&#39;]]
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_09.webp&#39;]]
 
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_09_2.webp&#39;]]
+&amp;emsp;After you loosen him up to two fingers, he begs you &quot;Please fuck me. I want your cock.&quot;
 
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_10.webp&#39;]]
-
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_11.webp&#39;]]\
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_12.webp&#39;]]\
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_13.webp&#39;]]\
-[img[setup.ImagePath+&#39;/misc/sleep/Sleep_14.webp&#39;]]\</tw-passagedata><tw-passagedata pid="41" name="Room_Staff" tags="" position="1463,205" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="Room_Parking" tags="" position="1613,205" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="Pizza" tags="" position="2722,45" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="Frat_Intro" tags="" position="1603,815" size="100,100">You jump into that party, always enjoying the energy wild drunk men brought to any occasion. However bad they were at washing cars, they were still able to rack in customers.
+&amp;emsp;You grant his desires and shove your cock into his tight hole and start fucking him on the couch.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_10.webp&#39;]]
+@@.arousal; you gain 25 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
+&amp;emsp;&quot;Yes. Yes. More!&quot; He grunts with each hit. &quot;Fuck me!&quot;
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_11.webp&#39;]]
+@@.arousal; you gain 25 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
+&amp;emsp; You fuck him harder and harder until cum is flying out his cock. But you don&#39;t stop.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_12.webp&#39;]]
+@@.arousal; you gain 25 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
+&amp;emsp; You keep fucking him for the next 10 minutes until he comes again.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_13.webp&#39;]]\
+@@.arousal; you gain 25 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
+&amp;emsp; And the next 10 minutes after that.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_14.webp&#39;]]\
+&amp;emsp; Until his hole was loose and your were satisfied.
+@@.arousal; Your Arousal is at 100, you have to cum!@@
+&amp;emsp;You brought your cock to his face and fed him all your cum your built up from fucking him. He readily takes your cum down and swallows it all.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_15.webp&#39;]]
+&lt;&lt;set $skilltree.arousal -= 100&gt;&gt;
+@@.exp; you gain 100 exp@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 100&gt;&gt;\
+&amp;emsp; As you clean up up and put on your clothes to leave, you turn around again to see him fast asleep on the couch, now completely nude.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_16.jpg&#39;]]
+[[&quot;Oh well.&quot;|Room_Common]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+</tw-passagedata><tw-passagedata pid="38" name="Room_Staff" tags="" position="2173,1023" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="39" name="Room_Parking" tags="" position="1613,205" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="Pizza" tags="" position="2441,27" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="41" name="Frat_Intro" tags="" position="748,907" size="100,100">You jump into that party, always enjoying the energy wild drunk men brought to any occasion. However bad they were at washing cars, they were still able to rack in customers.
 
 [img[setup.ImagePath+&#39;Trojan/Trojan_02.webp&#39;]]
 
@@ -1482,15 +1382,15 @@ You wonder if the name lived up to it&#39;s namesake.
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[&quot;Have a drink and then head out&quot;|Outside]]</tw-passagedata><tw-passagedata pid="45" name="Frat_Blowjob" tags="" position="1603,965" size="100,100">[img[setup.ImagePath+&#39;Trojan/Trojan_02.webp&#39;]]
-</tw-passagedata><tw-passagedata pid="46" name="Kitchen_01" tags="" position="2539,195" size="100,100">[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_01.webp&#39;]]
+[[&quot;Have a drink and then head out&quot;|Outside]]</tw-passagedata><tw-passagedata pid="42" name="Frat_Blowjob" tags="" position="738,1049" size="100,100">[img[setup.ImagePath+&#39;Trojan/Trojan_02.webp&#39;]]
+</tw-passagedata><tw-passagedata pid="43" name="Kitchen_01" tags="" position="2425,173" size="100,100">[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_01.webp&#39;]]
 
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_02.webp&#39;]]
 
 
 [The following requires a high Raise Arousal in order to get him to want to be fucked.]
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_03.webp&#39;]]
-[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_04.webp&#39;]]</tw-passagedata><tw-passagedata pid="47" name="GymTrainer_01" tags="" position="1757,177" size="100,100">
+[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_04.webp&#39;]]</tw-passagedata><tw-passagedata pid="44" name="GymTrainer_01" tags="" position="2859,1017" size="100,100">
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_02.webp&#39;]]
 
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_03.webp&#39;]]
@@ -1503,7 +1403,141 @@ You wonder if the name lived up to it&#39;s namesake.
 
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_07.webp&#39;]]
 
-</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="45" name="PassageFooter" tags="" position="276,194" size="100,100">&lt;&lt;print &quot;-----------------&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="Marc_Lease1" tags="" position="3172,428" size="100,100">You get on your bed and on fours and yell out &quot;Come in!&quot;
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/Lease_01.webp&#39;]]
+	The door slides open and Marcs walks in a couple of steps before he realizes what&#39;s happening. &quot;Look,&quot; he speaks slowly, trying to process your naked body, &quot;what happened yesterday was a one time thing. You need to be a real tenant from now on.&quot;
+He was vocally reject you but was walking closer to you with every world. He stood at the foot of your bed, eyes locked on your bottom. You grab your buttcheeks, massaged them and pull them apart.
+[img[setup.ImagePath+&#39;Marc/Lease_02.webp&#39;]]
+That broke the last straw. Marc dove into your asshole, eating it hungrily. His tongue swirled your anus, his saliva lubricates your whole. 
+
+[img[setup.ImagePath+&#39;Marc/Lease_03.webp&#39;]]
+
+Marc was so lost in munching your ass, you think he forgot about you entirely.
+[img[setup.ImagePath+&#39;Marc/Lease_04.webp&#39;]]</tw-passagedata><tw-passagedata pid="47" name="Marc_Lease2" tags="" position="3099,535" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="48" name="Tucker_Grind" tags="" position="1512,1255" size="100,100">&lt;&lt;set $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] --&gt;&gt;
+
+&amp;emsp;You affect him with your arousal through his guiding hand. You feel his cock harden in his pants, pushing on your thigh. He lets out a soft erotic sigh when You push your ass against his bulge. His cock slides between your buttchecks, softly pushing against your asshole.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[NEED IMAGE]
+&quot;Good shot. But your posture could use a little more help.&quot; His hands move to your hips. He is now actively dry humping his cock against your ass. He position each stroke to hit against your hole. Your clothes were the only thing preventing it from penetrating.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[NEED IMAGE]
+&amp;emsp;Before you could take it to the next level, the door opens and a crew of frat boys walks in, clearly drunk and rowdy.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_04.webp&#39;]]
+Tucker straightens up and jumps away from you. 
+&quot;Ey, Tucks! Didn&#39;t see you there! You shoulda came with us to Emilys. She had a buncha her slutty sisters over. We&#39;re heading back tonight.&quot; 
+&quot;Oh. Sweet! Fuck yea.&quot; He attempts enthusiasm but his voice cracked at the end with panick. They were obviously too drunk to notice. He&#39;s obstructs their view of his hard-on with the pool table but you could still it from your angle. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_03_2.webp&#39;]]
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&amp;emsp;He quickly looks between you and the frat boys, sweat forming on his forehead. You realized his look. He&#39;s super closeted. 
+You smile to yourself, perfect. You were here on mission to liberate men just like him.
+&amp;emsp;&quot;Ey, Tucks. Who&#39;s this fella?&quot; The guy whose been talking to Tucker was obviously the leader of the frat boys. Whatever he says, probably goes. So if you can convert him, it&#39;ll probably make your job a lot easier.
+&amp;emsp;You jump in before Tucker can answer. &quot;Oh, I&#39;m &lt;&lt;print $name&gt;&gt;. Just moved in today. Was just checking out the pool room. Wanna play a game?&quot; You suggest.
+&amp;emsp;&quot;What kind of game?&quot; The guy asks. You smile.
+You convince them to play a game of strip billiards. However, you lost every round, ending the game with you completely naked.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_05.webp&#39;]]
+&amp;emsp;You take every opportunity to spread you legs and show them your hole.
+Tucker who only manage to lose his shirt struggles with his now obvious cock. However, he wasn&#39;t the only horny one now. Several of the other drunk guys are leering at you too.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_06.webp&#39;]]
+The dry-humping from before and now your naked body was getting too much for Tucker and you can see that precum had started leaking through his pants.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_07.jpg&#39;]]
+&amp;emsp; Moments after the game was over, the leader of the group gave the cue to wrap it up and made everyone put their clothes back on. He hadn&#39;t checked you out at all, clearly very straight. You knew your god powers were too weak to actually work on all these men, even if they were near passed-out drunk, but it was a good first pass. The boys head out to their party, leaving you alone in the billiard room.
+@@.obj; &quot;New Obj: Persue Tucker and help him get out of the closet.&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;New Obj: Persue Tucker and help him get out of the closet.&quot;&gt;&gt;\
+
+&lt;&lt;if $skilltree.arousal &gt; 100&gt;&gt;
+	@@.arousal; Your Arousal is at 100, you have to cum!@@
+&lt;&lt;cont append&gt;&gt;
+Now that you&#39;re alone. You take out your cock and start stroking it
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_08.webp&#39;]]
+You were about to cum onto the ground when the door slams open. It&#39;s Tucker. He see you jerking your cock. 
+&quot;Give it to me quick.&quot; he makes his way up to you and gets on his knees. You pull open his mouth and shoot your load into it. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_09.webp&#39;]]
+He swallows all of it quickly and gets up and runs out without saying another word.
+@@.exp; you gain 25 exp@@
+&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
+&lt;&lt;set $skilltree.arousal -= 100&gt;&gt;\
+[[&quot;Back to the Common Area&quot;|Room_Common]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+&lt;&lt;else&gt;&gt;
+[[&quot;Back to the Common Area&quot;|Room_Common]]
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+</tw-passagedata><tw-passagedata pid="49" name="Tucker_Kiss" tags="" position="1661,1254" size="100,100">&amp;emsp;Your face are inches from each other and so you move in to kiss. There&#39;s no resistance, he moves his lips to meet yours. You taste the musk of tobacco.
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_03.webp&#39;]]
+
+Before you could take it to the next level, the door opens and a crew of frat boys walks in, clearly drunk and rowdy.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_04.webp&#39;]]
+&quot;Ey, Tucks! Didn&#39;t see you there! You shoulda came with us to Emilys. She had a buncha her slutty sisters over. We&#39;re heading back tonight.&quot; 
+&quot;Oh. Sweet! Fuck yea.&quot; He attempts enthusiasm but his voice cracked at the end with panick. They were obviously too drunk to notice. He&#39;s obstructs their view of his hard-on with the pool table but you could still it from your angle. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_03_2.webp&#39;]]
+&amp;emsp;He quickly looks between you and the frat boys, sweat forming on his forehead. You realized his look. He&#39;s super closeted. 
+You smile to yourself, perfect. You were here on mission to liberate men just like him.
+&amp;emsp;&quot;Ey, Tucks. Who&#39;s this fella?&quot; The guy whose been talking to Tucker was obviously the leader of the frat boys. Whatever he says, probably goes. So if you can convert him, it&#39;ll probably make your job a lot easier.
+&amp;emsp;You jump in before Tucker can answer. &quot;Oh, I&#39;m &lt;&lt;print $name&gt;&gt;. Just moved in today. Was just checking out the pool room. Wanna play a game?&quot; You suggest.
+&amp;emsp;&quot;What kind of game?&quot; The guy asks. You smile.
+You convince them to play a game of strip billiards. However, you lost every round, ending the game with you completely naked.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_05.webp&#39;]]
+&amp;emsp;You take every opportunity to spread you legs and show them your hole.
+Tucker who only manage to lose his shirt struggles with his now obvious cock. However, he wasn&#39;t the only horny one now. Several of the other drunk guys are leering at you too.
+@@.arousal; you gain 10 arousal@@
+&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;\
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_06.webp&#39;]]
+&amp;emsp; Moments after the game was over, the leader of the group gave the cue to wrap it up and made everyone put their clothes back on. He hadn&#39;t checked you out at all, clearly very straight. You knew your god powers were too weak to actually work on all these men, even if they were near passed-out drunk, but it was a good first pass.
+@@.obj; &quot;New Obj: Persue Tucker and help him get out of the closet.&quot;@@
+	&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
+&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;New Obj: Persue Tucker and help him get out of the closet.&quot;&gt;&gt;\
+
+&lt;&lt;if $skilltree.arousal &gt; 100&gt;&gt;
+	@@.arousal; Your Arousal is at 100, you have to cum!@@
+&lt;&lt;cont append&gt;&gt;
+@@.obj; Now that you&#39;re alone. You take out your cock and start stroking it. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_08.webp&#39;]]
+You were about to cum onto the ground when the door slams open. It&#39;s Tucker. He see you jerking your cock. 
+&quot;Give it to me quick.&quot; he makes his way up to you and gets on his knees. You pull open his mouth and shoot your load into it. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker_09.webp&#39;]]
+He swallows all of it quickly and gets up and runs out without saying another word.
+@@.exp; you gain 25 exp@@
+&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
+&lt;&lt;set $skilltree.arousal -= 100&gt;&gt;\
+[[&quot;Back to the Common Area&quot;|Room_Common]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+&lt;&lt;else&gt;&gt;
+[[&quot;Back to the Common Area&quot;|Room_Common]]
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
