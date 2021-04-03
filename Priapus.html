@@ -414,12 +414,12 @@ The goal of the Introduction Sequence is to introduce the premise, mission and g
 &lt;&lt;/cont&gt;&gt;
 
 &lt;&lt;editcycle &#39;time&#39; suspend&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="125,268" size="100,100">&lt;&lt;showcycle &#39;time&#39; upperfirst&gt;&gt;
-&lt;&lt;if $skilltree[&quot;exp&quot;] &gt; 100&gt;&gt;
+&lt;&lt;if $skilltree[&quot;exp&quot;] &gt;= 100&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;exp&quot;] -= 100&gt;&gt;\
 	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;\
 	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;\
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if $skilltree[&quot;exp&quot;] &gt; 100&gt;&gt;
+&lt;&lt;if $skilltree[&quot;exp&quot;] &gt;= 100&gt;&gt;
 	&lt;&lt;set $skilltree[&quot;exp&quot;] -= 100&gt;&gt;\
 	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;\
 	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;\
@@ -702,7 +702,7 @@ Replenishment Points: @@#refresh;$rp@@
     &lt;&lt;/cont&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="983,473" size="100,100">&amp;emsp;&quot;You fucking slut.&quot; He enounces each word with a mix of disgust and devilishness. &quot;Is this what you want?&quot; He takes his cock back from you, smacks it across your face and starts stroking it.
+</tw-passagedata><tw-passagedata pid="9" name="FirstSex_03" tags="" position="983,472" size="100,100">&amp;emsp;&quot;You fucking slut.&quot; He enounces each word with a mix of disgust and devilishness. &quot;Is this what you want?&quot; He takes his cock back from you, smacks it across your face and starts stroking it.
 &amp;emsp;You nod your head and give him your best slutty eyes.
 
 \&lt;&lt;cont append&gt;&gt;
@@ -722,7 +722,7 @@ You feel the power grow inside you.
 &lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
 &amp;emsp;Once you absorbed all your could, you got back up your feet. Marc ruffles through his desk and pulls out a key. He throws it your way.
 
-&amp;emsp;&quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $900 payment on the first or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
+&amp;emsp;&quot;Room 69. I&#39;ll come up with a lease tomorrow morning. Make the $150 payment every week on sunday or I&#39;ll have your ass.&quot; You aren&#39;t sure what he meant but you&#39;d rather stay living here then find out. 
 &amp;emsp;You give a firm nod and before you actually get on his last nerve, you quickly make your way out of his office without looking back. You were sure though, that Marc&#39;s eyes were on the ass he was just talking about.
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
@@ -1182,7 +1182,7 @@ The trainer at the front offers you help since he has nothing else to do.
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 @@.obj; Marc@@
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[img[setup.ImagePath+&#39;Marc_pic.jpg&#39;]]
+	[img[setup.ImagePath+&#39;Marc/Marc_pic.jpg&#39;]]
 	The manager of the apartment complex. Older gentlemen with a strong attitude and a stronger cock.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
 &lt;&lt;else&gt;&gt;You will meet this person once you finish the introduction.	
@@ -1191,7 +1191,7 @@ The trainer at the front offers you help since he has nothing else to do.
 @@.obj; Ben@@
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[img[setup.ImagePath+&#39;Ben_pic.jpg&#39;]]
+	[img[setup.ImagePath+&#39;Ben/Ben_pic.jpg&#39;]]
 	Your shy twink neighbor. Clearly wants his hole destroyed.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex] &lt;/span&gt;
 &lt;&lt;else&gt;&gt;You will meet this person once you finish the introduction.	
@@ -1200,7 +1200,7 @@ The trainer at the front offers you help since he has nothing else to do.
 @@.obj; Tucker@@
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;
 &lt;&lt;if $npc[&quot;met&quot;][_tindex] == true&gt;&gt;
-	[img[setup.ImagePath+&#39;Tucker_pic.jpg&#39;]]
+	[img[setup.ImagePath+&#39;Tucker/Tucker_pic.jpg&#39;]]
 	Easy-going fella you met in lounge. Enjoys pool and rubbing his bulge against your thigh as he teaches you how to play. If only he wasn&#39;t so stuck in the closet.
 	&lt;span class=&quot;obj&quot;&gt; $npc[&quot;notice&quot;][_tindex]&lt;/span&gt;
 &lt;&lt;else&gt;&gt;You can meet this person in the lounging area.
@@ -1337,7 +1337,7 @@ The man was fingering himself. He looked like he was still half-asleep and half 
 &quot;Come back.&quot; he moaned, &quot;I want more.&quot;
 [[&quot;Give him more.&quot;|Sleeping_02]]&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 &lt;&lt;/if&gt;&gt;\
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Sleeping_02" tags="" position="1920,952" size="100,100">&amp;emsp;You walk back to the sofa and get on your knees again. You move his finger away from his asshole and replace them with yours. Your index finger slides in and out of his tight hole, Once  your found his g-spot, his cock turned hard again. 
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Sleeping_02" tags="" position="1920,952" size="100,100">&amp;emsp;You walk back to the sofa and get on your knees again. You move his finger away from his asshole and replace them with yours. Your index finger slides in and out of his tight hole, Once  you found his prostate, his cock turned hard again. 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Common/Sleep_09_2.webp&#39;]]
 &amp;emsp; The man was moaning uncontrollably as you played with his g-spot. You start to milk his cock, making him go crazier.
@@ -1379,7 +1379,7 @@ The man was fingering himself. He looked like he was still half-asleep and half 
 @@.exp; you gain 25 exp@@
 &lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
 @@.arousal; Your Arousal is at 100, you have to cum!@@
-&amp;emsp;You pulled your cock out and sprayed your cum all over his dick and hole.
+&amp;emsp;You finally shot your load into his loose asshole. He yelled out in euphoria when he felt hole fill up with your cum. You let him savor the feeling before pulling your cock slowly out.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Common/Sleep_15.webp&#39;]]
 &lt;&lt;set $skilltree.arousal -= 100&gt;&gt;
