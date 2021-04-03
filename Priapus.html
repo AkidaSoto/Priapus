@@ -362,25 +362,7 @@ Setting.addToggle("autoClick", {
 }); // default value not defined, so false is used
 
 
-/*
-	Debug Settings.
-*/
-(function () {
-	Setting.addHeader("Debug Settings");
-
-	function initSettingDebug() {
-		Config.debug = settings.debug;
-	}
-	Setting.addToggle("debug", {
-		label    : "Enable test/debug mode?",
-		default  : false,
-		onInit   : initSettingDebug,
-		onChange : function () {
-			initSettingDebug();
-			window.location.reload();
-		}
-	});
-})();</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,43" size="100,100">
+</script><tw-passagedata pid="1" name="Start Your Story" tags="" position="701,43" size="100,100">
 \&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;Priapus&lt;/p&gt;&lt;p style=&quot;font-family: Garamond, serif; font-size: 16px&quot;&gt;Story based on the popular Bara Manga by Mentaiko, &quot;Priapus&quot;&lt;/p&gt;\
 [img[setup.ImagePath+&#39;GameStart.jpg&#39;]]
 
@@ -400,6 +382,9 @@ The goal of the Introduction Sequence is to introduce the premise, mission and g
     &lt;&lt;if not $name&gt;&gt;
         &lt;&lt;replace &#39;#error&#39;&gt;&gt;Names typically include letters!&lt;&lt;/replace&gt;&gt;
     &lt;&lt;else&gt;&gt;
+		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+		&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
+		&lt;&lt;set $skilltree.points to 1&gt;&gt;
         &lt;&lt;goto [[Introduction]]&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/link&gt;&gt;
@@ -408,18 +393,20 @@ The goal of the Introduction Sequence is to introduce the premise, mission and g
     &lt;&lt;if not $name&gt;&gt;
         &lt;&lt;replace &#39;#error&#39;&gt;&gt;Names typically include letters!&lt;&lt;/replace&gt;&gt;
     &lt;&lt;else&gt;&gt;
+		&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
 		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
-		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
+		&lt;&lt;set $npc[&quot;event&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet with Marc in the morning to sign the lease.&quot;&gt;&gt;
 		&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
+		&lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Stop by Room 70 to hi to your twink neighbor&quot;&gt;&gt;
+		&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;
 		&lt;&lt;set $skilltree.skills.Arousal.level to 1&gt;&gt;
 		&lt;&lt;set $skilltree.skills.Arousal.availableUses to 0&gt;&gt;
+		&lt;&lt;set $skilltree.skills.Arousal.maxUses to 1&gt;&gt;
 		&lt;&lt;set $rp to 1&gt;&gt;		
 		&lt;&lt;set $skilltree.arousal to 0&gt;&gt;
-		&lt;&lt;set $skilltree.exp to 25&gt;&gt;
+		&lt;&lt;set $skilltree.exp to 50&gt;&gt;
 		&lt;&lt;set $showered to true&gt;&gt;\
         &lt;&lt;goto [[Apartment]]&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -427,11 +414,15 @@ The goal of the Introduction Sequence is to introduce the premise, mission and g
 &lt;&lt;/cont&gt;&gt;
 
 &lt;&lt;editcycle &#39;time&#39; suspend&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="125,268" size="100,100">&lt;&lt;showcycle &#39;time&#39; upperfirst&gt;&gt;
-
-&lt;&lt;if $skilltree[&quot;xp&quot;] &gt; 100&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;exp&quot;] to 0&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;
-	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;
+&lt;&lt;if $skilltree[&quot;exp&quot;] &gt; 100&gt;&gt;
+	&lt;&lt;set $skilltree[&quot;exp&quot;] -= 100&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;\
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $skilltree[&quot;exp&quot;] &gt; 100&gt;&gt;
+	&lt;&lt;set $skilltree[&quot;exp&quot;] -= 100&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;\
+	&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;\
 &lt;&lt;/if&gt;&gt;
 
 Exp: $skilltree.exp / 100
@@ -450,7 +441,7 @@ You have @@#points;$skilltree.points@@ ability point(s) to use!
 
 
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 0&gt;&gt;
-	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aural&quot;][&quot;level&quot;]&gt;&gt;
+	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;]&gt;&gt;
 	&lt;&lt;set _strengthid to $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;amounts&quot;][_strengthid]&gt;&gt;
 	Passive Sexual Aura (+ _strengthid)
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="103,442" size="100,100">&lt;&lt;link &#39;God Abilities&#39;&gt;&gt;
@@ -743,9 +734,9 @@ You feel the power grow inside you.
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="127,71" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
+ &lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="128,71" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
 &lt;&lt;set $skilltree to {
-	points:1,
+	points:0,
 	skills: [],
 	exp:0,
 	level:1,
@@ -894,8 +885,6 @@ You need to find your room before you make an explosive scene.
 	&lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
 	@@.arousal; you gain 10 arousal@@
 	&lt;&lt;set $skilltree.arousal to $skilltree.arousal + 10&gt;&gt;
-	@@.exp; you gain 10 exp@@
-	&lt;&lt;set $skilltree.exp to $skilltree.exp + 10&gt;&gt;
 	You shower and clean up, uneventfully.
 @@.notif; You feel refreshed. Awarded 1 Replenishment point that returns a use of an ability.@@
 	&lt;&lt;set $rp to 1&gt;&gt;\
@@ -992,10 +981,8 @@ You shower and clean up, uneventfully.
 &lt;&lt;set $skilltree.arousal to 0&gt;&gt;\
 &amp;emsp;You wash yourself up afterwards. As you back out from the shower rooms to change, you notice some familiar shoes under the bathroom stalls and the sounds of quiet jerking. You thought to yourself that Ben should have just joined you if he was just going to follow you and jerk off alone in the stalls. But you left him alone to his preferences. 
 &amp;emsp;You changed and continued onto your mission.
-
 @@.exp; you gain 25 exp@@
 &lt;&lt;set $skilltree.exp to $skilltree.exp + 25&gt;&gt;\
-
 @@.notif; You feel refreshed. Awarded 1 Replenishment point that returns a use of an ability.@@
 &lt;&lt;set $rp to 1&gt;&gt;
 [[&quot;Let&#39;s head out&quot; |Apartment]]
@@ -1015,7 +1002,7 @@ You shower and clean up, uneventfully.
 
 [[&quot;Common Area&quot;|Room_Common]]
 [[&quot;Dining Hall&quot;|Room_Kitchen]]
-&lt;&lt;if $showered is true&gt;&gt;[[&quot;Take a Shower&quot;|Room_Bathroom]]&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Take a Shower&quot;&gt;&gt;&amp;emsp;You&#39;ve already showered today.&lt;&lt;/message&gt;&gt;
+&lt;&lt;if $showered is false&gt;&gt;[[&quot;Take a Shower&quot;|Room_Bathroom]]&lt;&lt;else&gt;&gt;&lt;&lt;message &quot;Take a Shower&quot;&gt;&gt;&amp;emsp;You&#39;ve already showered today.&lt;&lt;/message&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 [[&quot;Outside Pool&quot;|Room_Pool]]
 [[&quot;Gym&quot;|Room_Gym]]
@@ -1036,8 +1023,7 @@ You&#39;re standing the common area. This is a place for the men to relax and ha
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if lastVisited(&quot;Sleeping_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;afternoon&#39;)&gt;&gt;
 You see a man fast asleep on one of the couch.
-img[setup.ImagePath+&#39;Rooms/Common/Sleep_01.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_01.webp&#39;]]
 &lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] &gt; 0&gt;&gt;
 &lt;&lt;link &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;
 	&lt;&lt;goto [[Sleeping_01]]&gt;&gt;
@@ -1045,7 +1031,7 @@ img[setup.ImagePath+&#39;Rooms/Common/Sleep_01.webp&#39;]]
 &lt;&lt;else&gt;&gt;
 &lt;&lt;message &#39;Use God Skill 01: Raise Arousal&#39;&gt;&gt;&amp;emsp;No uses left&lt;&lt;/message&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
-&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/if&gt;&gt;
 
 There&#39;s a bulletin board of notices and local events.
 	[[&quot;Check the bulletin&quot;|Bulletin]]
@@ -1072,15 +1058,15 @@ Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about 
 [[&quot;Jerk Off&quot;|Jerk_Off]]
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
-&lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1 and Cycle.check(&#39;time&#39;, &#39;morning&#39;)&gt;&gt;
+&lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1 and Cycle.check(&#39;time&#39;, &#39;morning&#39;) and $npc[&quot;event&quot;][_tindex] == false&gt;&gt;
 	There&#39;s a knock at the door.
-	&lt;&lt;if $skilltree[&quot;skills&quot;][&quot;Aura&quot;][&quot;level&quot;] &gt; 1&gt;&gt;\
+&lt;&lt;if $skilltree.skills.Aura.level &gt; 1&gt;&gt;
 &lt;&lt;link &#39;Greet Marc naked.&#39;&gt;&gt;
 	&lt;&lt;goto [[Marc_Lease1]]&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
 &lt;&lt;message &#39;Greet Marc naked.&#39;&gt;&gt;&amp;emsp;Your Sexual Aura is not high enough to seduce him.&lt;&lt;/message&gt;&gt;
-&lt;&lt;/if&gt;&gt;\
+&lt;&lt;/if&gt;&gt;
 	[[&quot;Greet Marc clothed.&quot;|Marc_Lease2]]
 &lt;&lt;/if&gt;&gt;
 
@@ -1225,7 +1211,7 @@ You fall sleep on your bed.
 
 &lt;&lt;cont append&gt;&gt;
 You start to get horny at the break of dawn and start playing with yourself for a bit.
-&lt;&lt;set _pic to random(1,16)&gt;&gt;\
+&lt;&lt;set _pic to random(1,15)&gt;&gt;\
 [img[setup.ImagePath+&#39;Rooms/Player/hump_0&#39; + _pic + &#39;.webp&#39;]]
 @@.arousal; you gain 25 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
@@ -1244,9 +1230,11 @@ You play with yourself too much, causing you cum.
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/cont&gt;&gt;
 
-&lt;&lt;for _i=0; $i&lt;$npc.event; $i++&gt;&gt;\
+&lt;&lt;for _i=0; _i&lt;$npc.event.length; _i++&gt;&gt;\
 	&lt;&lt;set $npc.event[_i] to false&gt;&gt;
-&lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Room_Ben" tags="" position="2839,597" size="100,100">You arrive at Ben&#39;s door and knock on it.
+&lt;&lt;/for&gt;&gt;
+
+&lt;&lt;set $skilltree.skills.Arousal.availableUses to $skilltree.skills.Arousal.maxUses&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Room_Ben" tags="" position="2839,597" size="100,100">You arrive at Ben&#39;s door and knock on it.
 
 [First encounter, just requires a raised arousal. you get to fuck him]
 
@@ -1326,7 +1314,7 @@ You squeeze his cock dry.
 &lt;&lt;set $skilltree.arousal -= 100&gt;&gt;\
 &amp;emsp;You drained his balls of his cum yet he was still knocked-out on the couch so, you just left his pants down. That should teach him a lesson about sleeping in public.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Common/Sleep_07_2.jpg&#39;]]
 &amp;emsp;You began to walk away when only after a couple of steps, you heard a quiet groggy voice. &quot;Wait.&quot;
 You turn around and see two legs raised up high and a pair of buttcheeks.
 The man was fingering himself. He looked like he was still half-asleep and half in ectasy.
@@ -1667,8 +1655,7 @@ You were not aroused enough to cum.
 [[&quot;Back to the Common Area&quot;|Room_Common]]
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Marc_Lease1" tags="" position="3133,398" size="100,100">&lt;&lt;set $skilltree[&quot;skills&quot;][&quot;Arousal&quot;][&quot;availableUses&quot;] --&gt;&gt;
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Marc_Lease1" tags="" position="3133,398" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
 You get on your bed and on fours and yell out &quot;Come in!&quot;
 &lt;&lt;cont append&gt;&gt;
@@ -1744,7 +1731,7 @@ He leaves you breathless and naked on your bed. You stay there for 5 more minute
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_03.webp&#39;]]
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_04.webp&#39;]]</tw-passagedata><tw-passagedata pid="54" name="Dining_Blow" tags="" position="2636,322" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="55" name="Jerk_Off" tags="" position="3016,150" size="100,100">&lt;&lt;cont append&gt;&gt;
 You decided that you should some alone time with yourself in bed.
-&lt;&lt;set _pic to random(1,16)&gt;&gt;\
+&lt;&lt;set _pic to random(1,15)&gt;&gt;\
 [img[setup.ImagePath+&#39;Rooms/Player/hump_0&#39; + _pic + &#39;.webp&#39;]]
 @@.arousal; you gain 25 arousal@@
 &lt;&lt;set $skilltree.arousal to $skilltree.arousal + 25&gt;&gt;\
