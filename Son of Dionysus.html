@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Son of Dionysus" startnode="1" creator="Twine" creator-version="2.3.13" ifid="C2CC7A9E-FEA6-4B65-97F1-D9A7120DBA6C" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.arousal {
+	<tw-storydata name="Son of Dionysus" startnode="1" creator="Twine" creator-version="2.3.14" ifid="C2CC7A9E-FEA6-4B65-97F1-D9A7120DBA6C" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.arousal {
   font-size: 1.2rem;
   color: pink;
   text-align:center;
@@ -823,6 +823,7 @@ You feel the power grow inside you.
 &lt;&lt;set $paidrent to true&gt;&gt;\
 &lt;&lt;set $gotlease to false&gt;&gt;\
 &lt;&lt;set $kidnap to false&gt;&gt;\
+&lt;&lt;set $kidnapcomplete to false&gt;&gt;\
 &lt;&lt;set $firstrent to true&gt;&gt;\
 &lt;&lt;set $seengym to false&gt;&gt;\
 \
@@ -1207,32 +1208,34 @@ You shower and clean up, uneventfully.
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;
 	&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="Apartment" tags="" position="1544,54" size="100,100">&lt;&lt;editcycle &#39;time&#39; resume&gt;&gt;\
+&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;HomoAndros Lobby&lt;/p&gt;
+
 [img[setup.ImagePath+&#39;Sets/lobby_2.webp&#39;]]
 
 HomoAndros Gay Progression: @@#displaygay;$HomoAndros@@ / 100
 &lt;&lt;showmeter &#39;gaybar&#39; &#96;$HomoAndros/ 100&#96;&gt;&gt;
 &lt;&lt;if $HomoAndros == 0&gt;&gt;
 &lt;&lt;elseif $HomoAndros &lt;= 10&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_1&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_1.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 20&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_2&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_2.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 30&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_3_1&#39;]]
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_3_2&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_3_1.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_3_2.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 40&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_4&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_4.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 50&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_5&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_5.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 60&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_6&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_6.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 70&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_7&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_7.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 80&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_8&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_8.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 90&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_9&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_9.webp&#39;]]
 &lt;&lt;elseif $HomoAndros &lt;= 100&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms\Lobby\Lobby_10&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Lobby/Lobby_10.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
 &amp;emsp;You are standing in the HomoAndros lobby. Where do you want to head to?
@@ -1312,38 +1315,35 @@ Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about 
 &lt;&lt;message &quot;Jerk Off [+3 Hours]&quot;&gt;&gt;&amp;emsp;You&#39;ve jerked off too much today!&lt;&lt;/message&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;
-
 &lt;&lt;if $paidrent is false&gt;&gt;
-	There&#39;s a knock at the door. It&#39;s probably Marc coming &lt;&lt;if $gotlease&gt;&gt;for rent.&lt;&lt;else&gt;&gt;with the lease.&lt;&lt;/if&gt;&gt;
-	&lt;&lt;if $gotlease is false&gt;&gt;
-	[[&quot;Greet Marc Naked.&quot;|Marc_Lease1]]
-	[[&quot;Greet Marc Clothed.&quot;|Marc_Lease2]]
-	&lt;&lt;elseif $money &gt;= 150&gt;&gt;
-	[[&quot;Pay Marc Rent&quot;|Apartment][$money -= 150]]
-	&lt;if $punishment == 0&gt;&gt;\
-	[[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_punishment]]
-	&lt;&lt;/else&gt;&gt;
-	[[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_GameOver]]
-	&lt;&lt;/if&gt;&gt;
-	&lt;&lt;else&gt;&gt;
-		&lt;if $punishment == 0&gt;&gt;\
-	[[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_punishment]]
-	&lt;&lt;/else&gt;&gt;
-	[[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_GameOver]]
-	&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
+    There&#39;s a knock at the door. It&#39;s probably Marc coming &lt;&lt;if $gotlease is true&gt;&gt;for rent.&lt;&lt;else&gt;&gt;with the lease.&lt;&lt;/if&gt;&gt;
+    &lt;&lt;if $gotlease is false&gt;&gt;
+        [[&quot;Greet Marc Naked.&quot;|Marc_Lease1]]
+        [[&quot;Greet Marc Clothed.&quot;|Marc_Lease2]]
+    &lt;&lt;elseif $money &gt;= 150&gt;&gt;
+        [[&quot;Pay Marc Rent&quot;|Apartment][$money -= 150]]
+        &lt;&lt;if $punishment == 0&gt;&gt;\
+            [[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_punishment]]
+        &lt;&lt;else&gt;&gt;
+            [[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_GameOver]]
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+        &lt;&lt;if $punishment == 0&gt;&gt;\
+    [[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_punishment]]
+        &lt;&lt;else&gt;&gt;
+    [[&quot;Tell Marc you don&#39;t have the money.&quot;|Marc_GameOver]]
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
 &lt;&lt;else&gt;&gt;
-	[[&quot;Head out&quot;|Apartment]]
-	
-	[[&quot;Shower and head out&quot;|Room_Bathroom]]
+    [[&quot;Head out&quot;|Apartment]]
+    [[&quot;Shower and head out&quot;|Room_Bathroom]]
 &lt;&lt;/if&gt;&gt;
 
 </tw-passagedata><tw-passagedata pid="24" name="Room_Bathroom" tags="" position="2545,821" size="100,100">HomoAndros Gay Progression: @@#displaygay;$HomoAndros@@ / 100
 &lt;&lt;showmeter &#39;gaybar&#39; &#96;$HomoAndros/ 100&#96;&gt;&gt;
 
 &lt;&lt;if $HomoAndros == 0&gt;&gt;
-You change out of your clothes, making sure that the men around see your semi-hardon.
+You change out of your clothes, making sure that the men around see your semi-hard on.
 [img[setup.ImagePath+&#39;Rooms/Showers/Bathroom_00.webp&#39;]]
 
 You catch a couple of men watching through their peripheral vision so you take a moment to play around with dick.
@@ -1386,31 +1386,29 @@ And most of them don&#39;t even think twice about showing off their assets.
 
 Men are working out at the gym.
 
-[img[setup.ImagePath+&#39;Rooms/Gym/Gym1.webp&#39;]]
-
-&lt;&lt; if $seengym is false&gt;&gt;
-
+&lt;&lt;if $seengym is false&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro_1.webp&#39;]]
-
 As you walk into the gym, an attractive asian man cleaning some of the equipment.
 &quot;Hi! Welcome to the HomoAndros Gym. I&#39;m Ichiro, let me know if there&#39;s anything I can help you with.&quot;
-You noticed his extremely toned body. He&#39; clearly takes extra care of his body and is an avid user of the gym he works at.
+You noticed his extremely toned body. He&#39; clearly takes extra care of his body and is an avid user of the gym he works at. You hope to see him around more often.
 &lt;&lt;set $seengym to true&gt;&gt;
+&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ichiro&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 1&gt;&gt;\
+@@.obj; You&#39;ve met Ichiro. You can now see him under &quot;Character&quot;@@
+
 &lt;&lt;else&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1.webp&#39;]]
-
 You see Ichiro working out, he&#39;s in the zone and doesn&#39;t notice you.
 &lt;&lt;ability &#39;SA&#39; 5 &quot;Get a closer look and admire his body.&quot; &quot;Ichiro_1&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-
-
-&lt;&lt;if lastVisited(&quot;GymTrainer_01&quot;) is -1 and Cycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
+&lt;&lt;ifCycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_01.webp&#39;]]
 You visit the gym late in the middle of the night. It is mostly empty.
 A gym bro walks up to and asks if you want to work out with him.
 
-[img[setup.ImagePath+&#39;Rooms/Gym/Gym_01.webp&#39;]]
-	[[&quot;Sure, have him teach you&quot;|GymTrainer_01]]
+&lt;&lt;ability &#39;RA&#39; 3 &quot;Sure, have him teach you.&quot; &quot;GymTrainer_01&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1.webp&#39;]]
@@ -1418,7 +1416,7 @@ A gym bro walks up to and asks if you want to work out with him.
 [[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="26" name="Tucker_Intro" tags="" position="2222,1467" size="100,100">&amp;emsp;The man seems to be focused on making a shot, leaning over the table. His juicy ass is propped up very nicely for you to see.
 &amp;emsp;&quot;Hey.&quot; You say as you approach him. He shifts his neck to look your way and makes a shot at the same time.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker/Tucker_1.webp&#39;]]
+[img[setup.ImagePath+&#39;Tucker/Tucker1_1.webp&#39;]]
 &amp;emsp;&quot;Hey.&quot; The balls falls into their pockets and he gives you an welcoming smile. &quot;You new?&quot;
 &amp;emsp;&quot;Yeah, Just settled in. I&#39;m &lt;&lt;print $name&gt;&gt;.&quot;
 &amp;emsp;He tosses you a stick. &quot;Tucker. You play?&quot; 
@@ -1428,15 +1426,15 @@ A gym bro walks up to and asks if you want to work out with him.
 &amp;emsp;You&#39;re unfamiliar with all of the human games they&#39;ve created but billiards is one that you&#39;ve seen before. &quot;Never played before.&quot; You lie, a plan already forming in your mind.
 &amp;emsp;&quot;But you just hit it like this, yea?&quot; You lean over and attempt the worst posture you could imagine and took a shot, missing.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker/Tucker_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Tucker/Tucker1_2.webp&#39;]]
 &amp;emsp;He chuckles and shakes his head. &quot;No, not at all.&quot;You give him an innocent shrug and lip pout. He sighs dramatically and says, &quot;Okay, Okay. More like this,&quot; he leans over you. He then puts his left hand on yours and directs it towards the center of the white ball. He lays his right hand on your back, pushing it down to the right position, arching your back. His crotch now sits nicely on your thigh.
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker/Tucker_3.webp&#39;]]
+[img[setup.ImagePath+&#39;Tucker/Tucker1_3.webp&#39;]]
 Then, he leans further onto your body, his face now right next your ears. &quot;More like this.&quot; he whispers, you feel his breath pass through your ear.
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker/Tucker_4.webp&#39;]]
+[img[setup.ImagePath+&#39;Tucker/Tucker1_4.webp&#39;]]
 &lt;&lt;update &#39;arousal&#39; 5&gt;&gt;
 &amp;emsp;You make the shot, being a pro this time, easily not distracted by a bulge pressing against you. It lands perfectly and two balls are pocketed. &quot;Wow, it worked.&quot; You turn to Tucker.
 
@@ -1450,7 +1448,7 @@ Then, he leans further onto your body, his face now right next your ears. &quot;
 
 @@.notif;Events@@\
 &lt;&lt;set $dstack to Cycle.get(&#39;day&#39;).stack+1&gt;&gt;\
-&lt;&lt;if $dstack &gt;= 4 and $poker is false&gt;&gt;Ad: “We are six regular guys that get together to play poker every Wednesday evening. Our 6th player has moved away (I deal) and we are looking for a chill dude that doesn´t mind endless discussions about the latest Netflix shows. If that´s you, come to Room 12 on Wednesday night.
+&lt;&lt;if $dstack &gt;= 4 and $poker is false&gt;&gt;Ad: “We are six regular guys that get together to play poker every Wednesday evening. Our 6th player has moved away (I deal) and we are looking for a chill dude that doesn´t mind endless discussions about the latest Netflix shows. If that´s you, come to Room 47 on Wednesday night.
 &lt;&lt;message &quot;Take the ad&quot;&gt;&gt;
 &lt;&lt;set $poker to true&gt;&gt;
 &amp;emsp;You took the ad. Now to show up to Room 47 on Wednesday Night.&lt;&lt;/message&gt;&gt;
@@ -1470,13 +1468,13 @@ Then, he leans further onto your body, his face now right next your ears. &quot;
 &lt;&lt;else&gt;&gt;
 &amp;emsp;It&#39;s currently too late to work!
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;if $NoRape is false&gt;&gt;\
+&lt;&lt;if $kidnapcomplete is false&gt;&gt;&lt;&lt;if $NoRape is false&gt;&gt;\
 You notice a suspicious Ad
 &amp;emsp;&quot;Easy job! Make money fast! Show up outside HomoAndros at midnight to get more details! EZ $$$$&quot;
 &lt;&lt;message &quot;Take the ad&quot;&gt;&gt;
 &lt;&lt;set $kidnap to true&gt;&gt;
 &amp;emsp;You took the ad. Now to show up outside HomoAndros late at night.&lt;&lt;/message&gt;&gt;
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 [[&quot;Stop looking at Bulletin&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="28" name="Characters" tags="" position="259,518" size="100,100">@@.obj; Main Objectives@@
 &lt;&lt;print $mainobj&gt;&gt;\
@@ -1636,11 +1634,16 @@ A group of men have taken upon themselves to make a ruckus and being extremely l
 &lt;&lt;/if&gt;&gt;
 
 
-[[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="32" name="Room_Management" tags="" position="1990,841" size="100,100">[img[setup.ImagePath+&#39;Marc/Marc_Office.webp&#39;]]
+[[&quot;Leave&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="32" name="Room_Management" tags="" position="1990,841" size="100,100">&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;Managment&lt;/p&gt;
+[img[setup.ImagePath+&#39;Marc/Marc_Office.webp&#39;]]
 
 Marc is sitting as his desk. &quot;What do you need? I have work to do, boy. Make it quick.&quot; 
 
-[[Talk to him about being more community involvement||Marc_Scene2]]
+&lt;&lt;if $work.waiter is 100 or $work.mover is 100 or $work.tutor is 100&gt;&gt;
+[[Talk to him about more community involvement|Marc_Scene2]]
+&lt;&lt;else&gt;&gt;
+&lt;&lt;message &quot;Talk to him about more community involvement&quot;&gt;&gt;You have to be promoted (reach 100) for a job before you can talk to Marc about it.&lt;&lt;/message&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 [[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="33" name="Room_Billiards" tags="" position="2499,1621" size="100,100">&lt;&lt;if Cycle.check(&#39;time&#39;, &#39;night&#39;) or Cycle.check(&#39;time&#39;, &#39;evening&#39;) or Cycle.check(&#39;time&#39;, &#39;midnight&#39;) &gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker_Billards.webp&#39;]]
@@ -1671,7 +1674,7 @@ You are outside the HomoAndro&#39;s apartment.
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $kidnap and Cycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
+&lt;&lt;if $kidnap and Cycle.check(&#39;time&#39;, &#39;midnight&#39;) and $kidnapcomplete is false&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Outside/alley.png&#39;]]
 [[&quot;Wait around for the EZ job.&quot;|kidnap]]
 &lt;&lt;/if&gt;&gt;
@@ -1876,10 +1879,11 @@ He quietly places his soft cock into your mouth and you start to work it. His le
 
 [[&quot;Come back later&quot;|Room_Kitchen]]
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="GymTrainer_01" tags="" position="3425,1357" size="100,100">[img[setup.ImagePath+&#39;Rooms/Gym/Gym_02.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="GymTrainer_01" tags="" position="3405,1364" size="100,100">[img[setup.ImagePath+&#39;Rooms/Gym/Gym_02.webp&#39;]]
 
 You&#39;d never turn down an offer such a hot guy. The Gym trainer was very tactile with his training. When you were working the machines, he was fully pushing his whole body weight against yours. You could feel his cock push against your ass cheeks.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_02_2.webp&#39;]]
 
 Moving to the barbells, when he was spotting you, he pushed his crotch right into his face. You could smell his jock strap, sweaty from the day&#39;s work. 
@@ -1888,6 +1892,7 @@ Moving to the barbells, when he was spotting you, he pushed his crotch right int
 
 When you moved over to do some push ups, he popped his cock out of his trousers and asked if you needed an external motivator.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_04.webp&#39;]]
 
 You continued your push-ups, lowering yourself on to his cock slowly until it hit the back of your throat. 
@@ -1896,6 +1901,7 @@ You continued your push-ups, lowering yourself on to his cock slowly until it hi
 
 You continued your blowjob when it became his turn to do reps with the barbell. You matched your blowjob to his rep speed, causing him to push himself faster if he wanted you to work on his cock faster.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_04_3.webp&#39;]]
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_05.webp&#39;]]
 
@@ -1906,15 +1912,30 @@ You continued to trade blowjobs with each other as you switched between working 
 
 &quot;Never skip leg day. Let&#39;s work out that ass.&quot; He pulls down your gym shorts and started fucking you.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_07.webp&#39;]]
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_08.webp&#39;]]
 
 You found yourself working up a sweat bouncing on his cock, and possibly your ass burning from a good work out but you couldn&#39;t tell over the sensation of his cock in your ass.
 &quot;Remember to take your post-work out protein drink!&quot;
 
-[img[setup.ImagePath+&#39;Rooms/Gym/Gym_09.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_10.webp&#39;]]
 
-[[&quot;Leave&quot;|Room_Gym]]</tw-passagedata><tw-passagedata pid="43" name="PassageFooter" tags="" position="244,176" size="100,100">&lt;&lt;print &quot;-----------------&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="Marc_Lease2" tags="" position="4014,786" size="100,100">&lt;&lt;set $paidrent to true&gt;&gt;
+You felt your ass explode as he injected you full of his proten rich cum.
+
+&lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/Gym_12.webp&#39;]]
+You find yourself overcome with pleasure from him fucking you like a simple everyday work out without breaking a sweat. You cum all over yourself over his consistent rhythm.
+&lt;&lt;/if&gt;&gt;
+
+[[&quot;Finish your work out and clean up&quot;|Room_Gym]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="PassageFooter" tags="" position="244,176" size="100,100">&lt;&lt;print &quot;-----------------&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="Marc_Lease2" tags="" position="4014,786" size="100,100">&lt;&lt;set $paidrent to true&gt;&gt;
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
 &lt;&lt;set $npc[&quot;romance&quot;][_tindex] to 1&gt;&gt;\
@@ -2009,7 +2030,8 @@ You smile to yourself: perfect. You were here on mission to liberate men just li
 You finish the rest of the game and the frat boys went on their way. Tucker walks by you and whispers to you, &quot;Thanks for being cool. You have a hot ass. Hope to play with again when we&#39;re alone.&quot;
 
 @@.obj; Tucker: Meet him at the billiards room again.@@
-&lt;&lt;update &#39;gay&#39; 5&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet him at the billiards room again.&quot;&gt;&gt;
 
 [[&quot;Back to the Common Area&quot;|Room_Common]]
@@ -2042,7 +2064,8 @@ You smile to yourself: perfect. You were here on mission to liberate men just li
 You finish the rest of the game and the frat boys went on their way. Tucker walks by you and whispers to you, &quot;Thanks for being cool. That was my first kiss with a guy and it was very nice. Hope to see you around again.&quot;
 
 @@.obj; Tucker: Meet him at the billiards room again.@@
-&lt;&lt;update &#39;gay&#39; 5&gt;&gt;
+&lt;&lt;update &#39;gay&#39;  $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Meet him at the billiards room again.&quot;&gt;&gt;
 
 [[&quot;Back to the Common Area&quot;|Room_Common]]
@@ -2118,7 +2141,7 @@ He leaves you breathless and naked on your bed. You stay there for 5 more minute
 
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="Job_Mover" tags="" position="788,1302" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
 Moving Experience:
-&lt;&lt;showmeter &#39;moverbar&#39; &#96;$work.mover/ 100&#96;&gt;
+&lt;&lt;showmeter &#39;moverbar&#39; &#96;$work.mover/ 100&#96;&gt;&gt;
 
 You spend some time with the twins with moving.
 &lt;&lt;update &#39;money&#39; 25&gt;&gt;
@@ -2141,43 +2164,48 @@ Nothing significant happens.
 
 &lt;&lt;if Cycle.check(&#39;time&#39;, &#39;morning&#39;) or Cycle.check(&#39;time&#39;, &#39;afternoon&#39;) or Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
 [[&quot;Keep Working&quot;|Job_Mover]]
+&lt;&lt;else&gt;&gt;
+It&#39;s too late to work.
 &lt;&lt;/if&gt;&gt;
 
-[[&quot;Back to bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="49" name="Job_Waiter" tags="" position="669,1308" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
+[[&quot;Back to bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="49" name="Job_Waiter" tags="" position="668,1308" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
 [img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/working.webp&#39;]]
 
 Customer Satisfication:
-&lt;&lt;showmeter &#39;waiterbar&#39; &#96;$work.waiter/ 100&#96;&gt;
+&lt;&lt;showmeter &#39;waiterbar&#39; &#96;$work.waiter/ 100&#96;&gt;&gt;
 
 You spend some time bussing tables.
 &lt;&lt;update &#39;money&#39; 25&gt;&gt;
 &lt;&lt;set $work.waiter += 5&gt;&gt;\
 
-&lt;&lt;if $work.waiter &gt;= 65 and lastVisited(&quot;waiter_help&quot;) is -1&gt;&gt;
+&lt;&lt;if $work.waiter &gt;= 65 and lastVisited(&quot;waiter_sausage&quot;) is -1&gt;&gt;
 It&#39;s been a long shift and it&#39;s just you and Sid working the front now. The restaurant is completely empty so you&#39;ve been chatting with Sid.
 
 5 minutes before close, a man comes in and starts aggressively demands for sausages.
 You check in the back but but the restaurant ran out, and the man won&#39;t leave until he gets his sausage!
-[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter1.webp&#39;]]
-&lt;&lt;ability &#39;RA&#39; 2 &quot;Feed him your sausage.&quot; &quot;waiter_sausage&quot;&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/waiter1.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 2 &quot;Feed him your sausage.&quot; &quot;waiter_help&quot;&gt;&gt;
 &lt;&lt;elseif $work.waiter &gt;= 80 and lastVisited(&quot;waiter_sausage&quot;) is -1&gt;&gt;
 On a pretty busy day, Sid asks you to come back to the storage room when you&#39;re done with your table.
 &quot;Just a couple of inventory things I want to show the newbie.&quot; 
-[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter1.webp&#39;]]
-&lt;&lt;ability &#39;RA&#39; 2 &quot;Make sure the back is all sorted out.&quot; &quot;waiter_help&quot;&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin//waiterwaiter1.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Make sure the back is all sorted out.&quot; &quot;waiter_help&quot;&gt;&gt;
 &lt;&lt;elseif $work.waiter &gt;= 100 and lastVisited(&quot;waiter_promotion&quot;) is -1&gt;&gt;
-[[&quot;waiter promotion&quot;|waiter_promotion]]
+It was a regular day at work. You were in the back when Sid came up to you without a word and pulled down your pants.
+&lt;&lt;ability &#39;RA&#39; 6 &quot;Serve him your cock.&quot; &quot;waiter_promotion&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 Nothing significant happens.
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if Cycle.check(&#39;time&#39;, &#39;morning&#39;) or Cycle.check(&#39;time&#39;, &#39;afternoon&#39;) or Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
 [[&quot;Keep Working&quot;|Job_Waiter]]
+&lt;&lt;else&gt;&gt;
+It&#39;s too late to work.
 &lt;&lt;/if&gt;&gt;
 
 [[&quot;Back to bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="50" name="Job_Tutor" tags="" position="905,1299" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
 Thomas&#39;s Grade: 
-&lt;&lt;showmeter &#39;tutorbar&#39; &#96;$work.tutor/ 100&#96;&gt;
+&lt;&lt;showmeter &#39;tutorbar&#39; &#96;$work.tutor/ 100&#96;&gt;&gt;
 
 You spend some time with Thomas with studying for the MCATs. HE is slopwly improving.
 &lt;&lt;update &#39;money&#39; 25&gt;&gt;
@@ -2190,15 +2218,16 @@ You can see that Thomas feels stressed out and is having diffuculty remembering 
 &lt;&lt;elseif $work.tutor &gt;= 80 and lastVisited(&quot;tutor_focus&quot;) is -1&gt;&gt;
 You&#39;re not sure why but Thomas seems too easily distractable today.
 [img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2.webp&#39;]]
-&lt;&lt;ability &#39;RA&#39; 2 &quot;Train his focus.&quot; &quot;tutor_focus&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Train his focus.&quot; &quot;tutor_focus&quot;&gt;&gt;
 &lt;&lt;elseif $work.tutor &gt;= 100 and lastVisited(&quot;tutor_promotion&quot;) is -1&gt;&gt;
 Today&#39;s the day that Thomas takes the MCATs.
-[[&quot;Find out his results&quot;|tutor_promotion]]
+&lt;&lt;ability &#39;RA&#39; 6 &quot;Find out his results&quot; &quot;tutor_promotion&quot;&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2.webp&#39;]]
 &lt;&lt;else&gt;&gt;Nothing significant happens.&lt;&lt;/if&gt;&gt;
-
 &lt;&lt;if Cycle.check(&#39;time&#39;, &#39;morning&#39;) or Cycle.check(&#39;time&#39;, &#39;afternoon&#39;) or Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
 [[&quot;Keep Working&quot;|Job_Tutor]]
+&lt;&lt;else&gt;&gt;
+It&#39;s too late to work.
 &lt;&lt;/if&gt;&gt;
 
 [[&quot;Back to bulletin&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="51" name="Dining_Fuck" tags="" position="4035,38" size="100,100">You zip his pants back up quiet and You crawl out from the table. You give a nod and signal towards the  empty back part of the dining hall.
@@ -2218,6 +2247,7 @@ It wasn&#39;t long before he came and shot all over himself.
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_05.webp&#39;]]
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
@@ -2229,7 +2259,7 @@ You give him a facial, getting it all over his face and hair.
 &quot;How&#39;s this?&quot; He presents himself after a moment of cleaning up. There was still a load hanging from the side of his face.
 &quot;You looked good.&quot; You lie and let him walk back his wife.
 
-[[&quot;Leave&quot;|Room_Kitchen]]</tw-passagedata><tw-passagedata pid="52" name="Dining_Blow" tags="" position="4051,158" size="100,100">[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_02.webp&#39;]]
+[[&quot;Leave&quot;|Room_Kitchen]]</tw-passagedata><tw-passagedata pid="52" name="Dining_Blow" tags="" position="4052,158" size="100,100">[img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_02.webp&#39;]]
 You milk out his cum and watch it fall to the ground.
 Maybe if you catch him again, you can fuck him.
 
@@ -2237,6 +2267,7 @@ Maybe if you catch him again, you can fuck him.
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_06.webp&#39;]]
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
@@ -2244,7 +2275,8 @@ You jerk yourself off quietly under the table and cum with him.
 [img[setup.ImagePath+&#39;Rooms/Kitchen/Kitchen_07.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
-[[&quot;Leave&quot;|Room_Kitchen]]</tw-passagedata><tw-passagedata pid="53" name="Jerk_Off" tags="" position="4369,638" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
+[[&quot;Leave&quot;|Room_Kitchen]]
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="Jerk_Off" tags="" position="4369,638" size="100,100">&lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(5)&lt;&lt;/script&gt;&gt;\
 You decided that you should some alone time with yourself in bed.
 &lt;&lt;set _pic to random(1,15)&gt;&gt;\
 &lt;&lt;cont append&gt;&gt;
@@ -2421,24 +2453,24 @@ You couldn&#39;t hold it in, releasing your load into him
 &quot;Not good. You know I had to go throught hoops to get you this room and I was expecting you be a good tenant.&quot;
 &quot;Sorry, sir. I j-&quot; Marc interrupts you by pulling you over onto his lap.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_1.webp&#39;]]
-
 He slaps your ass cheeks. &quot;I&#39;m going to have to punish a bad boy like you so you&#39;ll learn your lesson. Tell me you&#39;ll learn your lesson.&quot; He demanded.
 
 &quot;Yes, sir. I&#39;m a bad boy. I need to be taught a lesson.&quot; You whimper between his slaps.
 &quot;Good. Looks like you now how to behave. But I&#39;ll have to still bring you to my punishment room for the rest of the lesson.&quot; He lifts you up and starts to carry you out of the room.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_2.webp&#39;]]
-
 He carrys you with ease through the apartment, drawing lots of attention. No one seems to say anything because Marc owns the building and he can do whatever he wants. He goes down a dark stairway and opens a door labeled &quot;maintinence&quot;. 
 There&#39;s table full of sex toys and equipment. He reaches for some things you don&#39;t see. He settles down on the couch and strips you down.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_3.webp&#39;]]
-
 &quot;This plump butt. Hard to believe that you&#39;d do anything wrong.&quot; He admires your bare ass. He goes to grab something and you feel some cold plastic press against your hole.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_4.webp&#39;]]
-
 Marc penetrates your asshole through force, causing you to yell out of pain. &quot;Quiet, boy.&quot; He growled but doesn&#39;t stop. He starts to fuck you with the dildo aggressively. Without lubrication, the friction is too much; you cry out in pain anyway. 
 &quot;Damn loud mouth. Don&#39;t worry about it though, I know what can keep you quiet.&quot;
 
@@ -2447,64 +2479,65 @@ Marc penetrates your asshole through force, causing you to yell out of pain. &qu
 Marc pulls a ball gag over your face and tightens it without remorse.
 &quot;And let&#39;s also stop all this flailing around as well.&quot; He grabs some rope and starts restraining your arms.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_6.webp&#39;]]
-
 You are now unable to do much but show off your bare ass to Marc.
 &quot;Now you&#39;re ready for your punishment.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_7.webp&#39;]]
-
 Marc flails at your bottom.
 &quot;I told you what would happen if you didn&#39;t pay your rent on time!&quot;
 He whips at you and try to yell through the ball gag.
 &quot;Tell me you&#39;re a bad boy.&quot; he demanded. 
 You muffle out as he whips you. &quot;I&#39;m sorry, I&#39;m a bad boy.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_8.webp&#39;]]
-
 &quot;Not good enough. You seem obiedent now but whenever I take my eyes off of you, you turn around and get into some trouble.&quot;
 He decides to lessen on the whipping and moves to your nipples, squeezing and twisting roughly.
 &quot;I need to make sure you understand that you should never make trouble for me again.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_9.webp&#39;]]
-
 He pinches two clothes pin onto your nipples. They feel raw and inflammed under the pinch.
 Marc noticed your involuntary hard-on. &quot;Wow. You&#39;re a kinky boy, aren&#39;t you. I can having you cum from this at all.&quot;
 He ties a a rope around your cock and balls tightly.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_10.webp&#39;]]
-
 In the next few hours, Marc fuck you until satisfied and them leave to do some work. Having you hanged bonded up alone for a couple of hours. He&#39;d come back, silent and without acknowledging you. He&#39;d fucked your hole and then leave again.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_11.webp&#39;]]
-
 You were exhausted from the bondage so when he started to untie you after fucking you one time, you&#39;d thought he was finally finish.
 Instead, he smacked your face and dragged you into a new position and tied you back up.
 &quot;You&#39;re not done until I say you are.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/MarcP_12.webp&#39;]]
 [img[setup.ImagePath+&#39;Marc/MarcP_13.webp&#39;]]
-
 Your hole was filled with Marc&#39;s cum, staying lubricated for the next time he would fuck you. You don&#39;t know how long it was because you started to dissociate from the abuse and exhaustion.
 The last thing you remember was Marc slapping your face a couple of time to wake you up.
 &quot;Pay me on time. There won&#39;t be a second time you get to go free.&quot; and then you blacked out.
 
 &lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(20)&lt;&lt;/script&gt;&gt;\
 
-[[&quot;Wake up back in your room&quot;|Room_Player]]</tw-passagedata><tw-passagedata pid="60" name="mover_coworker" tags="" position="799,1556" size="100,100">You present your ass to your coworker.
+[[&quot;Wake up back in your room&quot;|Room_Player]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="mover_coworker" tags="" position="801,1556" size="100,100">You present your ass to your coworker.
 &quot;Let&#39;s make sure that this bed is working.&quot; you smile at him.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_2.webp&#39;]]
 
 &lt;&lt;cont append&gt;&gt;
 &quot;Of course, can&#39;t have the customers complaining.&quot; He readily slides his cock into your hole.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_2.webp&#39;]]
 &lt;&lt;cont append&gt;&gt;
 &quot;Let&#39;s make sure it&#39;s very sturdy.&quot; He starts fucking you hard, pushing his cock deep inside.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1_3.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_3.webp&#39;]]
 
 &lt;&lt;cont append&gt;&gt;
 After a while, you fall onto the bed from exhaustion, surprised that it was still intact. he comes over and finishes his load on top of you.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1_4.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_4.webp&#39;]]
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
@@ -2513,33 +2546,33 @@ After a while, you fall onto the bed from exhaustion, surprised that it was stil
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 &quot;I&#39;m cumming!&quot; you say.
 &quot;Don&#39;t make a mess on the bed!&quot; Your coworker yells at you and offers his mouth
-[img[setup.ImagePath+&#39;Rooms/Cruising/park3_08.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_5.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
 [[&quot;Clean up&quot;|Bulletin]]
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="mover_client" tags="" position="794,1434" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_0.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="mover_client" tags="" position="794,1434" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_0.webp&#39;]]
 You whip out your hard cock.
 &quot;Hey! What are you doing?&quot; The client looks down at your cock and back up at you.
 &quot;&quot;Housewarming gift.&quot; You grab him by his head and push him down to his knees.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_1.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_1.webp&#39;]]
 
 Once your cock was in his mouth, he became a different person. More lustful for cock. 
 &lt;&lt;cont append&gt;&gt;
 
 You fucked him on his bed....
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_1_2.webp&#39;]]
 
 ....on his couch...
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_2.webp&#39;]]
 
 ...and in his kitchen...
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_3.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_3.webp&#39;]]
 
 You fucked in every part of his new apartment until the whole apartment smelled like sex and sweat. 
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_4.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_4.webp&#39;]]
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
@@ -2547,33 +2580,33 @@ You fucked in every part of his new apartment until the whole apartment smelled 
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 You came inside him and fell over exhausted. Your cock stayed inside him semi-hard as you both took a moment to catch your breath.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2_5.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_5.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
 [[&quot;Clean up&quot;|Bulletin]]
 
 &lt;&lt;/cont&gt;&gt;
-&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="tutor_anatomy" tags="" position="919,1537" size="100,100">&quot;The penis is the male reproductive organ, also to be used for pleasure. Take a look.&quot;
+&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="tutor_anatomy" tags="" position="917,1436" size="100,100">&quot;The penis is the male reproductive organ, also to be used for pleasure. Take a look.&quot;
 
 Thomas takes a knee in front of your crotch and slowly takes of your pants.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor1_2.webp&#39;]]
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor1_3.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor1_3.webp&#39;]]
 
 &quot;Wow. It&#39;s so much bigger than mine.&quot; He admires.
 &quot;That&#39;s alright, the male penis comes in different sizes and shapes but can still be appreciated. Now, there&#39;s a special way of remembering concepts by using all five senses. Touch it and taste it and smell it to really remember it, okay.&quot;
 He nods and slowly takes in your cock. You can tell he&#39;s intensely concentrating on your penis.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor1_4.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor1_4.webp&#39;]]
 You let him suck your cock at his pace. It&#39;s meticuously slow but you&#39;re able too feel each of his amateurish movements.
 Once your cock was wet from his saliva, he became more couragous and begun to take  your cock deeper down his throat.
 &quot;Careful&quot; You warn but it was too late as he gagged.
 You see that the boy is now jerking himself off while still sucking you off.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor1_4_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor1_4_2.webp&#39;]]
 He jerks his penis until he cums unto the floor.
 &quot;Good boy. I can tell you&#39;re getting really familiar with how the penis works!&quot; 
 Thomas;s mood is significantly higher now that he had hands-on experience. He smiles up at you from on his knees with an innocent face full of precum.
@@ -2585,7 +2618,7 @@ Thomas;s mood is significantly higher now that he had hands-on experience. He sm
 &quot;What&#39;s the word for when the penis becomes stimulated and releases sperm?&quot;
 &quot;Ejaculation!&quot; He shouts out with enthusiasm.
 &quot;Good job! here&#39;s your reward.&quot;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor1_5.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor1_5.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
 You spend the rest of the session reviewing the concepts and can tell that Thomas made good progress today.
@@ -2593,7 +2626,7 @@ You spend the rest of the session reviewing the concepts and can tell that Thoma
 
 [[&quot;Back to bulletin&quot;|Bulletin]]
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="tutor_focus" tags="" position="902,1416" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_0.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="tutor_focus" tags="" position="922,1554" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_0.webp&#39;]]
 While Thomas was studying on his bed, you pull down his pants.
 &quot;Hey!? What are you doing?&quot; He says in surprise, with a hint of sexual curious. 
 &quot;Shh. I&#39;m training your focus. Stop getting distracted and keep reading.&quot; You stick your tongue into his virgin asshole. It was tight and you could tell that it had never been played with.
@@ -2601,7 +2634,7 @@ While Thomas was studying on his bed, you pull down his pants.
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_01.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_01.webp&#39;]]
 You eat him out for the next hour of study, his hole now loosened and soaked in your spit.
 &quot;Sir, I&#39;m just about done now.&quot; He whimpers out.
 &quot;Good boy. Just keep going and I&#39;ll give you a reward for your hard work.&quot;
@@ -2609,7 +2642,7 @@ You slide your cock along his but, grinding him and teasing his hole with your t
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_1.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_1.webp&#39;]]
 As he approaches the end of his work, you increase the distractions, kissing his neck and ears.
 &quot;Please, mister.&quot; He cries from frustration.
 &quot;Yes?&quot;
@@ -2622,7 +2655,7 @@ He looks back at your with anticipation.
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_2.webp&#39;]]
 Your cock enters him after hours of teasing. You slide it deep inside him easily with the amount of preparation and saliva you&#39;ve done.
 The student&#39;s breathes out a sigh of sexual relief that quickly turns into euphoria the deeper you enter.
 &quot;Yes. Oh my god. It&#39;s so deep!&quot; He grabs on to his bed sheets and tries to crawl away. You grab him by the hips and pull into all of your cock is inside him.
@@ -2631,7 +2664,7 @@ The student&#39;s breathes out a sigh of sexual relief that quickly turns into e
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_3.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_3.webp&#39;]]
 You flip him over and keep fucking him, with smaller and faster strokes.
 As you fuck him, his moans and screams starts getting louder.
 You cover his mouth and tell him. &quot;Quiet, your father is at home, you don&#39;t want him coming in, do you?&quot;
@@ -2641,7 +2674,7 @@ You can feel your cock hitting against his prostate with each pump.
 
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_4.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_4.webp&#39;]]
 His built-up cum sprays from his cock all over his stomach.
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
@@ -2649,7 +2682,7 @@ His built-up cum sprays from his cock all over his stomach.
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 You cum with him. Your cum and saliva mixing together inside. You keep fucking his loose hole, surprised at how tight it was only a couple of hours ago.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor2_5.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/tutor2_5.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
 Just as you finished cleaning up and getting clothed, Mr. Jackman knocks on the door and peeks in.
@@ -2681,7 +2714,7 @@ Even though you meant to rush, both of you get lost in the midst of fucking and 
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
-
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 You release your cum inside him at the same time.
@@ -2719,6 +2752,7 @@ He fucks himself your cock, barely minding that your there, jumping up and down 
 
 &lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
 &lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 &quot;Sir, the cock sausage comes with a special house sauce blend. Please open up and have a taste.&quot;
@@ -2798,40 +2832,47 @@ He pulled out and started coming all over your ass.
 
 You&#39;re thrown into the pull and when you recover, you don&#39;t see the guy at the pool anymore.
 
-[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="68" name="Ichiro_1" tags="" position="3564,1200" size="100,100">[img[setup.ImagePath+&#39;Ichiro/Ichiro1_0.webp&#39;]]
+[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="68" name="Ichiro_1" tags="" position="3563,1196" size="100,100">[img[setup.ImagePath+&#39;Ichiro/Ichiro1_0.webp&#39;]]
 
 You pretend to do some bicep curls nearby, letting Ichiro soak in your sexual aura. You see him start to get distracted as he continuously wipes away sweat from his forehead.
 Eventually, he couldn&#39;t handle the heat anymore and had to take his tank top off. He took it off in front of the mirror slowly, admiring his own chiseled perfect body.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1_1.webp&#39;]]
 
 He continued working out, now without his shirt. You were surprised how well he was able to focus at the level of sexual intensity he has around him.
 If anything, it was giving him more energy. He was burning off the sexual tension by working out more. You couldn&#39;t let that happen so you walked up to chat him him.
 &quot;Ichiro! Your body is amazing!&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1_2.webp&#39;]]
-
 Ichiro&#39;s face lit up from the compliment. 
 &quot;Thanks, good diet and routine, you&#39; know?&quot; He started flexing out his body for you.
 His sculpted body truly is a work of art. 
 &quot;Wow. I don&#39;t think I ever seen someone so fit.&quot; You continued to boost his ego.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1_2_2.webp&#39;]]
-
 At this point, Ichiro had completely given up on his work out and now just flexing for you, absorbing your compliments and sexual aura.
 He starts to touch himself more, letting his hands caress his own muscles.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ichiro/Ichiro1_3.webp&#39;]]
-
 You sat back to appreciate his exploration, playing with his nipples and rubbing at his bulge.
 
-[img[setup.ImagePath+&#39;Ichiro/Ichiro1_3_2.webp&#39;]]
 
+[img[setup.ImagePath+&#39;Ichiro/Ichiro1_3_2.webp&#39;]]
 His horniness takes over him and he takes out his cock and starts jerking off.
 
-[img[setup.ImagePath+&#39;Ichiro/Ichiro1_1_4.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Ichiro/Ichiro1_4.webp&#39;]]
+He soon cums all over himself on the gym floor.
 
-He soon cums all over himself on the gym floor.</tw-passagedata><tw-passagedata pid="69" name="kidnap" tags="" position="113,916" size="100,100">You hear someone speak from the shadows, &quot;Fuck, I thought we could get a girl tonight but fuck it, a hole&#39;s a hole.&quot;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+
+[[Leave him to clean up after himself|Room_Gym]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="kidnap" tags="" position="113,916" size="100,100">You hear someone speak from the shadows, &quot;Fuck, I thought we could get a girl tonight but fuck it, a hole&#39;s a hole.&quot;
 
 You turn around to see several men comes out from the shadows with lustful and hungry eyes. They were all looking at you like a piece of meat that they wanted to eat.
 
@@ -2885,48 +2926,49 @@ After a couple of hours, you blacked out. You were sure your body was still bein
 You woke at the break of dawn, outside in the alleyway naked. The sunlight hit your eyes and you felt like you had the worst hangover a god could ever have. The only think your posession was a $5 bill.
 
 &lt;&lt;update &#39;money&#39; 5&gt;&gt;
-&lt;&lt;update &#39;exp&#39; 50&gt;&gt;
 
 [[&quot;Sneak back home.&quot;|Room_Player]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="71" name="kidnap_3" tags="" position="220,807" size="100,100">&quot;Stop.&quot; You call out and all of the perpetrators in the vicinity freeze where they were.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped2_1.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Outside/kidnap2_1.webp&#39;]]
 You take control of their minds and force them to take their clothes off. They stand around like nude zombies waiting for your command.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped2_2.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Rooms/Outside/kidnap2_2.jpg&#39;]]
 You line up the men like a display. You get them hard and walk down the lin of a dozen men and examined their cocks. You mentally note down the large ones. The men with lifeless eyes stood at attention patiently.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped2_2_2.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Outside/kidnap2_2_2.jpg&#39;]]
 Once you were done, you cycled around one more time, noteing the asses that were impressive.
 With a complete assessment, you went around one last time and tapped on each of the men&#39;s shoulder and gave them a position.
 &quot;Top. Bottom. Bottom. Top....&quot; Until they were all assigned.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped3_1.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Outside/Kidnap3_1.webp&#39;]]
 With a snap of your finger, the men took on their assigned roles. The Bottoms got onto all fours and waited for dicipline from their Tops. You relingish mental control of the Tops and allowed them to live out their inner desires.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped3_1.webp&#39;]]
-
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Outside/Kidnap3_1_2.webp&#39;]]
 The Bottoms were chained like dogs, readily following any given order.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped3_2.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Rooms/Outside/Kidnap3_2.webp&#39;]]
 When the Tops were horny, they would line up and display their ass for the taking.
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped3_3.webp&#39;]]
-
+[img[setup.ImagePath+&#39;Rooms/Outside/Kidnap3_3.webp&#39;]]
 The Bottoms would squirm around spreading their ass cheeks open, begging for domination and cock.
 &quot;Please fuck us. We want your cock.&quot;
 
-[img[setup.ImagePath+&#39;Rooms/Outside/kidnapped3_4.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Outside/Kidnap3_4.webp&#39;]]
 
 You watch the Tops fuck the Bottoms until they were satisfied.
 You snap your fingers and demanded, &quot;You are to return every night to this sex dungeons to fulfill your sexual desires. However, you will flip roles every night.&quot; And so you left them so that Bottoms could exact revenge on the Tops the next night.
 
-[[&quot;Return home.&quot;|Outside]]</tw-passagedata><tw-passagedata pid="72" name="Job_Mover_Intro" tags="" position="786,1180" size="100,100">Marc&#39;s face drops when he sees you enter his office. &quot;What do you want now, you brat?&quot; You hold up the flyer for the mover&#39;s job impishly. 
+&lt;&lt;update &#39;exp&#39; 200&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement*4&gt;&gt;
+&lt;&lt;set $kidnapcomplete to true&gt;&gt;
+[[&quot;Return home.&quot;|Outside]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="Job_Mover_Intro" tags="" position="786,1180" size="100,100">Marc&#39;s face drops when he sees you enter his office. &quot;What do you want now, you brat?&quot; You hold up the flyer for the mover&#39;s job impishly. 
 
 &quot;Ah.&quot; He squints and tries to examine your motive. After a moment of assessment he says &quot;Alright, you&#39;ll do. We do need help. Follow me.&quot;
 
@@ -2973,7 +3015,7 @@ He blushes, &quot;Thanks for accepting the offer, sir.&quot;
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
 @@.obj; You&#39;ve met Thomas and Hugh Jackman. You can now see them under &quot;Character&quot;@@
 
-[[&quot;Start Tutoring&quot;|Job_Tutor]]</tw-passagedata><tw-passagedata pid="75" name="Room_Shop" tags="" position="1568,334" size="100,100">
+[[&quot;Start Tutoring&quot;|Job_Tutor]]</tw-passagedata><tw-passagedata pid="75" name="Room_Shop" tags="" position="1568,334" size="100,100">&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;HomoAndros General Convenience&lt;/p&gt;
 
 @@.notif;VR Headset@@\
 [img[setup.ImagePath+&#39;Rooms/Shop/VRheadset.jpg&#39;]]
@@ -3028,71 +3070,105 @@ He changes the topic. &quot;Did you know that this game actually can be played i
 
 
 
-</tw-passagedata><tw-passagedata pid="77" name="tutor_promotion" tags="" position="927,1676" size="100,100">Thomas came back from his exam and show us his passing grade. A cause for celebration led to Hugh inviting you over for dinner. It was a wonderful meal with the two of them, and was very pleasant to see Hugh in an apron cooking.
+</tw-passagedata><tw-passagedata pid="77" name="tutor_promotion" tags="" position="926,1676" size="100,100">Thomas came back from his exam and show us his passing grade. A cause for celebration led to Hugh inviting you over for dinner. It was a wonderful meal with the two of them, and was very pleasant to see Hugh in an apron cooking.
 
 After dinner, Thomas and you had moment to yourself in his room. “I feel sorry for Dad. He worked real hard ever since Mom died. I want to be a doctor so I can help pay back everything he’s done for me. He’s been really stress lately, I wish there was something I could do to help”
+You say “I could have a word with him. I’m older than you so maybe he’ll open up to me.“ You stayed and chat a bit more until it was late in the evening. Thomas was in bed and so you got up to leave. 
 
-You say “I could have a word with him. I’m older than you so maybe he’ll open up to me.“
-
-You stayed and chat a bit more until it was late in the evening. Thomas was in bed and so you got up to leave. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_1.webp&#39;]]
 You see Hugh sitting in the living room smoking from a cigar and drinking some liquor from a glass. 
-
 “Hugh, do you have a moment? I was thinking we could have a drink and chat about Thomas.”
-
 “Sure. I’ve really appreciate everything you’ve done for my family. I can’t really thank you enough.” This was his 5th time thanking you, each time was more sincere and heartfelt. 
-
 “No problem. You have a wonderful son.” With a wonderful ass that you didn’t add but though. “But you looked pretty stressed out lately. Thomas mentioned to me that you’ve been out of it. Could you tell me what’s wrong?”
-
 “Oh.” He laughs. “He caught on to that? I thought I was hiding it well. “ he trails off for a bit, finished his drink before continuing “You see....because of work and being a single father, I haven’t had the chance to go out and meet new people.”
 He got up and walked towards the liquor cabinet. “So when I posted an ad for a tutor... “ he pours out whiskey onto a glass. “... I didn’t expect it to be someone like you.” He throws the shot back. 
-
 “Someone.... like me?” You inquire. 
-
 He’s avoids eye contact by staring at his glass. “Yes. Someone like you.” His hand motions at the length of your body. “Captivating. Smart. Discipline....” then he whispers. “... Sexy”. He quickly starts pouring himself another large shot and downs it. 
-You get up and close the distance between you two. He moved back, but you continued to advance until you have him pinned against the wall. Your faces now inches from each other as you stare into each other’s eyes. The musk of a middle-aged man mixed with fine whiskey filled your nose. The man’s face showed an amalgamation of emotions; panic, arousal, fear, excitement. You grab him by his chin and declared. “You want me.”
+You get up and close the distance between you two. He moved back, but you continued to advance until you have him pinned against the wall. Your faces now inches from each other as you stare into each other’s eyes. The musk of a middle-aged man mixed with fine whiskey filled your nose. The man’s face showed an amalgamation of emotions; panic, arousal, fear, excitement. You grab him by his chin and declared, “You want me.” and kissed him.
 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_2.webp&#39;]]
 Hugh nodded his head slowly in affirmation. You twist him around, and push his body against the wall. There was no resistance doe the larger man. He was giving up control. You grabbed his ass and squeezed it. 
 “I want this.” You stated firmly. 
 He nodded once more and weakly whispered.  “yes, you can have it.”
-Your reach around his waist and unbuckle his belt. His pants drops to the ground and   displayed his hairy ass to you. 
+Your reach around his waist and unbuckle his belt. His pants drops to the ground and  displayed his hairy ass to you. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_3.webp&#39;]]
 You spread his cheeks and expose his asshole; tight and hairy. 
 You slide your tongue over it slowly and Hugh’s whole body shivers and buckles. 
 “So, this is what you want?”
 Hugh grabs the the whole bottle now and takes a swag from it. 
 “Yes. It feels so good. Please continue.”
- The normally confident and masculine fatherly figure before you was now begging for sex. Your cock pulsed in pleasure. You grabbed him and situated him bent over the couch, his ass now fully in displayed. You resume the analingus. It was so tight, you could barely get any of your tongue in.  When it was wet enough, you pushed your middle finger in. Hugh squirmed under the pressure. 
+ The normally confident and masculine fatherly figure before you was now begging for sex. Your cock pulsed in pleasure. You grabbed him and situated him bent over the couch, his ass now fully in displayed. You resume the analingus. It was so tight, you could barely get any of your tongue in.  When it was wet enough, you pushed your middle finger in. Hugh squirmed under the pressure.
+ 
+ &lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_4.webp&#39;]] 
 Soon enough, you could hold back and more and started grinding your cock against his ass. 
 Hugh was growing more lustful, grinding himself your cock. His grinding led to the tip entering his hole, and he let out gasp of pleasure and surprise. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_5.webp&#39;]] 
 “Oh my god. It’s in.” He exclaimed. You slide your cock slowly further in, feeling his virgin asshole absorb your cock. It felt as amazing as his son. You now had both the Jackman men’s virginity. 
 As you picked up the pace, his manly grunts broke down to mindless and loud moans; he had completely forgotten about his own sleeping son. 
 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_6.webp&#39;]] 
 As if on cue, You noticed Thomas from around the corner. He’s spying jerking off watching the you fuck his own father. You motion for him to come over. The several shots of hard liquor courage Hugh had taken caught up to him. Along with the pounding ecstasy of sex, he was now too euphoric to pay attention to his surrounding anymore. Thomas walked over unnoticed, jerking his hard cock vigorously. You whisper over to him. “You said you wanted to help him relax.”
  You slipped your cock out of Hugh, making a sloppy wet sound and presented his hole to Thomas. 
 “But I’ve never.....” he hesitated. Right, you had taken his asshole virginity but his dad was about to take his dick virginity. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_10.webp&#39;]] 
 “It’s okay.” You grab his cock with one hand and led it into position. In the other hand you push down on Hugh’s back so he wouldn’t look up. 
-Thomas enters his father slowly, his girth was big for his small size, girthier than even yours. Hugh gasps as his hole expanded even further. “Oh my god! Yes.” The older man, still ignorant, push his hips back and envelops all of Thomas’s cock in one go. 
+Thomas enters his father slowly, his girth was big for his small size, girthier than even yours. Hugh gasps as his hole expanded even further.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_7.webp&#39;]] 
+“Oh my god! Yes.” The older man, still ignorant, push his hips back and envelops all of Thomas’s cock in one go. 
 “Yes. Fuck me.” He begged. Thomas, taught by his father to always follow orders, starts fucking him. Thomas soon got into the motion and rhythm of fucking, increasing the pace and strides of each pound. Each slap of their body against each other was followed by Hugh moans. 
 Eventually, he does turn around and sees his son. 
-
 “Thomas!” He panics and tries to crawl away. You grab him and push his face back down. 
 “It’s okay, Hugh. Your son just wants to help you relax.” You try to mollify his concerns. 
 “...b-but ” he starts to argue. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_8.webp&#39;]] 
 “Hush.” You motion for Thomas to continue, his cock sliding back deep into his father. “You were just saying how much you wanted to be fuck by this cock, just now.” 
- Which each stroke, his integrity fell apart. His vocalization turned intelligible and soon back into moans. Hugh could no longer resist his own son’s cock, begging for more each time Thomas drove his cock in. 
+Whith each stroke, his integrity fell apart. His vocalization turned intelligible and soon back into moans. Hugh could no longer resist his own son’s cock, begging for more each time Thomas drove his cock in. 
 You took a step back and watch the two fuck, letting them rekindle their connection.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_9.webp&#39;]] 
 “Dad.” Thomas pulls his fathers face up his. “I love you so much.” And starts making out with Hugh. 
 Hugh returns the kiss, pulling his son closer and mumbles between penetration. “Love. You. Too. Son”. A sweet father-son moment. 
-“I’m going to cum, Dad.” His stroke slows down. 
-“Do it, Son.” Thomas’s pounds his father heavily until the last stroke and lingers there. On cue, Hugh’s cock exploded cum. Both of them fall over exhausted onto each other. 
+“I’m going to cum, Dad.” 
+“Do it, Son.”
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_12.webp&#39;]] 
+You push Thomas&#39;s waist and assisted him as Thomas pounds his father heavily until the last stroke and lingers there. On cue, Hugh’s cock exploded cum. Both of them fall over exhausted onto each other. 
 
-“We’re not done here, boys.” You wave your hard cock around. 
-Both men looked up from their daze and started crawling on fours over to you. 
-They mindlessly slobbered over your cock, switching between kissing each other and giving fellatio from one moment to the next. 
-They synchronous activity felt amazing and you couldn’t last long. You released your load onto the Jackman family men. They greedily licked the cum off your cock and from each other and then both collapse from exhaustion on the floor. 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_11.webp&#39;]] 
+The celebration didn&#39;t end there. You hadn&#39;t had your fill yet. While Thomas was still inside Hugh, you pushed your cock inside him. The young lad, with his youthful vigor, soon became hard again. Thomas rode your cock as he started to fuck Hugh again. 
 
-[[&quot;Return Home&quot;|Bulletin]]</tw-passagedata><tw-passagedata pid="78" name="mover_promotion" tags="" position="807,1680" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="79" name="waiter_promotion" tags="" position="669,1680" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_1.webp&#39;]]
+&lt;&lt;update &#39;arousal&#39; 50&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 100&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement*4&gt;&gt;
 
-Sid was ravenous faggot. When you guys shared a shift, you&#39;d had to fuck at least twice, once at the beginning of the shift and again at the end.
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_13.webp&#39;]] 
+When you came, Hugh was eager to swallow your load. His experience with thick cigars came in handy as we sucked the cum from your cock.
+&lt;&lt;/if&gt;&gt;
+
+The celebration continued until morning and by the time you were done, both gentleman were asleep naked on the couch cuddling each other.
+
+[[&quot;Return Home&quot;|Bulletin]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="mover_promotion" tags="" position="807,1680" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="79" name="waiter_promotion" tags="" position="665,1676" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_1.webp&#39;]]
+
+Sid was ravenous faggot. Whenever you guys shared a shift, you&#39;d had to fuck at least twice, once at the beginning of the shift and again at the end.
 We also weren&#39;t so inconspicious about it anymore. All the staff, even Frank, knew about our extracurricular activies but no one brought it because we two were the best workers. Sid, despite not having the powers of a god like you, was still able to make the male customer tip hundreds of dollars. Of course, all  you had to do was look their way to do the same.
 
 [img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_1_2.webp&#39;]]
@@ -3131,6 +3207,16 @@ In no time, the whole restaurant was filled with naked men and a full orgy. All 
 [img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_6.webp&#39;]]
 
 By the end of the shift, the staff sat on the counter and let the customer blow them to get their cum meals. 
+
+&lt;&lt;update &#39;arousal&#39; 50&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 100&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement*4&gt;&gt;
+
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+When you came, it was Frank that made it his priority to milk you. You gave him the cream that he&#39;s been anticipating.
+&lt;&lt;/if&gt;&gt;
+
 Everyone was pretty exhausted but we had the biggest tip by far, nearly 100 times more than normal. 
 &quot;Good job boys.&quot; Frank congratulated us. It was the first time you every heard an authentic compliment from the man.
 
@@ -3575,7 +3661,7 @@ As the guys are exchanging goodbyes, Ray bends down and picks something up from 
 “Hey MC, you dropped this.” He hands you a little plastic circle with a number that comes with each key. 
 “Oh, thanks, dude.” You respond and pocket it. As you leave Michael´s room you look at it, it is for room 16. Not yours then.
 (the scene should shift to the lobby with a button “Room 16?” available)
-</tw-passagedata><tw-passagedata pid="93" name="pool_orgy" tags="" position="3282,1653" size="100,100">[img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_2.webp&#39;]]
+</tw-passagedata><tw-passagedata pid="93" name="pool_orgy" tags="" position="3302,1652" size="100,100">[img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_2.webp&#39;]]
 [img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_3.webp&#39;]]
 
 You began to raise your sexual aura to affect all the men in the pool area. This makes them get rowdier as they starts to get more touchy with each other, tring to get a butt grope playfully.
@@ -3611,8 +3697,8 @@ By now, everywhere you looked, there was someone fucking or being fucked. The ro
 
 Of course, you&#39;d never miss out on the fun. You spread your legs out and within seconds found a dick entering you.
 
-[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="94" name="Tucker_StripPool" tags="" position="2207,1692" size="100,100">&amp;emsp;&quot;What kind of game?&quot; someone asks. You smile.
-You convinced them to play a game of strip billiards. There were a couple of confused looks but it was Tucker who speaks up. &quot;Game on, bro. Get ready to run out of hear bear butt naked.&quot; The other guys loosens and also agree to the game.
+[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="94" name="Tucker_StripPool" tags="" position="2198,1698" size="100,100">&amp;emsp;&quot;What kind of game?&quot; someone asks. You smile.
+You convinced them to play a game of strip billiards. There were a couple of confused looks but it was Tucker who speaks up. &quot;Game on, bro. Get ready to run out of here bare butt naked.&quot; The other guys loosens and also agree to the game.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker2_1.webp&#39;]]
 &amp;emsp;The game starts well with some guys losing their shirts right away. However, you purposely lose every round, ending the first game with you stripping down completely naked.
@@ -3634,15 +3720,15 @@ Tucker, who only managed to lose his shirt, struggles with his now obvious hard 
 
 &quot;Alright, alright. You lost. Put your clothes back on, I&#39;m gonna take a cig break.&quot; Tucker seemed like he was getting self-conscious from his own leering and was beginning to be too flustered. He quickly rushed out the back door of the billiards room to the alleyway.
 
-&lt;&lt;ability &#39;SA&#39; 4 &quot;Follow him.&quot; &quot;Tucker_Alley&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Follow him.&quot; &quot;Tucker_Alley&quot;&gt;&gt;
 &lt;&lt;ability &#39;SA&#39; 7 &quot;Leave him alone and play with the other boys.&quot; &quot;Tucker_orgy&quot;&gt;&gt;
-[[&quot;Head out and come back later&quot;||Room_Common]]
+[[&quot;Head out and come back later&quot;|Room_Common]]
 
 
 
 </tw-passagedata><tw-passagedata pid="95" name="Tucker_Alley" tags="" position="2146,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
-&lt;&lt;set $npc[&quot;romance&quot;][_tindex] +=&gt;&gt;\
+&lt;&lt;set $npc[&quot;romance&quot;][_tindex] += 1&gt;&gt;\
 
 You put your clothes back on and head out to the back alley and find Tucker with a cigarette in his mouth, looking off to the distance. The night is chilly but quiet. You can hear the occasional car pass by in the poorly lit alley.
 You walk up and joked, &quot;Mind if I bum a fag?&quot;
@@ -3685,6 +3771,10 @@ Before you could barely get your blowjob going, you could feel his balls tighten
 [img[setup.ImagePath+&#39;Tucker/Tucker2_alley6.webp&#39;]]
 Tucker grabs your head, and starts to facefuck you before holding it deepthroat. Cum shoots directly down your throat. When you felt the last of cum shoot out, Tucker loosened his grip on your head. You pulled your face free, saliva and cum drooling out into strings from your mouth to his cock.
 
+&lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker2_alley7.webp&#39;]]
 You started to lick his cock clean when the alley door slams open and a voice calls out.
@@ -3694,19 +3784,25 @@ You started to lick his cock clean when the alley door slams open and a voice ca
 &quot;Yo Tucks, What&#39;s taking so long --&quot; the guy stops and processes the scene of Tucker with his cock out and you on your knees with Tucker&#39;s cock in your mouth. &quot;--What kinda faggot shit is this?&quot; He runs back inside.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Tucker/Tucker2_alley7.webp&#39;]]
+[img[setup.ImagePath+&#39;Tucker/Tucker2_alley8.webp&#39;]]
 Without withdrawing, you continued to clean tuckers cock with your mouth but you could feel his body stiffen. You look up to his face and see it flushed white, like the world was crashing down on his shoulders.
 Tucker wrestles his cock from you mouth and turns towards his Frat Bro. &quot;Wait, I-I can explain.&quot; He flusters. Before you could even react to turn this party into a fun threesome, Tucker  pulls up his pants and runs off into the night.
 
-[[&quot;Sort yourself out and head back in&quot;||Room_Common]]
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker2_alley9.webp&#39;]]
 
+You&#39;re left there in the alley on the edge of cumming so you decide to take care of yourself.
+&lt;&lt;/end&gt;&gt;
+
+[[&quot;Sort yourself out and head back in&quot;|Room_Common]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
 
 
 </tw-passagedata><tw-passagedata pid="96" name="Tucker_orgy" tags="" position="2263,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
-&lt;&lt;set $npc[&quot;kink&quot;][_tindex] +=&gt;&gt;\
+&lt;&lt;set $npc[&quot;kink&quot;][_tindex] += 1&gt;&gt;\
 
 [img[setup.ImagePath+&#39;Tucker/Tucker2_orgy1.webp&#39;]]
 
@@ -3765,12 +3861,23 @@ Cocks were at every angle now. Every one of them demanding attention and so you 
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker2_orgy5.webp&#39;]]
 Soon, they started to ejaculate. They fed you their sweet cum. Covering every inch of your body with jizz. 
+
+&lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement*4&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 125&gt;&gt;
+
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Tucker/Tucker2_orgy6.webp&#39;]]
+
+You came on yourself, mixing your own semen with to the layer of cum soaked on your skin.
+&lt;&lt;/if&gt;&gt;
+
 When it was Tucker&#39;s turn, you took his cock down to your throat as he came, swallowing every ounce he shot out.
 You got up by his ear and whispered, &quot;See? Your bros don&#39;t mind you being a little gay at all.&quot;
 You turned around address the frat. &quot;Thanks for all the fun, boys. See you around.&quot; You walk away to clean yourself up.
 
-
-[[&quot;Clean up&quot;||Room_Common]]
+[[&quot;Clean up&quot;|Room_Common]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 </tw-passagedata><tw-passagedata pid="97" name="Randy_Vlog" tags="" position="1649,842" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Randy&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
@@ -3783,6 +3890,7 @@ From where you&#39;re standing nearby, you&#39;re able to see that his engagemen
 &quot;Do something else? Stop being boring?&quot; Randy reads out his comments and you can see him start to panic under the pressure.
 &quot;How about that new viral dance?&quot; He sets his phone down to start dancing.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Vlogger/Randy_2.webp&#39;]]
 
 He finished the routine despite being so visible nervous and continued to read the comments.
@@ -3792,6 +3900,7 @@ It honestly was a pretty good attempt. His twink body was able to make curves yo
 You walked over and into the camera&#39;s view.
 &quot;H-hey, I&#39;m trying to record something here.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Vlogger/Randy_3.webp&#39;]]
 
 You leaned in towards him and kiss him on the cheek before he could respond. All at once, a large amount comments into his phone and the number of viewers increased rapidly.
@@ -3800,17 +3909,21 @@ Randy&#39;s surprise at your kiss is changed to excitement when he sees more eng
 &quot;Do a real kiss this time.&quot; &quot;More!&quot;
 His followers start to gode him on. Randy looks back at you and jumps at your face.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Vlogger/Randy_4.webp&#39;]]
 
 It was an awkward kiss, you could tell he wasn&#39;t experienced but you still let him kiss at his own pace. It was a short kiss and when he stopped his attention was back at his phone, not really acknowledging  your presence.
 &quot;Wow! That was intense.&quot;,&quot;Oh god, I&#39;m so hard now&quot;.
 He was fully absorbed in responding to his followers now and so you took your leave.
 
+@@.obj; You&#39;ve met Randy. You can now see him under &quot;Character&quot;@@
+
 @@.obj; Randy: Try and find again when he&#39;s streaming.@@
 &lt;&lt;update &#39;gay&#39; 5&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Try and find again when he&#39;s streaming.&quot;&gt;&gt;
 
-[[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="98" name="Ichiro_2" tags="" position="3553,1315" size="100,100">[img[setup.ImagePath+&#39;Ichiro2_1.webp&#39;]]
+[[&quot;Back to Lobby&quot;|Apartment]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="Ichiro_2" tags="" position="3553,1315" size="100,100">[img[setup.ImagePath+&#39;Ichiro2_1.webp&#39;]]
 
 [img[setup.ImagePath+&#39;Ichiro2_2.webp&#39;]]
 
@@ -3839,18 +3952,19 @@ He was fully absorbed in responding to his followers now and so you took your le
 [img[setup.ImagePath+&#39;Ichiro2_14.webp&#39;]]</tw-passagedata><tw-passagedata pid="99" name="Ben_Confidence" tags="" position="3906,1449" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="100" name="Ben_Sexy" tags="" position="4017,1450" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="101" name="Ben_VR" tags="" position="3962,1338" size="100,100">You show Ben the headset you bought. His eyes lit up with excitement. &quot;Woah! That&#39;s so cool!&quot;
 
 </tw-passagedata><tw-passagedata pid="102" name="Marc_GameOver" tags="" position="4272,877" size="100,100">[img[setup.ImagePath+&#39;Marc/GameOver_1.webp&#39;]]
-
 You were sent to Marc&#39;s Dungeon indefinetly. You were held in a cage whenever Marc wasn&#39;t in the mood to fuck you. Days passed in the room, and with the florescent lights always on, you could tell how many passed by.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/GameOver_2.webp&#39;]]
-
 Marc was always trying out new punishment on you. You were his test toy for his experiments. He found innovated ways to punish and tortue you.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/GameOver_3.webp&#39;]]
-
 There were even times when he brought other men to play with you. Marc was always more aggressive before bringing someone in, making sure to tire you out so that you wouldn&#39;t resist.
 
-@@.neg;You have failed your mission to turn the world gay!@@</tw-passagedata><tw-passagedata pid="103" name="Marc_Scene2" tags="" position="1985,957" size="100,100">Before you could bring up the idea, the door slams open. It was a face that you recognize from briefly seeing; Louis. The guy you saw in passing after leaving Marc&#39;s office after securing your room by giving him a wonderful blowjob and stealing Louis&#39;s room.
+@@.neg;You have failed your mission to turn the world gay!@@
+
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="Marc_Scene2" tags="" position="1995,963" size="100,100">Before you could bring up the idea, the door slams open. It was a face that you recognize from briefly seeing; Louis. The guy you saw in passing after leaving Marc&#39;s office after securing your room by giving him a wonderful blowjob and stealing Louis&#39;s room.
 
 &quot;Marc.&quot; Louis announces annoyingly. &quot;You called me back here again after the you failed get me a room the first time. I hope you&#39;re not thinking of wasting my time again.&quot;
 
@@ -3866,10 +3980,14 @@ Marc gets in between you two quickly, &quot;I&#39;m so sorry again, Louis. He&#3
 
 &quot;NEW!!?? I was suppose to be a new tenant and you&#39;re telling me so rando off the street is living at this prestigious apartment?!&quot; He starts to redden. The tension in the room is readily rising.
 
-&lt;&lt;ability &#39;RA&#39; 10 &quot;You and Louis should try to work something out.&quot; &quot;Marc_Louis1&quot;&gt;&gt;
-&lt;&lt;ability &#39;RA&#39; 10 &quot;You think it should be Louis that should be apologizing to Marc. Make him submit.&quot; &quot;Marc_Louis2&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 5 &quot;You and Louis should try to work something out.&quot; &quot;Marc_Louis1&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 5 &quot;You think it should be Louis that should be apologizing to Marc. Make him submit.&quot; &quot;Marc_Louis2&quot;&gt;&gt;
 
-[[Return to the Lobby||Apartment]]</tw-passagedata><tw-passagedata pid="104" name="Marc_Louis1" tags="" position="1901,1076" size="100,100">You take a deep breathe to center yourself and channel your power into your voice. &quot;Actually, I&#39;m very sorry for that sudden outrage. I should have just talked about it another time.&quot; The tension in the room immediately dissipates and you see both men relax.
+[[Return to the Lobby||Apartment]]</tw-passagedata><tw-passagedata pid="104" name="Marc_Louis1" tags="" position="1902,1076" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 3&gt;&gt;\
+&lt;&lt;set $npc[&quot;romance&quot;][_tindex] += 1&gt;&gt;\
+
+You take a deep breathe to center yourself and channel your power into your voice. &quot;Actually, I&#39;m very sorry for that sudden outrage. I should have just talked about it another time.&quot; The tension in the room immediately dissipates and you see both men relax.
 
 Marc returns the apology, &quot;Ah, I&#39;m also sorry to you $name for pushing you aside so rudely.&quot;
 Louis also follows with his own. &quot;And I&#39;m sorry for barging in so suddenly and expecting my demands to be met.&quot;
@@ -3883,66 +4001,80 @@ Both of you return your attention to Marc. &quot;Of course! Marc, I think we&#39
 
 Marc chuckles. &quot;Well, if you boys have found a way to work together, I don&#39;t suppose I should get in your way.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_1.webp&#39;]]
 
 You and Louis get on your knees to blow Marc. Even after seeing his cock for the 3rd time, you&#39;re still impressed by it&#39;s size. It was surely large enough for you to share with Louis. You both take a size and sandwich yourselves onto his cock. You alternate intermittenly between making out with louis and using your mouths to suck.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_2.webp&#39;]]
-
 As you both get into the flow of things, you&#39;re able to learn how to communicate with each other nonverbally. You took turns deepthoroating Marc&#39;s dick.
 &quot;Wow, boys. I&#39;m very impressed by how you&#39;re willing to share. I think both of you deserve a reward for your communication.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_3.webp&#39;]]
-
 Marc bends you two over his desk and exposes your butt. You feel his thick manly finger slid over your whole and start penetrating you. By your side, you hear Louis let out a moan and start to squirm getting fingered as well.
 &quot;So, which one of you wants to get fucked while I listen to the other one&#39;s problems?&quot; You and Louis look at each other.
 &quot;Louis can get fucked first, sir!&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_4.webp&#39;]]
-
 Marc begans to slid his cock into Louis as you both start to give each other blowjobs. From your angle, you can see Marc&#39;s large cock enter the twink&#39;s hole slowly. 
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_5.webp&#39;]]
-
 Once Marc was fully inside Louis, he started to pick up on the pace aggressively. You changed position to embrace Louis so that he could be stable.
 As Marc fucks Louis, he talks to you. &quot;So what was it you wanted to talk about?&quot; You muffle Louis&#39;s face into you arms so that his moans would be as loud.
 &quot;Well sir, I was hoping to have HomoAndros be more involved with community engagement. I have some ideas that could make improve on the lifestyle of the men here.&quot;
 His pacing slows for a moment as he ponders your purposal. &quot;I see. I suppose then men here are always in need of more engagement. Let&#39;s talk about it more later then.&quot;
 &quot;Yes, sir.&quot; He goes back to fucking Louis intensely
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_6.webp&#39;]]
-
 Marc continues to fuck Louis until he cums all himself. He pulls his cock out from Louis as he lays there heavily breathing. 
 &quot;Your turn now. Get on.&quot; Marc ordered.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_7.webp&#39;]]
-
 You get into position on top of Marc. From fucking Louis, his cock was lubricated with precum that helped you get used to the large size. Marc drilled you once you got to the bottom.
 They started talking about Louis&#39;s accomendations but you couldn&#39;t pay attention due to the intensity of riding Marc.
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/scene2_8.webp&#39;]]
-
 They two of them continued to talk but there wasn&#39;t a moment of break from Marc fucking you. You could tell he was even more aggressively towards you than he was with Louis. You made a mental note to annoy him even more if it meant he would continue to fuck you at this intensity.
 
-[img[setup.ImagePath+&#39;Marc/scene2_9.webp&#39;]]
+&lt;&lt;set _temparo to  100-$skilltree.arousal&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; _temparo&gt;&gt;
+@@.arousal; Your Arousal is at 100, you have to cum!@@
 
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/scene2_9.webp&#39;]]
 When the conversation was over, the two of you made a mess of cum on Louis&#39;s face. &quot;Welcome to HomoAndros. This is your welcoming present.&quot;
 
-[[Return to lobby||Apartment]]
-</tw-passagedata><tw-passagedata pid="105" name="Marc_Louis2" tags="" position="2064,1074" size="100,100">You took a deep breath and spoke with power. &quot;Marc. I was here first, don&#39;t you think Louis deserves a punishment for interrupting us?&quot;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+
+[[Return to lobby|Apartment]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+</tw-passagedata><tw-passagedata pid="105" name="Marc_Louis2" tags="" position="2064,1074" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 3&gt;&gt;\
+&lt;&lt;set $npc[&quot;kink&quot;][_tindex] += 1&gt;&gt;\
+
+You took a deep breath and spoke with power. &quot;Marc. I was here first, don&#39;t you think Louis deserves a punishment for interrupting us?&quot;
 
 Marc relaxes a bit and his eyes glazes over. &quot;Yes, you&#39;re right.&quot; He grabs at Louis.
 &quot;Wait! What the hell are you doing? Get your hands off of me!&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/louis1.webp&#39;]]
-
 Marc pants Louis and bends him over his thighs and starts punishing Louis. He tries to squirm out of Marc&#39;s grasp but the size and muscle difference between the two of them was two large.
 You channel your power again and talk to Louis. &quot;You&#39;re getting punished because you&#39;ve been a bad boy today. Let daddy Marc punish you, okay?&quot;
 
 You see Louis struggle with your order with his intense internal sense of pride but eventually breaks. &quot;Y-yes. Please, punish me Marc. Please, I&#39;ll do anything for you.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/louis2.webp&#39;]]
-
 Marc pushes Louis to his knees. &quot;Bad boys need to learn patience.&quot; He makes Louis suck on his cock.
 Marc returns his attention to you.&quot; Yes, so sorry about Louis. What were you did you want to talk about?&quot;
 &quot;Well sir, I was hoping to have HomoAndros be more involved with community engagement. I have some ideas that could make improve on the lifestyle of the men here.&quot;
@@ -3950,17 +4082,23 @@ Louis continues to blow on Marc as he talk. &quot;I see. I suppose the men here 
 &quot;Yes, sir.&quot; He gives his undivided attention to Louis.
 &quot;So boy, are you more patient now?&quot; Louis looks up and muffles a confirmation through his sucking.&quot;Good, now also let&#39;s apologize to our friend her as well.&quot;
 
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Marc/louis5.webp&#39;]]
-
 Marc pulls Louis up and pends him over his desk. You take Marc&#39;s seat and watch as Louis is fucked. 
 &quot;Now tell $name that you&#39;re very sorry for interrupting his conversation.&quot;
 Louis looks at you sincerely, &quot;I&#39;m sorry, $name. I was a bad boy and I did something very rude.&quot; You smile at his submission.
 
-[img[setup.ImagePath+&#39;Marc/louis5.webp&#39;]]
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Marc/louis7.webp&#39;]]
+You leave the two of them to fuck, trusting that Marc will tame Louis in due time.
 
-You leave the two of them to fuck, trusting that Marc will tame Louis.
+&lt;&lt;set _temparo to  90-$skilltree.arousal&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; _temparo&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 
-[[Return to Lobby||Apartment]]
+[[Return to Lobby|Apartment]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
 
 </tw-passagedata></tw-storydata>
