@@ -833,7 +833,7 @@ You feel the power grow inside you.
 &lt;&lt;set $gayincrement to 1&gt;&gt;\
 
 &lt;&lt;set $npc to {
-	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;,&quot;Morpheus&quot;,&quot;Thomas &amp; Hugh&quot;,&#39;Poker Guys&#39;,&#39;Randy&#39;],
+	name: [&quot;Marc&quot;,&quot;Ben&quot;,&quot;Tucker&quot;,&quot;Morpheus&quot;,&quot;Thomas &amp; Hugh&quot;,&#39;Poker Guys&#39;,&#39;Randy&#39;,&quot;The Twins&quot;,&quot;Restaurant Staff&quot;],
 	met:[false,false,false,false,false,false,false],
 	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;],
 	progress:[1,1,0,0,0,0,0],
@@ -1304,7 +1304,7 @@ Though it&#39;s an all-male dormitory, it&#39;s not uncommon to see woman about 
 
 [[&quot;Order Pizza: Costs $10&quot;|Pizza]]
 
-[[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="23" name="Room_Player" tags="" position="4082,665" size="100,100">[img[setup.ImagePath+&#39;Sets/Room69.jpg&#39;]]
+[[&quot;Back to Lobby&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="23" name="Room_Player" tags="" position="4082,664" size="100,100">[img[setup.ImagePath+&#39;Sets/Room69.jpg&#39;]]
 &amp;emsp;You are in your room. What do you want to do?
 
 [[&quot;Sleep&quot;|Sleep]]
@@ -1403,7 +1403,14 @@ You see Ichiro working out, he&#39;s in the zone and doesn&#39;t notice you.
 &lt;&lt;ability &#39;SA&#39; 5 &quot;Get a closer look and admire his body.&quot; &quot;Ichiro_1&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;ifCycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
+&lt;&lt;if Cycle.check(&#39;time&#39;, &#39;morning&#39;)
+You walk into the gym and notice only one guy working out, he’s on the squat rack and wearing only tight shorts. Judging by the man’s physique, he is obviously here nearly every day, and you notice the faint curved scars running under his pecs but you don’t think much of them. 
+You wander around the gym and get behind the squat rack to not so subtly check out his ass. He looks just as good from behind as from the front and you start to feel your cock swell in your pants. 
+[img[setup.ImagePath+&#39;Rooms/Gym/1.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 2 &quot;Offer to help with his form.&quot; &quot;GymTrans&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if Cycle.check(&#39;time&#39;, &#39;midnight&#39;)&gt;&gt;
 [img[setup.ImagePath+&#39;Rooms/Gym/Gym_01.webp&#39;]]
 You visit the gym late in the middle of the night. It is mostly empty.
 A gym bro walks up to and asks if you want to work out with him.
@@ -1449,6 +1456,8 @@ Then, he leans further onto your body, his face now right next your ears. &quot;
 @@.notif;Events@@\
 &lt;&lt;set $dstack to Cycle.get(&#39;day&#39;).stack+1&gt;&gt;\
 &lt;&lt;if $dstack &gt;= 4 and $poker is false&gt;&gt;Ad: “We are six regular guys that get together to play poker every Wednesday evening. Our 6th player has moved away (I deal) and we are looking for a chill dude that doesn´t mind endless discussions about the latest Netflix shows. If that´s you, come to Room 47 on Wednesday night.
+[img[setup.ImagePath+&#39;PokerGuys/selfie.jpg&#39;]]
+
 &lt;&lt;message &quot;Take the ad&quot;&gt;&gt;
 &lt;&lt;set $poker to true&gt;&gt;
 &amp;emsp;You took the ad. Now to show up to Room 47 on Wednesday Night.&lt;&lt;/message&gt;&gt;
@@ -1589,10 +1598,6 @@ You play with yourself too much, causing you cum.
 
 Ben welcomes you into his room. He seem anxious about your presence.
 &quot;Hi...&quot;
-
-How are you so confident?
-[[&quot;Confidence starts with the mind&quot;||Ben_VR]]
-[[&quot;Confidence starts with the body&quot;||Ben_VR]]
 
 &lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1&gt;&gt;\
 [[Play some video games||Ben_Play]]
@@ -2147,20 +2152,21 @@ You spend some time with the twins with moving.
 &lt;&lt;update &#39;money&#39; 25&gt;&gt;
 &lt;&lt;set $work.mover += 5&gt;&gt;\
 
-&lt;&lt;if $work.mover &gt;= 65 and lastVisited(&quot;mover_coworker&quot;) is -1&gt;&gt;
-Your coworker asks for help moving a bed.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1.webp&#39;]]
-&lt;&lt;ability &#39;RA&#39; 2 &quot;Make sure the bed is working.&quot; &quot;mover_coworker&quot;&gt;&gt;
-&lt;&lt;elseif $work.mover &gt;= 80 and lastVisited(&quot;mover_client&quot;) is -1&gt;&gt;
-You notice your client is pretty cute.
+&lt;&lt;if $work.mover &gt;= 65 andlastVisited(&quot;mover_client&quot;)  is -1&gt;&gt;
+While the twins were out, you were left alone with the client to help out with the last of his moving. You notice your client today is pretty cute.
 [img[setup.ImagePath+&#39;Rooms/Bulletin/mover2.webp&#39;]]
 &lt;&lt;ability &#39;RA&#39; 2 &quot;Help him break in his new apartment.&quot; &quot;mover_client&quot;&gt;&gt;
-&lt;&lt;elseif $work.mover &gt;= 100 and lastVisited(&quot;mover_client&quot;) is -1&gt;&gt;
-[[&quot;mover promotion&quot;|mover_promotion]]
+&lt;&lt;elseif $work.mover &gt;= 80 and  lastVisited(&quot;mover_coworker&quot;) is -1&gt;&gt;
+Noah asks for help moving a bed.
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Make sure the bed is working.&quot; &quot;mover_coworker&quot;&gt;&gt;
+&lt;&lt;elseif $work.mover &gt;= 100 and lastVisited(&quot;mover_promotion&quot;) is -1&gt;&gt;
+At the end of the day, Adrian has to run out to do some paper work. You and Noah make eye contact and head into the guest room.
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 6 &quot;Start fucking.&quot; &quot;mover_promotion&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 Nothing significant happens.
 &lt;&lt;/if&gt;&gt;
-
 
 &lt;&lt;if Cycle.check(&#39;time&#39;, &#39;morning&#39;) or Cycle.check(&#39;time&#39;, &#39;afternoon&#39;) or Cycle.check(&#39;time&#39;, &#39;evening&#39;)&gt;&gt;
 [[&quot;Keep Working&quot;|Job_Mover]]
@@ -2524,7 +2530,7 @@ The last thing you remember was Marc slapping your face a couple of time to wake
 &lt;&lt;script&gt;&gt;Cycle.get(&#39;time&#39;).update(20)&lt;&lt;/script&gt;&gt;\
 
 [[&quot;Wake up back in your room&quot;|Room_Player]]
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="mover_coworker" tags="" position="801,1556" size="100,100">You present your ass to your coworker.
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="mover_coworker" tags="" position="801,1556" size="100,100">You present your ass to Noah.
 &quot;Let&#39;s make sure that this bed is working.&quot; you smile at him.
 [img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_2.webp&#39;]]
 
@@ -2545,13 +2551,15 @@ After a while, you fall onto the bed from exhaustion, surprised that it was stil
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
 &quot;I&#39;m cumming!&quot; you say.
-&quot;Don&#39;t make a mess on the bed!&quot; Your coworker yells at you and offers his mouth
+&quot;Don&#39;t make a mess on the bed!&quot; Noah yells at you and offers his mouth
 [img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_5.webp&#39;]]
 &lt;&lt;/if&gt;&gt;
 
+Noah mentions before leaving, &quot;Don&#39;t let Adrian know about this, okay?&quot;
+
 [[&quot;Clean up&quot;|Bulletin]]
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="mover_client" tags="" position="794,1434" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_0.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="mover_client" tags="" position="801,1426" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2_0.webp&#39;]]
 You whip out your hard cock.
 &quot;Hey! What are you doing?&quot; The client looks down at your cock and back up at you.
 &quot;&quot;Housewarming gift.&quot; You grab him by his head and push him down to his knees.
@@ -2998,9 +3006,13 @@ You snap your fingers and demanded, &quot;You are to return every night to this 
 
 You follow Marc out of the office and into an area with a door labeled &quot;Staff&#39;s Room&quot;
 
-Before you guys walked inside, Marc stopped you and warned you, &quot;You&#39;ll be working with my nephews so I don&#39;t want any of your usual funny business.&quot;
+Before you walked inside, Marc stopped you and warned you, &quot;You&#39;ll be working with my nephews so I don&#39;t want any of your usual funny business.&quot;
 
 The thought of Marc&#39;s nephews caught your attention. &quot;I promise, this will be only professional, sir!&quot; You affirm him, with  your fingers crossed behind your back.
+
+Inside, you&#39;re introduced to Marc&#39;s twin nephews, Noah and Adrian. These two buff twins were rough housing with each other and didn&#39;t noticed  you two at first. Marc coughs, announcing yourselves and the two of them straighen up. You wolldn&#39;t be able to tell the difference between the two of them if it weren&#39;t for the name tags.
+
+Well, this would a be a fun job.
 
 
 [[&quot;Start working&quot;|Job_Mover]]
@@ -3032,12 +3044,7 @@ He&#39;s gone before you finish putting on your work uniform. A nearby server ap
 A bear opens the door with a bright smile oh his face. &quot;Welcome! Thank you for coming to help Thomas! I&#39;m Hugh Jackman, call me Hugh&quot;, he greets you. He clasp your hand with both of his and shakes it enthusiastically.
 
 &quot;He&#39;s been pretty nervous studying for the MCATs, so any help is appreciated.&quot; Hugh turns to the side, showing a younger man who had been previously eclipsed by Hugh&#39;s larger stature.
-
 He blushes, &quot;Thanks for accepting the offer, sir.&quot;
-
-&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Thomas &amp; Hugh&#39;)&gt;&gt;
-&lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
-@@.obj; You&#39;ve met Thomas and Hugh Jackman. You can now see them under &quot;Character&quot;@@
 
 [[&quot;Start Tutoring&quot;|Job_Tutor]]</tw-passagedata><tw-passagedata pid="75" name="Room_Shop" tags="" position="1568,334" size="100,100">&lt;p style=&quot;font-family: Garamond, serif; font-size: 30px&quot;&gt;HomoAndros General Convenience&lt;/p&gt;
 
@@ -3083,6 +3090,7 @@ You decide to spend some time with Ben trying out some of his video games. It wa
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Ben/Play_03.webp&#39;]]
 Eventually, your poximity was too much for him and jumps up and out of your arms. &quot;Sorry.&quot; He turns away from you and subtly tries to fix his boner and his pants. 
+
 He changes the topic. &quot;Did you know that this game actually can be played in virtual reality? It would be pretty cool try out. I think I could be more confident in myself it I could practice with VR.&quot;
 
 &lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Ben&#39;)&gt;&gt;
@@ -3190,7 +3198,54 @@ When you came, Hugh was eager to swallow your load. His experience with thick ci
 The celebration continued until morning and by the time you were done, both gentleman were asleep naked on the couch cuddling each other.
 
 [[&quot;Return Home&quot;|Bulletin]]
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="mover_promotion" tags="" position="807,1680" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="79" name="waiter_promotion" tags="" position="665,1676" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_1.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="78" name="mover_promotion" tags="" position="806,1680" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion1.webp&#39;]]
+
+This was your daily after-hours fuck session whenever Adrian had to run out. Noah was pound your ass cheeks out until he was satisfied on the client&#39;s fresh clean bed. Afterwards you&#39;d clean-up and pretend to work when Adrian comes back.
+
+However, today, Adrian came back early.
+&quot;Hey! What the fuck Adrian!? Today was my turn with $name !&quot; You read his name tag and it did say Adrian so why was Adrian calling Noah, Adrian?
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion2.webp&#39;]]
+
+Turns out, you&#39;d had been fucking both twins this whole time. They were alternating days fucking your hole without your knowledge. There was mix-up today and their plan fell apart. Well, you reassured them there was plenty of you to go around.
+You let the real Adrian finish fucking you as Noah stood by to watch.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion3.webp&#39;]]
+
+Then you&#39;d hop right over to Noah and ride his cock for Adrian to watch.
+&quot;See boys, I don&#39;t get tired out so easily. You both can have me everyday.&quot;
+The twins look at each other and exchanging a knowing look. Noah lifts you up.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion4.webp&#39;]]
+
+With Noah&#39;s dick still inside you, Adrian pushes his cock into your hole. You asshole expands to accept both twin&#39;s cock. Noah&#39;s holding stable as Adrian starts fucking you.
+
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion5.webp&#39;]]
+
+The twins continued to abuse your hole by double penetrating you but you were able to hold out to their stamina.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion6.webp&#39;]]
+
+You took the Twin&#39;s facial. Cum from both cocks flooded your face.
+
+&lt;&lt;update &#39;arousal&#39; 50&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 100&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement*4&gt;&gt;
+
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover_promotion7.webp&#39;]]
+
+In return, the boys milked you together
+&lt;&lt;/if&gt;&gt;
+
+
+[[&quot;Return Home&quot;|Bulletin]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="79" name="waiter_promotion" tags="" position="665,1676" size="100,100">[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_1.webp&#39;]]
 
 Sid was ravenous faggot. Whenever you guys shared a shift, you&#39;d had to fuck at least twice, once at the beginning of the shift and again at the end.
 We also weren&#39;t so inconspicious about it anymore. All the staff, even Frank, knew about our extracurricular activies but no one brought it because we two were the best workers. Sid, despite not having the powers of a god like you, was still able to make the male customer tip hundreds of dollars. Of course, all  you had to do was look their way to do the same.
@@ -3238,6 +3293,7 @@ By the end of the shift, the staff sat on the counter and let the customer blow 
 
 &lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
 &lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin/waiter/Promo_8.webp&#39;]]
 When you came, it was Frank that made it his priority to milk you. You gave him the cream that he&#39;s been anticipating.
 &lt;&lt;/if&gt;&gt;
 
@@ -3312,25 +3368,34 @@ Mover Exp
 I&#39;m judging...&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;/button&gt;&gt;
 
-[[Return to scene|$previous_passage]]</tw-passagedata><tw-passagedata pid="81" name="Room_Poker" tags="" position="1285,1520" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
+[[Return to scene|$previous_passage]]</tw-passagedata><tw-passagedata pid="81" name="Room_Poker" tags="" position="1263,1509" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
 
 &lt;&lt;if $npc[&quot;progress&quot;][_tindex] == 1&gt;&gt;
 You knock on the door and a well build guy in his thirties opens with a wide smile.
 
-*athletic dude opening doors*
+[img[setup.ImagePath+&#39;PokerGuys/Michael1.webp&#39;]]
 
-“You must be MC! Come on in, I´m Michael.”
+“You must be $name! Come on in, I´m Michael.”
 
 He leads you into his living room, where the sofa has been pushed to the wall to make space for a poker table. It seems you are the last one to arrive. Michael goes straight to introductions:
 
-“Guys, this is MC, MC, these are the guys. 
-Anthony - still at Uni *cute twink, should look kinda gay already*,
+“Guys, this is $name, $name, these are the guys. 
+Anthony - still at Uni,
 
-Colin and Nick – both lawyers uptown *both uptight, very clean and put together*, 
+[img[setup.ImagePath+&#39;PokerGuys/Anthony1.webp&#39;]]
 
-Ray – ex-rugby player, now a trainer *big muscly dude*,
+Colin and Nick – both lawyers uptown,
 
-Dave is a stay at home dad *any dad looking character will work, beard helps too :D*,
+[img[setup.ImagePath+&#39;PokerGuys/Colin1.webp&#39;]]
+[img[setup.ImagePath+&#39;PokerGuys/Nick1.webp&#39;]]
+
+Ray – ex-rugby player, now a trainer,
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray1.webp&#39;]]
+
+Dave is a stay at home dad,
+
+[img[setup.ImagePath+&#39;PokerGuys/David1.webp&#39;]]
 
 and I do PR for Knight International. If you have any questions about that ask now, because we have a major rule at the table…”
 
@@ -3338,6 +3403,8 @@ and I do PR for Knight International. If you have any questions about that ask n
 
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
 @@.obj; You&#39;ve met The Poker Guys. You can now see them under &quot;Character&quot;@@
+
+[img[setup.ImagePath+&#39;PokerGuys/pokerguys.webp&#39;]]
 
 Michael starts shuffling the cards and says: “Let´s start then.”
 
@@ -3359,7 +3426,8 @@ You dish out the bro hugs and Anthony quietly moans when you get to him. Michael
 “Michael, why do you always take this so seriously? We´re just a bunch of friends.” You ask.
 “Dude, I have a corporate job. I don´t get to control shit. I need an outlet.” He responds with a sigh.
 Everyone then settles around the poker table for another night of gambling. 
-*guys playing poker
+
+[img[setup.ImagePath+&#39;PokerGuys/pokerguys.webp&#39;]]
 
 You spend the evening getting to know the guys and discover that you all make a pretty good match.
 
@@ -3379,14 +3447,14 @@ You dish out the bro hugs but you see Anthony just waves at you shyly.
 “Anthony what the fuck are you doing in my chair?” Colin says clearly annoyed.
 “Well I think that chair brings me bad luck so I wanna try this one.” Anthony replies. Everyone chuckles, but you know better. That little minx just doesn´t wanna sit next to you anymore. 
 “Don´t you worry Colin, I don´t bite… much.” You jab at him and you both laugh.
-*pretend bite*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony48.webp&#39;]]
 
 Everyone then settles around the poker table for another night of gambling.
-*guys playing poker*
+[img[setup.ImagePath+&#39;PokerGuys/pokerguys.webp&#39;]]
 
-&lt;&lt;ability &#39;SA&#39; 3 &quot;Charge your Aura up&quot; &quot;Colin_1&quot;&gt;&gt;
-&lt;&lt;ability &#39;RA&#39; 2 &quot;Show Anthony that he can´t escape you&quot; &quot;Anthony2_2&quot;&gt;&gt;
-[[&quot;Finish the night with your losses|Apartment]]
+&lt;&lt;ability &#39;SA&#39; 5 &quot;Charge your Aura up&quot; &quot;Colin_1&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Show Anthony that he can´t escape you&quot; &quot;Anthony2_2&quot;&gt;&gt;
+[[&quot;Finish the night as is|Anthony_Fail]]
 &lt;&lt;end&gt;&gt;
 
 
@@ -3398,11 +3466,7 @@ Everyone then settles around the poker table for another night of gambling.
 
 </tw-passagedata><tw-passagedata pid="82" name="Anthony_1" tags="" position="1408,1510" size="100,100">The game gets a little louder and everyone is having a good time, but not enough to distract them from the game. But you do catch Anthony stealing glances at you more often than usual. You decide to use the tried and proved method of stretching and ´accidentally´ showing off your abs.
 
-*stretching as the t-shirt pulls up revealing abs*
-
 You sneakily look at him and discover that he has definitely noticed. A quiet whine escapes his mouth.
-
-*surprised and staring, and horny :D *
 
 “You OK, dude?” Asks Ray.
 
@@ -3412,26 +3476,34 @@ You sneakily look at him and discover that he has definitely noticed. A quiet wh
 
 It seems Anthony is barely paying attention to the game anymore, with a little push he might go over the edge.
 
-&lt;&lt;ability &#39;RA&#39; 1 &quot;Do a playful shoulder punch and raise Anthony´s arousal&quot; &quot;Anthony_2&quot;&gt;&gt;
+&lt;&lt;ability &#39;RA&#39; 3 &quot;Do a playful shoulder punch and raise Anthony´s arousal&quot; &quot;Anthony_2&quot;&gt;&gt;
 
-[[&quot;I played with him enough today&quot;| Anthony_Fail]]</tw-passagedata><tw-passagedata pid="83" name=" Anthony_Fail" tags="" position="1520,1515" size="100,100">The damage was done and Anthony was useless in the game for the rest of the evening. You still didn´t make it even close to winning, but at least you didn´t completely lose. You lost ??? dollars, but it was worth it. (the amount lost should be considerably lower than before)
+[[&quot;I played with him enough today&quot;|Anthony_Fail]]</tw-passagedata><tw-passagedata pid="83" name="Anthony_Fail" tags="" position="1526,1514" size="100,100">The damage was done and Anthony was useless in the game for the rest of the evening. 
 
-*either embarrassed Anthony, or guys laughing*</tw-passagedata><tw-passagedata pid="84" name="Anthony_2" tags="" position="1357,1644" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
-&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;
+[img[setup.ImagePath+&#39;PokerGuys/Anthony2.webp&#39;]]
 
-When the round ended with Anthony managing to only get a pair of threes, you channel your divine power into your fist and playfully punch him in the shoulder. He nearly jumps from his chair as the jolt of power surges through him.
+You still didn´t make it even close to winning, but at least you didn´t completely lose. 
 
-*pic of Anthony*
+&lt;&lt;update &#39;money&#39; -10&gt;&gt;
+
+but it was worth it. 
+
+[[&quot;Finish the night&quot;|Apartment]]
+
+
+</tw-passagedata><tw-passagedata pid="84" name="Anthony_2" tags="" position="1390,1637" size="100,100">When the round ended with Anthony managing to only get a pair of threes, you channel your divine power into your fist and playfully punch him in the shoulder. He nearly jumps from his chair as the jolt of power surges through him.
 
 Next round passes, with Anthony folding almost immediately. He seems to not be able to sit comfortably. He then excuses himself to the bathroom, and you get a glance at the visible bulge in his pants.
 
-*bulge gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony3.webp&#39;]]
 
 When he returns, his cheeks are flushed and your enhanced senses easily pick up the scent of cum in the air. It is not hard to imagine what he was just doing.
 
-*jerking off in a bathroom*
+Anthony was useless in the game for the rest of the evening. You still didn´t make it even close to winning, but at least you didn´t completely lose.
 
-Anthony was useless in the game for the rest of the evening. You still didn´t make it even close to winning, but at least you didn´t completely lose. You lost ??? dollars, but it was worth it.
+&lt;&lt;update &#39;money&#39; -10&gt;&gt;
+
+but it was worth it.
 
 You were the last to leave as you helped Michael with cleaning up and laughing at Anthony´s ´luck´ today.
 
@@ -3443,102 +3515,117 @@ You could leave the door slightly open behind you, hoping he will take the hint.
 
 [[&quot;Leave the door open. Be dominant.  Hide in the shadows and wait for him to enter.|Anthony_3B]]
 
-[[&quot;That is enough for tonight, close the door&quot;&quot;|Room_Player]] 
+[[&quot;That is enough for tonight, close the door.&quot;|Room_Player]] 
 
 
-</tw-passagedata><tw-passagedata pid="85" name="Anthony_3A" tags="" position="1495,1756" size="100,100">You take off your clothes and make yourself comfortable on the bed, spreading your sexual aura.
+</tw-passagedata><tw-passagedata pid="85" name="Anthony_3A" tags="" position="1629,1643" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;
 
-*gif*
+You take off your clothes and make yourself comfortable on the bed, spreading your sexual aura.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony4.webp&#39;]]
 
 Anthony hesitantly walks into your room and is unable to hide his surprise and his boner when he sees you.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony5.webp&#39;]]
 
 As he stands shocked at the foot of your bed, you get on all fours, make your way to him and slowly unzip his pants.
 
-*gif*
-
 You pull his dick out and start sucking hungrily. He comes out of his stupor with delighted moaning.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony6.webp&#39;]]
 
 “What is it about you? It´s like magic, one moment I´m fine and the other all I can think about is your ass.” He gets out in between his moans.
 
-*gif of Anthony moaning*
-
 You chuckle to yourself and continue sucking him. He takes off his shirt and burrows his hands into your hair.
 
-*taking off shirt*
-
-*burrowing hands in the hair of the guy sucking him*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony7.webp&#39;]]
 
 You drag his pants down and squeeze his ass.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony8.webp&#39;]]
 
 You can see your power shining in his eyes as he kicks off his shoes and socks and steps out of his pants.
 
 “Lay on your back I wanna fuck your mouth” He commands, completely at the mercy of your influence. You do as he says.
 
-*MC laying on his back with head over the edge with Anthony fucking his mouth*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony9.webp&#39;]]
 
 “Fuck dude, you mouth feels so good!” He moans as you relax your throat to take him all in, wrapping your arms around his waist.
 
 You let him fuck your throat for a while, enjoying how all his inhibitions crumbled away.
 
-“You throat feels like heaven, but I really need to dive into that ass.” He says and pulls his dick out of your mouth.
+“You throat feels like heaven, but I really need to dive into that ass.” You just smile at him, you move to lie onto a nearby reclining chair and spread your legs.
 
-“How do you want me?” You say with a cocky grin.
-
-*pull out dick from his mouth, MC smiling/grinning*
-
-“Doggy.” Anthony replies without hesitation and so you turn around and get on all fours. He kneads your ass with his hands and spreads your cheeks wide open.
-
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony10.webp&#39;]]
 
 He buries his face in your ass, and starts rimming you with such intensity that you can´t help it and start moaning too.
 
-*MC moan while being rimmed*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony12.webp&#39;]]
 
-He definitely knows what to do with his tongue and when he reaches around to jerk you off you get lost in the sensation of letting him have his way with you. Your full attention returns when his tongue is replaced with his rock hard cock.
+“Fuck, that is one amazing ass. I could eat that all day.”
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony11.webp&#39;]]
 
-He starts to fuck you slowly and sensually to make it all the way inside you. It doesn´t take long before he´s balls deep in you and the tempo increases until he is ploughing you hard.
+He definitely knows what to do with his tongue and when he reaches around to jerk you off you get lost in the sensation of letting him have his way with you. You decide to switch positions, a bit of doggy style is just what you need
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony13.webp&#39;]]
+
+He kneads your ass and slaps it with his dick.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony14.webp&#39;]]
+
+He starts to fuck you slowly and sensually to make it all the way inside you.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony15.webp&#39;]]
+
+He reaches down for a hungry kiss.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony16.webp&#39;]]
+
+It doesn´t take long before he´s balls deep in you and the tempo increases until he is ploughing you hard.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony17.webp&#39;]]
 
 Eventually he pulls out his cock and says:
 
 “Come ride me, I wanna see your face as you´re impaled on my dick.” And he didn´t have to ask twice. As he falls onto the bed, you straddle him and guide his dick back into your hole.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony18.webp&#39;]]
 
-In one slick move, you take all of his dick inside and wiggle around, slowly teasing him.
+In one slick move, you take all of his dick inside and wiggle around, slowly teasing him. He clearly loves it.
 
-*MC fully impaled on Anthony´s dick*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony19.webp&#39;]]
 
-Before he could complain, you start riding him. Amidst his moaning he says:
+Before he could complain, you start riding him again.
 
-“Oh yes! Ride that dick!” You smile at his hunger and start riding harder. You start riding him like your life depends on it.
+[img[setup.ImagePath+&#39;PokerGuys/Anthony20.webp&#39;]]
 
-*gif*
+Amidst his moaning he says:
 
-His breaths get faster and his moans get louder as your enhanced stamina lets you keep the pace longer than any normal human. His muscles spasm as a roar bursts from his throat. Shaking in his orgasm you feel his seed fill your ass in several shots, and you let yourself also cross the ledge of orgasm.
+“Oh yes! Ride that dick!” You smile at his hunger and start riding harder. His hungry mouth finds yours again.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony21.webp&#39;]]
+
+His breaths get faster and his moans get louder as your enhanced stamina lets you keep the pace longer than any normal human. He stares at you, lost in lust.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony22.webp&#39;]]
+
+His muscles spasm as a roar bursts from his throat. Shaking in his orgasm you feel his seed fill your ass in several shots, and you let yourself also cross the ledge of orgasm.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony23.webp&#39;]]
 
 Cum shoots out of your dick with such force that the first shot ends up on the headboard. Second and third end land on Anthony´s face and the last splashes on his smooth chest.
 
-*cum on Anthony´s chest while MC still sits on him*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony24.webp&#39;]]
 
 You enjoy the last waves of orgasm as Anthony licks his lips that are covered in your cum.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony25.webp&#39;]]
 
 “Fuck, even your cum tastes great.” He says as he tries to reach more of it with his tongue. You decide to help him and make out.
 
-*gif*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony26.webp&#39;]]
 
 “I have never come this hard.” He says, breathless.
 
@@ -3550,142 +3637,228 @@ You enjoy the last waves of orgasm as Anthony licks his lips that are covered in
 
 “I…okay.” His softening dick slips out of your ass as he wraps his arms around you. You slide to his side, content with being the little spoon tonight. Before you even figure out what to say next, his breath steadies and a quiet snore tells he already fell asleep. Maybe he could not handle as much of your power as you thought. You chuckle to yourself and go to sleep too.
 
-*sleeping*</tw-passagedata><tw-passagedata pid="86" name="Anthony_3B" tags="" position="1482,1640" size="100,100">You kick off your shoes and slink into the shadows in the corner by the door. You see Anthony nervously stopping in front of your door, making his mind about whether he should enter or not.
-*nervous Anthony in the hallway*
+[img[setup.ImagePath+&#39;PokerGuys/Anthony27.webp&#39;]]
+
+[[&quot;Wake up in bed&quot;|Room_Player]]</tw-passagedata><tw-passagedata pid="86" name="Anthony_3B" tags="" position="1510,1644" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
+&lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;
+
+You kick off your shoes and slink into the shadows in the corner by the door. You see Anthony nervously stopping in front of your door, making his mind about whether he should enter or not.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony28.webp&#39;]]
+
 He gathers his courage and steps inside as he carefully takes couple steps forward, you slip behind him, kicking the door closed and wrapping your arms around Anthony from behind.
-*gif*
+
 “It seem I have caught an intruder* You whisper in his ear and then gently bite it.
-*biting ear*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony29.webp&#39;]]
+
 “I am… sorry? Was I not supposed to?” Anthony says, unsure. You decide your spread your aura around you and see that he relaxes a bit.
-“Oh I am sure there is a perfectly reasonable explanation to why my door was open. It couldn´t possible be to lure helpless twinks into my room.” You chuckle and plant a kiss on his neck as you start running your hands across his torso.
-*holding Anthony from behind, sliding arms under his t-shirt*
+
+“Oh I am sure there is a perfectly reasonable explanation to why my door was open. It couldn´t possibly be to lure helpless twinks into my room.” You chuckle and plant a kiss on his neck as you start running your hands across his torso.
+
 “What is it about you? It´s like magic, one moment I´m fine and the other all I can think about is your cock.” Anthony says with a hint of confusion.
+
 “Is that what you are thinking about?” You plant a gentle bite on his neck.
+
 “No!” He exclaims.
+
 “Maybe? Would you be mad?” He asks, and sounds actually worried to your surprise.
-“Would it help you to know that I´ve been having dirty thoughts about you since the first time we met?” You say and slide one of your hands into pants, squeezing his semi-hard dick.
-*gif of Anthony moaning as he is held from behind*
+
+“Would it help you to know that I´ve been having dirty thoughts about you since the first time we met?” You spin him around and slide one of your hands into his pants, squeezing his semi-hard dick.
+
 You laugh a bit.
-“I´ll take that as a yes.” You spin him around and plant your lips on his.
-*gif*
-He is hesitant at first, but then he gives into the kiss. You stumble into the bedroom while still making out.
+
+“I´ll take that as a yes.”
+
+He is hesitant at first, but then he gives into the kiss. You stumble into the bedroom while still making out. You yank off his shorts, pull off his shirt and throw away the cap.
+
 “I think it´s time to make some of your fantasies come true.” You say and smirk.
+
 He starts taking off your shirt, running his hands across your chest.
-*Anthony undressing MC*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony30.webp&#39;]]
+
 “Fuck you´re so hot.” He says as he starts sucking on your nipple.
-*sucking nipple*
-You run your hands across his back and also help him out of his t-shirt. He starts planting hungry kisses across your pecs, slowly lowering down to your abs and into your happy trail.
-*gif*
-He undoes your belts and pulls down your jeans. You help him get them off. His hands keep travelling across your body as if he can´t get enough of your body. He squeezes your ass as he buries his face into your underwear. Your traces his fingers across the visible outline of your shaft, sucking on the head of your dick.
-*Anthony sucking on MC´s bulge, ideally in boxer briefs*
+
+He starts planting hungry kisses across your pecs, slowly lowering down to your abs and into your happy trail.
+
+He undoes your belt and pulls down your jeans. You help him get them off. His hands keep travelling across your body as if he can´t get enough of your body. He squeezes your ass as he buries his face
+
+into your underwear. Your traces his fingers across the visible outline of your shaft, sucking on the head of your dick.
+
 He looks up at you with pleading eyes that show just how much he wants your dick. You give him another smirk.
-“Anthony, you are doing great. Relax.” You let more power flow into him and notice it reflect in his eyes. He pulls down your underwear and hungrily attacks your dick. 
-*gif*
-Whatever he might lack in experience, he definitely makes up for with eagerness. You enjoy the blowjob for a bit before you say: “Come up here now.” He obeys you without a moment´s hesitation. You make out some more as you undo his belt and he sheds the last bits of clothing he has, letting his dick spring out. You grab it and start jerking him off.
-*gif, they should also still be making out*
-He is making out with you while moaning from the effects of your touch. He is so eager you just have to smile. After a while you push him onto the bed. 
-*pushing him onto the bed*
-He actually looks hurt for a moment, as if just this distance was too much for him. You straddle him and turn around. To allow you to have some fun with his dick while still letting him reach yours you decide 69 is the way to go.
-*69*
-As you get to work on his dick, he starts to moan heavily, sending vibrations along your shaft. 
-*more 69*
-Anthony seems to be completely lost in ecstasy and it doesn´t take long for him to go rigid and yelp loudly as your dick slips out of his mouth. You shove his cock down your throat and while loudly moaning your name he sprays several shots of cum down your throat. He comes some much you are not able to swallow it all as it dribbles out.
-*gif*
-You are however not done with him just yet. 
-“MC, you are amazing…” He says tiredly. 
+
+“Anthony, you are doing great. Relax.” You let more power flow into him and notice it reflect in his eyes. He pulls down your underwear and hungrily attacks your dick.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony31.webp&#39;]]
+
+Whatever he might lack in experience, he definitely makes up for with eagerness. You enjoy the blowjob for a bit before you say: “Come up here now.” He obeys you without a moment´s hesitation. You make out some more as you undo his belt and he sheds the last bits of clothing he has, letting his dick spring out. You start to blow him.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony8.webp&#39;]]
+
+He starts to moan from the effects of your touch. He is so eager you just have to smile.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony6.webp&#39;]]
+
+Maybe you are pouring too much power into him, as the amount of precum he is producing is insane.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony32.webp&#39;]]
+
+After a while you push him onto the bed. He actually looks hurt for a moment, as if just this distance was too much for him. You straddle him and turn around. To allow you to have some fun with his dick while still letting him reach yours you decide 69 is the way to go.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony33.webp&#39;]]
+
+As you get to work on his dick, he starts to moan heavily, sending vibrations along your shaft. Anthony seems to be completely lost in ecstasy and it doesn´t take long for him to go rigid and yelp loudly as your dick slips out of his mouth. You move around and shove his cock down your throat and while loudly moaning your name he sprays several shots of cum down your throat. He comes some much you are not able to swallow it all as it dribbles out.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony34.webp&#39;]]
+
+You are however not done with him just yet.
+
+“$name , you are amazing…” He says tiredly.
+
 “Oooh but we are not done yet, not even close?”
+
 “We are not? But I´m spent.” He responds, and you don´t find it hard to believe.
-“Let me show you some tricks up my sleeve.” You turn to make out with him some more, his cum still dripping form your chin.
-*making out, cum on chin*
+
+“Let me show you some tricks up my sleeve.” You move to make out with him some more, his cum still dripping from your chin.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony35.webp&#39;]]
+
 You put your all into making out with him, pouring some more of your divine energy into him. After couple minutes, Anthony catches a second wind.
+
 “How do you want it?” You say with a cocky grin.
-“Doggy.” Anthony replies without hesitation and so you turn him around and help him get on all fours. You knead his ass with your hands and spread his cheeks wide open.
-*gif*
-You bury your face in his ass, and start rimming him with such intensity that he starts to moan again.
-*Anthony moans while being rimmed*
+
+“I don´t care just fuck me.” Anthony replies without hesitation and so you shove him and spread his legs. You knead his ass with your hands and spread his cheeks wide open before you bury your face in his ass, rimming him with such intensity that he starts to moan again.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony36.webp&#39;]]
+
 You definitely know what to do with your tongue and when you reach around to jerk him off his expression betrays that he is lost in the sensation of letting you have your way with him. You rim him for a bit more to get him properly prepared, and then get your dick ready by his ass.
-*gif*
-You start to fuck him slowly and sensually to make it all the way inside him. It doesn´t take long before you´re balls deep in him. The tempo increases until you are ploughing him hard.
-*gif*
-Amidst his moans he says: 
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony37.webp&#39;]]
+
+You start to fuck him slowly and sensually to make it all the way inside him. It doesn´t take long before you´re balls deep in him.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony38.webp&#39;]]
+
+The tempo increases until you are ploughing him hard.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony39.webp&#39;]]
+
+Amidst his moans he says:
+
 “Could I… could I ride you? Please, I wanna see your face as I impale myself on your dick.” How could you refuse those puppy eyes? You lay comfortably onto the bed, as he straddles you and guides your dick back into his hole.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony40.webp&#39;]]
+
 In one slick move, he takes all of his dick inside and an expression of pure bliss spreads across his face. He starts to ride you with gusto and slowly increasing speed.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony41.webp&#39;]]
+
 “You sure know how to ride a dick.” You say appraisingly.
+
 Big smile spreads across his face and starts to ride harder.
-*gif* 
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony42.webp&#39;]]
+
 He starts to ride you like his life depends on it. His breaths get faster and his moans get louder as he is once again closing in to an orgasm. His muscles spasm as a roar bursts from his throat. Shaking in his orgasm, you feel his ass tighten so hard it sends you over the edge too.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony43.webp&#39;]]
+
 As you fill his ass with your divine seed, cum shoots out of his dick with such force that the first shot ends up on the headboard. Second and third end land on your face and the last splashes on your chest.
-*cum on MC´s chest while Anthony still sits on him*
-You enjoy the last waves of orgasm as Anthony collapses on you and starts to lick the cum off of your face.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony44.webp&#39;]]
+
+You enjoy the last waves of orgasm as Anthony collapses on you and starts to lick the cum off of your chest.
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony45.webp&#39;]]
+
 “I have never come this hard.” He says, breathless.
+
 “I´m that good, huh?” You said, not really surprised.
-“I am so juiced out I can barely move.” 
+
+“I am so juiced out I can barely move.”
+
 “Then stay, you can go to your room in the morning.” You tell him. Who say no to some post-coital cuddles.
+
 “I…okay.” Your softening dick slips out of his ass as you wrap your arms around him. You slide him to your side, assuming the position of the big spoon. Before you even figure out what to say next, his breath steadies and a quiet snore tells he already fell asleep. Maybe he could not handle as much of your power as you thought. You chuckle to yourself and go to sleep too.
-*sleeping*
-</tw-passagedata><tw-passagedata pid="87" name="Anthony2_1" tags="" position="1375,1785" size="100,100">Anthony´s reaction is immediate and you know he won´t be paying much attention once again. 
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony27.webp&#39;]]
+
+[[&quot;Wake up in bed&quot;|Room_Player]]</tw-passagedata><tw-passagedata pid="87" name="Anthony2_1" tags="" position="1395,1772" size="100,100">Anthony´s reaction is immediate and you know he won´t be paying much attention once again. 
 The night moves on a bit and you notice some small successes. Ray seemingly can´t stop making lewd jokes. He also complimented everyone on everything he could. He seems to be getting susceptible to your powers, but still keeps some resistance. Anthony on the other hand seems to be trying to play with one hand only. His other hand is moving under the table. Others wrote it off as a distraction technique, but you are not so sure. 
 You decide to ´accidentally´ drop a chip to kick off your plan. You fold and climb under the table. Sure enough, Anthony´s hard dick is out and he is trying to sneakily stroke it.
-*gif*
 
+[img[setup.ImagePath+&#39;PokerGuys/Anthony46.webp&#39;]]
 
--	Raise Anthony´s arousal by giving him a quick blowjob (uses Raise Arousal, on RA1 go to result B, on RA2 or higher go to result C)
--	He´s already a mess, leave him alone (go to result A)
-</tw-passagedata><tw-passagedata pid="88" name="Anthony2_2" tags="" position="1371,1897" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Raise Anthony´s arousal by giving him a quick blowjob&quot; &quot;Anthony2_2&quot;&gt;&gt;
+[[&quot;He´s already a mess, leave him alone&quot;|Anthony_Fail]]</tw-passagedata><tw-passagedata pid="88" name="Anthony2_2" tags="" position="1519,1768" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Poker Guys&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 3&gt;&gt;
 
 You summon all of your divine power as you spread Anthony´s legs. You send a jolt of pure sexual energy into Anthony´s dick as you swallow it whole. 
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Anthony47.webp&#39;]]
+
 He is hard as a rock and by the taste of it has been leaking precum for a while now. He shakes as your power rocks his body and sprays of hot cum start to shoot down your throat. You may have just given the fastest blowjob in history.
-*gif*
-“MC!” Anthony exclaims loudly as you suck all the cum out of him.
+
+“$name !” Anthony exclaims loudly as you suck all the cum out of him.
 “Dude, calm down, what the hell?” You hear Colin say. You climb up from under the table and put on your most innocent face.
 “What?” You ask and look at the others pretending to look for explanation. They all just shake their heads, except for Ray.
 “Anthony you look like he just gave you a blowjob under the table!” Ray bellows as he starts to laugh.
-“Well ye…” Anthony doesn´t finish his sentence as he realizes what he almost admitted, he tries to cover it with nervous laughter. (go to SA2 finale)
-</tw-passagedata><tw-passagedata pid="89" name="ColinRay_1" tags="" position="1199,1648" size="100,100">You focus your divine power into your sexual aura. Anthony notices and his face scrunches in effort. He is actually trying to resist it. You smile to yourself. OK Anthony, you can get a break this week. 
+“Well ye…” Anthony doesn´t finish his sentence as he realizes what he almost admitted, he tries to cover it with nervous laughter. 
 
+[img[setup.ImagePath+&#39;PokerGuys/Anthony2.webp&#39;]]
+
+You still didn´t make it even close to winning, but at least you didn´t completely lose. 
+
+&lt;&lt;update &#39;money&#39; -10&gt;&gt;
+
+but it was worth it. 
+
+[[&quot;Finish the night&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="89" name="Ray_1" tags="" position="1392,1908" size="100,100">You focus your divine power into your sexual aura. Anthony notices and his face scrunches in effort. He is actually trying to resist it. You smile to yourself. OK Anthony, you can get a break this week. 
 
 You dive into the game, letting a few rounds pass so the guys can properly marinade in your aura. You survey the table. Michael is as usual laser focused on his role. Anthony is at your mercy whenever you wish. Colin and Nick… look just like the first time you have met them. It seems like they are all but immune to your influence, probably because their job calls for a high amount of self-control. Dave is goofing off as usual, the only person who doe not live in Homo Andros. You can sense that he is getting plenty of sex. So the problem is not his inhibitions, but the lack of frustration that you usually turn to your advantage. And on your right, Ray, with his muscles bulging out of his shirt. Last time you had the feeling that he just needed a little push so he might be a viable option. It&#39;s Ray who interrupts your surveillance.
 
 “Damn Michael, is your AC broken or something? It´s so hot in here.” 
 “What? It´s set for 18°C as usual, if it were up to only me I would have a comfy 25.” Michael responds incredulous.
-“Well I need to vent.” He says as he pulls off his shirt.
-*gif*
+“Well I need to vent.” He says as he pulls off his shirt and kicks off his shorts.
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray2.webp&#39;]]
 
 “Ahhh, so much better. Now to destroy you all.”
--	Get Ray even hotter (jump to SA3 result C)
--	Try your luck with Colin (jump to SA3 result B)
--	You´re happy as it is (jump to SA3 result A)
-</tw-passagedata><tw-passagedata pid="90" name="Ray_1" tags="" position="1159,1775" size="100,100">You focus on the shirtless hunk to your right. Just looking at his sculpted chest is making you hard.
-*gif*
+
+&lt;&lt;ability &#39;SA&#39; 6 &quot;Get Ray even hotter&quot; &quot;Ray_2&quot;&gt;&gt;
+[[Try your luck with Colin|Colin_2]]
+[[&quot;You´re happy as it is&quot;|Colin_Fail]]
+</tw-passagedata><tw-passagedata pid="90" name="Ray_2" tags="" position="1392,2021" size="100,100">You focus on the shirtless hunk to your right. Just looking at his sculpted chest is making you hard.
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray3.webp&#39;]]
+
  You start to formulate your plan to get Ray in your bed. Lewd jokes keep pouring from Ray and even some of his sexy escapades from when he was a professional rugby player. It seems fooling around in the showers and the locker room was quite common in their team. 
-*team showers*
+
 Whenever you have a moment you sneak glances at Ray´s massive chest. He catches you and starts popping his pecs.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray4.webp&#39;]]
+
 “Oh stop it, you ass.” You say, but do you really mean it?
--	Yes, focus on the game (jump to SA3 result A)
--	Raise his arousal (uses Raise Arousal, needs RA5 so the MC can just use his voice to get to the SA3 finale, otherwise continue this section)
-You summon your divine power into your hand, but unfortunately Ray doesn´t sit close enough for you to touch him without having to be really obvious about it. Maybe you need to develop your powers more. (jump to SA3 result A)
-</tw-passagedata><tw-passagedata pid="91" name="Colin_1" tags="" position="1268,1782" size="100,100">You turn away from the shirtless hunk and instead try to get the attention of the man to your left. Apart from the breaks in between games, he is focusing on the game and ignoring your attempts at distraction. 
--	Give up (jump to SA3 result A)
--	Find a way to touch Colin and raise his arousal (this should produce a Raise Arousal check but always come out as a fail)
-When he beats your flush with a full house, you go for the tried and true playful shoulder punch charged with you divine power. He freezes for a moment, then shakes his head and continues collecting his chips. He has resisted your direct touch. What kind of crazy resilience does this motherfucker have? (jump to SA3 result A)
-</tw-passagedata><tw-passagedata pid="92" name="Ray_2" tags="" position="1160,1884" size="100,100">You gather your divine power into your vocal cords.
+
 “We all know you are horny and can´t wait to get your rocks off somewhere, you don´t need to show us.” As the others laugh, you lock eyes with Ray. You see a glimmer of light in his eyes as your suggestion takes hold. 
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray5.webp&#39;]]
+
 From then on, you bask in Ray´s almost undivided attention. Ray starts losing hand after hand, soon almost matching Anthony. As luck would have it, Ray gets and extremely good hand, but so do you. As you stare at each other, trying to decide what to do, you give Ray a wink.
-*gif*
+
+[img[setup.ImagePath+&#39;PokerGuys/Ray6.webp&#39;]]
+
 This seems to completely derail him as he changes a card, accidentally ruining a royal flush. The other start to laugh at him and call him an idiot, but he barely seems to notice. By the end of the evening, you wind up making ??? dollars. You are finally turning it around.
 As the guys are exchanging goodbyes, Ray bends down and picks something up from the floor.
-“Hey MC, you dropped this.” He hands you a little plastic circle with a number that comes with each key. 
+
+“Hey $name, you dropped this.” He hands you a little plastic circle with a number that comes with each key. 
+
 “Oh, thanks, dude.” You respond and pocket it. As you leave Michael´s room you look at it, it is for room 16. Not yours then.
-(the scene should shift to the lobby with a button “Room 16?” available)
-</tw-passagedata><tw-passagedata pid="93" name="pool_orgy" tags="" position="3302,1652" size="100,100">[img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_2.webp&#39;]]
+
+(This is the current end for the Poker Guys!)
+
+[[&quot;Finish the Night&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="91" name="pool_orgy" tags="" position="3302,1652" size="100,100">[img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_2.webp&#39;]]
 [img[setup.ImagePath+&#39;Rooms/Pool/Pool3_1_3.webp&#39;]]
 
 You began to raise your sexual aura to affect all the men in the pool area. This makes them get rowdier as they starts to get more touchy with each other, tring to get a butt grope playfully.
@@ -3732,7 +3905,7 @@ By the end, they were begging for your cum so you had them line up so you spray 
 &lt;&lt;/if&gt;&gt;
 
 
-[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="94" name="Tucker_StripPool" tags="" position="2198,1698" size="100,100">&amp;emsp;&quot;What kind of game?&quot; someone asks. You smile.
+[[&quot;Leave&quot;|Room_Pool]]</tw-passagedata><tw-passagedata pid="92" name="Tucker_StripPool" tags="" position="2198,1698" size="100,100">&amp;emsp;&quot;What kind of game?&quot; someone asks. You smile.
 You convinced them to play a game of strip billiards. There were a couple of confused looks but it was Tucker who speaks up. &quot;Game on, bro. Get ready to run out of here bare butt naked.&quot; The other guys loosens and also agree to the game.
 &lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker2_1.webp&#39;]]
@@ -3761,7 +3934,7 @@ Tucker, who only managed to lose his shirt, struggles with his now obvious hard 
 
 
 
-</tw-passagedata><tw-passagedata pid="95" name="Tucker_Alley" tags="" position="2146,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="93" name="Tucker_Alley" tags="" position="2146,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
 &lt;&lt;set $npc[&quot;romance&quot;][_tindex] += 1&gt;&gt;\
 
@@ -3835,7 +4008,7 @@ You&#39;re left there in the alley on the edge of cumming so you decide to take 
 
 
 
-</tw-passagedata><tw-passagedata pid="96" name="Tucker_orgy" tags="" position="2263,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="94" name="Tucker_orgy" tags="" position="2263,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 2&gt;&gt;\
 &lt;&lt;set $npc[&quot;kink&quot;][_tindex] += 1&gt;&gt;\
 
@@ -3914,7 +4087,7 @@ You turned around address the frat. &quot;Thanks for all the fun, boys. See you 
 
 [[&quot;Clean up&quot;|Room_Common]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
-</tw-passagedata><tw-passagedata pid="97" name="Randy_Vlog" tags="" position="1649,842" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Randy&#39;)&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="95" name="Randy_Vlog" tags="" position="1649,842" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Randy&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;met&quot;][_tindex] to true&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 1&gt;&gt;\
 
@@ -3954,11 +4127,13 @@ He was fully absorbed in responding to his followers now and so you took your le
 @@.obj; You&#39;ve met Randy. You can now see him under &quot;Character&quot;@@
 
 @@.obj; Randy: Try and find again when he&#39;s streaming.@@
+
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
 &lt;&lt;update &#39;gay&#39; 5&gt;&gt;
 &lt;&lt;set $npc[&quot;notice&quot;][_tindex] to &quot;Try and find again when he&#39;s streaming.&quot;&gt;&gt;
 
 [[&quot;Back to Lobby&quot;|Apartment]]
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="98" name="Ichiro_2" tags="" position="3553,1315" size="100,100">[img[setup.ImagePath+&#39;Ichiro2_1.webp&#39;]]
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="96" name="Ichiro_2" tags="" position="3553,1315" size="100,100">[img[setup.ImagePath+&#39;Ichiro2_1.webp&#39;]]
 
 [img[setup.ImagePath+&#39;Ichiro2_2.webp&#39;]]
 
@@ -3984,9 +4159,9 @@ He was fully absorbed in responding to his followers now and so you took your le
 
 [img[setup.ImagePath+&#39;Ichiro2_13.webp&#39;]]
 
-[img[setup.ImagePath+&#39;Ichiro2_14.webp&#39;]]</tw-passagedata><tw-passagedata pid="99" name="Ben_Confidence" tags="" position="3906,1449" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="100" name="Ben_Sexy" tags="" position="4017,1450" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="101" name="Ben_VR" tags="" position="3962,1338" size="100,100">You show Ben the headset you bought. His eyes lit up with excitement. &quot;Woah! That&#39;s so cool!&quot;
+[img[setup.ImagePath+&#39;Ichiro2_14.webp&#39;]]</tw-passagedata><tw-passagedata pid="97" name="Ben_Confidence" tags="" position="3906,1449" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="98" name="Ben_Sexy" tags="" position="4017,1450" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="99" name="Ben_VR" tags="" position="3962,1338" size="100,100">You show Ben the headset you bought. His eyes lit up with excitement. &quot;Woah! That&#39;s so cool!&quot;
 
-</tw-passagedata><tw-passagedata pid="102" name="Marc_GameOver" tags="" position="4272,877" size="100,100">[img[setup.ImagePath+&#39;Marc/GameOver_1.webp&#39;]]
+</tw-passagedata><tw-passagedata pid="100" name="Marc_GameOver" tags="" position="4272,877" size="100,100">[img[setup.ImagePath+&#39;Marc/GameOver_1.webp&#39;]]
 You were sent to Marc&#39;s Dungeon indefinetly. You were held in a cage whenever Marc wasn&#39;t in the mood to fuck you. Days passed in the room, and with the florescent lights always on, you could tell how many passed by.
 
 &lt;&lt;cont append&gt;&gt;
@@ -3999,7 +4174,7 @@ There were even times when he brought other men to play with you. Marc was alway
 
 @@.neg;You have failed your mission to turn the world gay!@@
 
-&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="Marc_Scene2" tags="" position="1995,963" size="100,100">Before you could bring up the idea, the door slams open. It was a face that you recognize from briefly seeing; Louis. The guy you saw in passing after leaving Marc&#39;s office after securing your room by giving him a wonderful blowjob and stealing Louis&#39;s room.
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="Marc_Scene2" tags="" position="1995,963" size="100,100">Before you could bring up the idea, the door slams open. It was a face that you recognize from briefly seeing; Louis. The guy you saw in passing after leaving Marc&#39;s office after securing your room by giving him a wonderful blowjob and stealing Louis&#39;s room.
 
 &quot;Marc.&quot; Louis announces annoyingly. &quot;You called me back here again after the you failed get me a room the first time. I hope you&#39;re not thinking of wasting my time again.&quot;
 
@@ -4018,7 +4193,7 @@ Marc gets in between you two quickly, &quot;I&#39;m so sorry again, Louis. He&#3
 &lt;&lt;ability &#39;RA&#39; 5 &quot;You and Louis should try to work something out.&quot; &quot;Marc_Louis1&quot;&gt;&gt;
 &lt;&lt;ability &#39;RA&#39; 5 &quot;You think it should be Louis that should be apologizing to Marc. Make him submit.&quot; &quot;Marc_Louis2&quot;&gt;&gt;
 
-[[Return to the Lobby||Apartment]]</tw-passagedata><tw-passagedata pid="104" name="Marc_Louis1" tags="" position="1902,1076" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
+[[Return to the Lobby||Apartment]]</tw-passagedata><tw-passagedata pid="102" name="Marc_Louis1" tags="" position="1902,1076" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 3&gt;&gt;\
 &lt;&lt;set $npc[&quot;romance&quot;][_tindex] += 1&gt;&gt;\
 
@@ -4092,7 +4267,7 @@ When the conversation was over, the two of you made a mess of cum on Louis&#39;s
 
 [[Return to lobby|Apartment]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
-</tw-passagedata><tw-passagedata pid="105" name="Marc_Louis2" tags="" position="2064,1074" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="103" name="Marc_Louis2" tags="" position="2064,1074" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Marc&#39;)&gt;&gt;\
 &lt;&lt;set $npc[&quot;progress&quot;][_tindex] to 3&gt;&gt;\
 &lt;&lt;set $npc[&quot;kink&quot;][_tindex] += 1&gt;&gt;\
 
@@ -4136,7 +4311,80 @@ You leave the two of them to fuck, trusting that Marc will tame Louis in due tim
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
 
-</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="104" name="GymTrans" tags="" position="3556.666748046875,1443" size="100,100">You approach him and clear your throat to get his attention. He does one more squat, grunting while he lifts the heavy weight on his shoulders, and turns to look at you once the bar is secured on the rack. He gives you a curious look and wipes the sweat from his brow, “I got a couple sets left, there’s other racks though,” he gestures to the four empty ones. 
+“No, I wanted to offer to help with your form,” you respond, shaking your head. 
+His face flushes and he glances away before nodding, “S-sure.”
+
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/2.webp&#39;]]
+
+You get up behind him, far too close than you need to, and wait for him to get under the bar again. He lifts it up and as he lowers down, you press up against him and bring your arms around his built torso. 
+
+You press your hips against his ass, your cock half hard already, and fondle his pecs. He groans lowly and keeps squatting. 
+
+You notice him start to struggle to lift the weight when he gets turned on, too distracted, and he lets out a moan when you grind forward against his ass. He’s obviously flustered but when you look over his shoulder he doesn’t seem to be hard. He pulls away and quickly leaves to shower before you can do anything. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/3.webp&#39;]]
+You wait a minute before following him and find him naked in the showers, facing away from you. You undress and join him. He immediately notices you and looks back at you, shifting his weight uneasily. His gaze flickers down to your half hard cock and he blushes before looking away. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/5.webp&#39;]]
+
+You approach him from behind and capture his lips in a deep kiss. He immediately returns it and moans into your moan, rubbing your tongues together while you press your cock against his bare ass. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/6.webp&#39;]]
+
+You turn him around to jerk him off only to find he doesn’t have what you expect between his legs. Instead of a cock like yours, his is small and pokes out from between wet folds. The scars on his chest finally start to make sense. But you don’t care, either way a man’s a man. 
+
+He seems nervous, biting his lip and barely looking at you, but you reassure him quietly and start rubbing your cocks together. He lets out quiet moans and you can feel his small cock throb against yours. He’s wet too, and his juices spread over your length. 
+
+&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/7.webp&#39;]]
+
+You sink down on your knees and push your face between his legs, inhaling his musky scent. You wrap your lips around his engorged clit and suck hard, hearing him moan above. His wetness drips onto your chin and your cock throbs at the thought of being inside him. 
+
+&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/8.webp&#39;]]
+
+He starts shaking and grabs your hair, tugging hard. He yanks you forward by your hair and let him fuck your face, his hips working quickly to grind himself against your tongue while you suck him. He cums with a choked out moan, his eyes rolling back and his jaw hanging open, and you can taste his release on your tongue. 
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/10.webp&#39;]]
+In his hazy state, you turn him around and pull his hips back to put his pussy on display. You sink inside his wet heat in one thrust and immediately start fucking him hard. He cries out and scrambles to hold onto the tiled walls. His pussy walls are tight around you, practically milking you, and you can soon feel him tightening up.
+
+&lt;&lt;cont append&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/11.webp&#39;]]
+You force yourself to hold back your orgasm and carry him to the locker room outside the showers.
+
+[img[setup.ImagePath+&#39;Rooms/Gym/12.webp&#39;]]
+You lay him down on the bench and keep fucking into his pussy, his body jerking backwards.  He cums again from your intense energy.
+
+&lt;&lt;update &#39;arousal&#39; 25&gt;&gt;
+&lt;&lt;update &#39;gay&#39; $gayincrement&gt;&gt;
+&lt;&lt;update &#39;exp&#39; 25&gt;&gt;
+
+&lt;&lt;if $skilltree.arousal &gt;= 100&gt;&gt;
+&lt;&lt;update &#39;arousal&#39; -100&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Gym/13.webp&#39;]]
+It doesn’t take long before you come inside him, pulling out weak moans from his open mouth while you fill him up. 
+&lt;&lt;/if&gt;&gt;
+
+[[&quot;Finish showering and head out&quot;|Room_Gym]]
+
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
+</tw-passagedata><tw-passagedata pid="105" name="Colin_Fail" tags="" position="1517,1908" size="100,100">The rest of the evening is filled with Ray´s lewd jokes and some of his sexy escapades from his time as a professional rugby player. His temperature problem, however, did seem to affect his game negatively. The more he lost, the more got angry and eventually he was just huffing in anger.
+
+“So much for the destruction.” Colin laughed at Ray who is as chipless as you. But thanks to the distraction, you did not lose any money today, maybe you´ll soon be able to even win
+
+[[&quot;Finish the Night&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="106" name="Colin_2" tags="" position="1517,2027" size="100,100">You turn away from the shirtless hunk and instead try to get the attention of the man to your left. Apart from the breaks in between games, he is focusing on the game and ignoring your attempts at distraction.
+
+&lt;&lt;message &quot;Find a way to touch Colin and raise his arousal&quot;&gt;&gt;&amp;emsp;
+When he beats your flush with a full house, you go for the tried and true playful shoulder punch charged with you divine power. He freezes for a moment, then shakes his head and continues collecting his chips. He has resisted your direct touch. What kind of crazy resilience does this motherfucker have?&lt;&lt;/message&gt;&gt;
+
+[[&quot;Stop trying for now&quot;|Colin_Fail]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
