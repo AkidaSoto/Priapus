@@ -1647,11 +1647,11 @@ Ben welcomes you into his room. He seem anxious about your presence.
 [[Play some video games|Ben_Play]]
 &lt;&lt;else&gt;&gt;
 &lt;&lt;if $bought_VR is true&gt;&gt;
-[[&quot;Show Ben the VR Headset&quot;||Ben_VR]]
+&lt;&lt;ability &#39;SA&#39; 3 &quot;Show Ben the VR Headset&quot; &quot;Ben_VR&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $bought_dildo is true&gt;&gt;
-[[&quot;Show Ben the dildo&quot;||Ben_dildo]]
+&lt;&lt;ability &#39;SA&#39; 3 &quot;Show Ben the Dildo Set&quot; &quot;Ben_dildo&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
@@ -2200,15 +2200,15 @@ You spend some time with the twins with moving.
 
 &lt;&lt;if $work.mover &gt;= 65 and lastVisited(&quot;mover_client&quot;)  is -1&gt;&gt;
 While the twins were out, you were left alone with the client to help out with the last of his moving. You notice your client today is pretty cute.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover2.webp&#39;]]
 &lt;&lt;ability &#39;RA&#39; 2 &quot;Help him break in his new apartment.&quot; &quot;mover_client&quot;&gt;&gt;
 &lt;&lt;elseif $work.mover &gt;= 80 and lastVisited(&quot;mover_coworker&quot;) is -1&gt;&gt;
 Noah asks for help moving a bed.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1.webp&#39;]]
 &lt;&lt;ability &#39;RA&#39; 4 &quot;Make sure the bed is working.&quot; &quot;mover_coworker&quot;&gt;&gt;
 &lt;&lt;elseif $work.mover &gt;= 100 and lastVisited(&quot;mover_promotion&quot;) is -1&gt;&gt;
-At the end of the day, Adrian has to run out to do some paper work. You and Noah make eye contact and head into the guest room.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover1.webp&#39;]]
+At the end of the day, Adrian has to run out to do some paper work. You and Noah make eye contact. He picks you up in one swoop and carries you to the bed room.
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover3.webp&#39;]]
 &lt;&lt;ability &#39;RA&#39; 6 &quot;Start fucking.&quot; &quot;mover_promotion&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 Nothing significant happens.
@@ -2579,7 +2579,7 @@ The last thing you remember was Marc slapping your face a couple of time to wake
 [[&quot;Wake up back in your room&quot;|Room_Player]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="mover_coworker" tags="" position="801,1556" size="100,100">You present your ass to Noah.
 &quot;Let&#39;s make sure that this bed is working.&quot; you smile at him.
-[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Rooms/Bulletin/mover/mover1_1_2.webp&#39;]]
 
 &lt;&lt;cont append&gt;&gt;
 &quot;Of course, can&#39;t have the customers complaining.&quot; He readily slides his cock into your hole.
