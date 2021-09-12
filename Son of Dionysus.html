@@ -786,7 +786,7 @@ You feel the power grow inside you.
 
  &lt;&lt;link &#39;Head up to your new apartment&#39;&gt;&gt;
   		&lt;&lt;goto [[Intro_1]]&gt;&gt;
- &lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="76,54" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
+ &lt;&lt;/link&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="StoryInit" tags="" position="75,54" size="100,100">&lt;&lt;set $name to &#39;Priapus&#39;&gt;&gt;\
 &lt;&lt;set $skilltree to {
 	points:0,
 	skills: [],
@@ -838,7 +838,7 @@ You feel the power grow inside you.
 	met:[false,false,false,false,false,false,false],
 	notice: [&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;],
 	progress:[1,1,0,0,0,1,0],
-	maxprogress:[3,3,3,1,1,3,1],
+	maxprogress:[3,3,2,1,1,3,1],
 	romance:[0,0,0,0,0,0,0],
 	kink:[0,0,0,0,0,0,0],
 }&gt;&gt;\
@@ -898,6 +898,14 @@ You feel the power grow inside you.
 &lt;&lt;set $skilltree.exp to $skilltree.exp + $args[1]&gt;&gt;\
 &lt;&lt;updatemeter &#39;expbar&#39; &#96;$skilltree.exp / 100&#96;&gt;&gt;\
 &lt;&lt;replace &quot;#displayexp&quot;&gt;&gt;&lt;&lt;print $skilltree.exp&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $skilltree.exp &gt;= 100&gt;&gt;
+@@.exp; You leveled up!@@
+&lt;&lt;set $skilltree.exp -= 100&gt;&gt;\
+&lt;&lt;updatemeter &#39;expbar&#39; &#96;$skilltree.exp / 100&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#displayexp&quot;&gt;&gt;&lt;&lt;print $skilltree.exp&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;set $skilltree[&quot;points&quot;] ++&gt;&gt;\
+&lt;&lt;set $skilltree[&quot;level&quot;] ++&gt;&gt;\
+&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $skilltree.exp &gt;= 100&gt;&gt;
 @@.exp; You leveled up!@@
 &lt;&lt;set $skilltree.exp -= 100&gt;&gt;\
@@ -2240,8 +2248,8 @@ You check in the back but but the restaurant ran out, and the man won&#39;t leav
 &lt;&lt;elseif $work.waiter &gt;= 80 and lastVisited(&quot;waiter_sausage&quot;) is -1&gt;&gt;
 On a pretty busy day, Sid asks you to come back to the storage room when you&#39;re done with your table.
 &quot;Just a couple of inventory things I want to show the newbie.&quot; 
-[img[setup.ImagePath+&#39;Rooms/Bulletin//waiterwaiter1.webp&#39;]]
-&lt;&lt;ability &#39;RA&#39; 4 &quot;Make sure the back is all sorted out.&quot; &quot;waiter_help&quot;&gt;&gt;
+[img[setup.ImagePath+&#39;Rooms/Bulletin//waiter/waiter2.webp&#39;]]
+&lt;&lt;ability &#39;RA&#39; 4 &quot;Make sure the back is all sorted out.&quot; &quot;waiter_sausage&quot;&gt;&gt;
 &lt;&lt;elseif $work.waiter &gt;= 100 and lastVisited(&quot;waiter_promotion&quot;) is -1&gt;&gt;
 It was a regular day at work. You were in the back when Sid came up to you without a word and pulled down your pants.
 &lt;&lt;ability &#39;RA&#39; 6 &quot;Serve him your cock.&quot; &quot;waiter_promotion&quot;&gt;&gt;
@@ -2502,6 +2510,7 @@ You couldn&#39;t hold it in, releasing your load into him
 [[&quot;Head Back&quot;|Outside]]
 
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="Marc_punishment" tags="" position="4099,905" size="100,100">&lt;&lt;set $paidrent to true&gt;&gt;
+&lt;&lt;set $punishment to 1 &gt;&gt;
 Marc&#39;s brows frows when you tell him you are unable to pay.
 &quot;Not good. You know I had to go throught hoops to get you this room and I was expecting you be a good tenant.&quot;
 &quot;Sorry, sir. I j-&quot; Marc interrupts you by pulling you over onto his lap.
@@ -3243,7 +3252,7 @@ Whith each stroke, his integrity fell apart. His vocalization turned intelligibl
 You took a step back and watch the two fuck, letting them rekindle their connection.
 
 &lt;&lt;cont append&gt;&gt;
-[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_9.webp&#39;]] 
+[img[setup.ImagePath+&#39;Rooms/Bulletin/tutor/Promo_9.gif&#39;]] 
 “Dad.” Thomas pulls his fathers face up his. “I love you so much.” And starts making out with Hugh. 
 Hugh returns the kiss, pulling his son closer and mumbles between penetration. “Love. You. Too. Son”. A sweet father-son moment. 
 “I’m going to cum, Dad.” 
@@ -3523,7 +3532,7 @@ You dish out the bro hugs but you see Anthony just waves at you shyly.
 Everyone then settles around the poker table for another night of gambling.
 [img[setup.ImagePath+&#39;PokerGuys/pokerguys.webp&#39;]]
 
-&lt;&lt;ability &#39;SA&#39; 5 &quot;Charge your Aura up&quot; &quot;Colin_1&quot;&gt;&gt;
+&lt;&lt;ability &#39;SA&#39; 5 &quot;Charge your Aura up&quot; &quot;Ray_1&quot;&gt;&gt;
 &lt;&lt;ability &#39;RA&#39; 4 &quot;Show Anthony that he can´t escape you&quot; &quot;Anthony2_2&quot;&gt;&gt;
 [[&quot;Finish the night as is&quot;|Anthony_Fail]]
 &lt;&lt;/if&gt;&gt;
@@ -3582,9 +3591,9 @@ When you finally made it back to your room, you notice Anthony hiding around the
 
 You could leave the door slightly open behind you, hoping he will take the hint. But the question is, if you choose to seduce him, will let him have you his way or wait for him to come in and then take charge?
 
-[[&quot;Leave the door open. Be submissive. Get naked and spread yourself on the bed.|Anthony_3A]]  
+[[&quot;Leave the door open. Be submissive. Get naked and spread yourself on the bed.&quot;|Anthony_3A]]  
 
-[[&quot;Leave the door open. Be dominant.  Hide in the shadows and wait for him to enter.|Anthony_3B]]
+[[&quot;Leave the door open. Be dominant.  Hide in the shadows and wait for him to enter.&quot;|Anthony_3B]]
 
 [[&quot;That is enough for tonight, close the door.&quot;|Room_Player]] 
 
@@ -3885,7 +3894,7 @@ You still didn´t make it even close to winning, but at least you didn´t comple
 
 but it was worth it. 
 
-[[&quot;Finish the night&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="89" name="Ray_1" tags="" position="1392,1908" size="100,100">You focus your divine power into your sexual aura. Anthony notices and his face scrunches in effort. He is actually trying to resist it. You smile to yourself. OK Anthony, you can get a break this week. 
+[[&quot;Finish the night&quot;|Apartment]]</tw-passagedata><tw-passagedata pid="89" name="Ray_1" tags="" position="1401,1898" size="100,100">You focus your divine power into your sexual aura. Anthony notices and his face scrunches in effort. He is actually trying to resist it. You smile to yourself. OK Anthony, you can get a break this week. 
 
 You dive into the game, letting a few rounds pass so the guys can properly marinade in your aura. You survey the table. Michael is as usual laser focused on his role. Anthony is at your mercy whenever you wish. Colin and Nick… look just like the first time you have met them. It seems like they are all but immune to your influence, probably because their job calls for a high amount of self-control. Dave is goofing off as usual, the only person who doe not live in Homo Andros. You can sense that he is getting plenty of sex. So the problem is not his inhibitions, but the lack of frustration that you usually turn to your advantage. And on your right, Ray, with his muscles bulging out of his shirt. Last time you had the feeling that he just needed a little push so he might be a viable option. It&#39;s Ray who interrupts your surveillance.
 
@@ -3995,6 +4004,8 @@ Once you got your underwear off, you throw it at Tucker. He catches it instincti
 &amp;emsp;You take every opportunity to spread your legs and show them your hole.
 Tucker, who only managed to lose his shirt, struggles with his now obvious hard cock. However, he wasn&#39;t the only horny one now. Several of the other drunk guys are leering at you too.
 &lt;&lt;cont append&gt;&gt;
+
+&lt;&lt;cont append&gt;&gt;
 [img[setup.ImagePath+&#39;Tucker/Tucker2_5.webp&#39;]]
 
 &quot;Alright, alright. You lost. Put your clothes back on, I&#39;m gonna take a cig break.&quot; Tucker seemed like he was getting self-conscious from his own leering and was beginning to be too flustered. He quickly rushed out the back door of the billiards room to the alleyway.
@@ -4002,7 +4013,7 @@ Tucker, who only managed to lose his shirt, struggles with his now obvious hard 
 &lt;&lt;ability &#39;RA&#39; 4 &quot;Follow him.&quot; &quot;Tucker_Alley&quot;&gt;&gt;
 &lt;&lt;ability &#39;SA&#39; 7 &quot;Leave him alone and play with the other boys.&quot; &quot;Tucker_orgy&quot;&gt;&gt;
 [[&quot;Head out and come back later&quot;|Room_Common]]
-
+&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
 
 
 </tw-passagedata><tw-passagedata pid="93" name="Tucker_Alley" tags="" position="2146,1802" size="100,100">&lt;&lt;set _tindex to $npc[&quot;name&quot;].indexOf(&#39;Tucker&#39;)&gt;&gt;\
@@ -4072,7 +4083,7 @@ Tucker wrestles his cock from you mouth and turns towards his Frat Bro. &quot;Wa
 [img[setup.ImagePath+&#39;Tucker/Tucker2_alley9.webp&#39;]]
 
 You&#39;re left there in the alley on the edge of cumming so you decide to take care of yourself.
-&lt;&lt;/end&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 [[&quot;Sort yourself out and head back in&quot;|Room_Common]]
 &lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;&lt;&lt;/cont&gt;&gt;
@@ -4510,7 +4521,7 @@ When he beats your flush with a full house, you go for the tried and true playfu
 You presented him with the array of toys you bought. His face was flusteredd at he examined the toys but you could tell from the boner in his pants that we was intrigued.
 You lay him on his bed and assure him. &quot;Don&#39;t worry. I&#39;m here to help. Let&#39;s get you comfortable with your body.&quot;
 
-[img[setup.ImagePath+&#39;Ben/Ben3_2.webp&#39;]]
+[img[setup.ImagePath+&#39;Ben/Ben3_1_2.webp&#39;]]
 
 Ben hesitantly lets you pull down his pants. His cock flops out hard. You start with a simple fleshlight. His body stiffens as you push his cock into the toy. His eyes closed shut and his hands laid by his side, Ben was enjoing it as you fucked him with the fleshlight. His hips moved slightly to your rhythm.
 &quot;Good. Now that wasn&#39;t so bad, right? Why don&#39;t you try something by yourself?&quot;
